@@ -1,23 +1,22 @@
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
-import {logout} from "../../utils/login/login";
+import { Redirect } from 'react-router-dom';
 
 
 const Dashboard = () => {
 
-    function loginPage(){
-        window.location.href='/login'
-    }
+   function delete_cookie(name) { document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;'; }; 
 
     function handleLogout () {
-        logout();
-        loginPage();
-    }
+        delete_cookie('token')
+            .then(
+                <Redirect to='/login'></Redirect>
+            );
+    };
     
     return (
         <div>
             <h1>This is private</h1>
-            <button onClick={() =>handleLogout()}>Click here to log out</button>
+            <button onClick={() =>handleLogout()}>log out</button>
         </div>
     );
 };

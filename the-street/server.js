@@ -2,6 +2,17 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const routes = require('./routes/index');
+const cookieParser = require('cookie-parser');
+const withAuth = require('./middleware/private');
+
+app.use(cookieParser());
+
+
+app.get('/checkToken', withAuth, function(req, res) {
+  res.sendStatus(200);
+});
+
+
 
 
 const PORT = process.env.PORT || 8080;

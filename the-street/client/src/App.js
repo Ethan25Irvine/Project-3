@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import PrivateRoute from "./components/privateRoute";
+import withAuth from "./components/privateRoute";
 import Dashboard from "./pages/privatePage"
 
 import Login from "./pages/login/login";
@@ -13,10 +13,9 @@ function App() {
     <Router>
       <div>
       <Switch>
-        <Route exact path="/login">
-          <Login />
-        </Route>
-        <PrivateRoute component={Dashboard} path="/private" exact />
+        <Route exact path="/login" component={Login}/>
+ 
+        <Route component={withAuth(Dashboard)} path="/private" exact />
       </Switch>
     </div>
     </Router>
