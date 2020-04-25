@@ -1,31 +1,27 @@
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
+const routes = require('./routes/index');
 
-// serve static files from /public
-app.use(express.static(__dirname + '/template'));
 
-// include routes
-const routes = require('./routes/router');
-app.use('/', routes);
+const PORT = process.env.PORT || 8080;
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  const err = new Error('File Not Found');
-  err.status = 404;
-  next(err);
+// Define middleware here
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+// Add routes, both API and view
+app.use(routes);
+
+// Connect to the Mongo DB
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/theStreet");
+
+// Start the API server
+app.listen(PORT, function() {
+  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
-
-// error handler
-// define as the last app.use callback
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.json('error', {
-    message: err.message,
-    error: {}
-  });
-});
-
-// listen on port 3000
-app.listen(3000, function () {
-  console.log('Express app listening on port 3000');
-}); 

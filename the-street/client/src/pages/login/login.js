@@ -1,5 +1,7 @@
-import React, {useState} from 'react';
+import React, {  useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import {login} from "../../utils/login/login";
+import API from "../../utils/API/user"
 // import {Route, Redirect} from 'react-router-dom';
 
 
@@ -10,16 +12,20 @@ function Login() {
        window.location.href='/private'
     }
     
+    
+    
 
     function handleInputChange(event) {
         const { name, value } = event.target;
         setLoginObject({...loginObject, [name]: value})
       };
 
+        const email = loginObject.email
       function handleFormSubmit(event) {
         event.preventDefault();
-        login(loginObject.email, loginObject.password);
-        adminPage();
+       API.getUser(email)
+        .then(console.log(email))
+        .catch(err => console.log(err));
       };
 
     return (

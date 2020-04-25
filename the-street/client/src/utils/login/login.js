@@ -1,13 +1,14 @@
-import Admin from "./admin"
+import API from "../API/user"
 
 const TOKEN_KEY = 'jwt';
 
 export const login = (email,password) => {
-    if (email === Admin.email && password === Admin.password){
-        localStorage.setItem(TOKEN_KEY, 'TestLogin');
-    } else {
-        alert("Email or Password is incorrect");
-    }
+    console.log(API.getUser(email))
+    // if (email === API.getUser(email) && password === API.getUser(email).password){
+    //     localStorage.setItem(TOKEN_KEY, 'TestLogin');
+    // } else {
+    //     alert("Email or Password is incorrect");
+    // }
     
 }
 
