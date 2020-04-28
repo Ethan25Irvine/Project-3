@@ -2,6 +2,12 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const SALT_WORK_FACTOR = 10;
 const UserSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    trim: true,
+    index:true
+  },
   email: {
     type: String,
     unique: true,
@@ -17,8 +23,7 @@ const UserSchema = new mongoose.Schema({
   isAdmin: {
       type: Boolean,
       default: false,
-      index:true
-  }  
+  },
 });
 
 UserSchema.pre('save', function(next) {

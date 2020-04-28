@@ -18,11 +18,11 @@ router
     //     .route("/logout")
     //     .post(userController.logout)
 // // Matches with "/api/user/login"
-// router
-//     .route("/:email")
-//     .get(userController.findByUser)
-//     .put(userController.update)
-//     .delete(userController.remove);
+router
+    .route("/:email")
+    .get(userController.findByUser)
+    .put(userController.update)
+    .delete(userController.remove);
 
 
 module.exports = router;
