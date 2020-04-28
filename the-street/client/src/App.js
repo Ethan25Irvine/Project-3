@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import withAuth from "./components/privateRoute";
-import Dashboard from "./pages/privatePage"
+import withAuthAdmin from "./components/privateRoute/isAdmin";
+import withAuthUser from "./components/privateRoute/isUser";
+import AdminPage from "./pages/adminPage"
+import UserPage from "./pages/userPage"
 
 import Login from "./pages/login/login";
 
@@ -15,7 +17,8 @@ function App() {
       <Switch>
         <Route exact path="/login" component={Login}/>
  
-        <Route component={withAuth(Dashboard)} path="/private" exact />
+        <Route component={withAuthAdmin(AdminPage)} path="/admin" exact />
+        <Route component={withAuthUser(UserPage)} path="/user" exact />
       </Switch>
     </div>
     </Router>

@@ -3,17 +3,18 @@ const app = express();
 const mongoose = require('mongoose');
 const routes = require('./routes/index');
 const cookieParser = require('cookie-parser');
-const withAuth = require('./middleware/private');
+const withAuthAdmin = require('./middleware/admin');
+const withAuthUser = require('./middleware/user');
 
 app.use(cookieParser());
 
-
-app.get('/checkToken', withAuth, function(req, res) {
+app.get('/isAdmin', withAuthAdmin, function(req, res) {
   res.sendStatus(200);
 });
 
-
-
+app.get('/isUser', withAuthUser, function(req, res) {
+  res.sendStatus(200);
+});
 
 const PORT = process.env.PORT || 8080;
 
