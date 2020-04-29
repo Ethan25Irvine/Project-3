@@ -8,9 +8,12 @@ const CartSchema = new mongoose.Schema(
     },
     products: [
       {
-        productId: Number,
-        quantity: Number,
-        name: String,
+        productName: String,
+        modifiers: [
+          {
+            modifierName: String,
+          }
+        ],
         price: Number
       }
     ],
@@ -23,7 +26,6 @@ const CartSchema = new mongoose.Schema(
       default: Date.now()
     }
   },
-  { timestamps: true }
 );
 
 module.exports = mongoose.model("Cart", CartSchema);
