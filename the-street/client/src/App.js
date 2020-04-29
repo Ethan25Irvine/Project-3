@@ -17,6 +17,7 @@ function App() {
     <Router>
       <div>
       <Switch>
+        <Route exact path="/" component={Login}/>
         <Route exact path="/confirm" component={Confirm}/>
         <Route exact path="/login" component={Login}/>
         <Route exact path="/register" component={Register}/>
