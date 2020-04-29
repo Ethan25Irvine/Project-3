@@ -1,0 +1,30 @@
+[
+	{
+		"id": 1,
+		"name": "Smoothie",
+		"image": "https://s3-media0.fl.yelpcdn.com/bphoto/CsduL9ORd7GwvAj_26LUIA/o.jpg",
+		"description": "very good smoothie",
+		"url": "/smoothie"
+	},
+	{
+		"id": 2,
+		"name": "Tea",
+		"image": "https://s3-media0.fl.yelpcdn.com/bphoto/CsduL9ORd7GwvAj_26LUIA/o.jpg",
+		"description": "very good tea",
+		"url": "/tea"
+	},
+	{
+		"id": 3,
+		"name": "Coffee",
+		"image": "https://s3-media0.fl.yelpcdn.com/bphoto/CsduL9ORd7GwvAj_26LUIA/o.jpg",
+		"description": "very good coffee",
+		"url": "/coffee"
+	},
+	{
+		"id": 4,
+		"name": "Ramen",
+		"image": "https://s3-media0.fl.yelpcdn.com/bphoto/VuryV6cUXPUomrcEnYlbWQ/o.jpg",
+		"description": "very good ramen",
+		"url": "/ramen"
+	}
+]

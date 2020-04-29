@@ -11,7 +11,7 @@ app.use(cookieParser());
 app.post('/api/sendMail', (req, res) => {
 	console.log(req.body);
 
-	sendEmail(req.body.email, req.body.namee, 'hello');
+	// sendEmail(req.body.email, req.body.name, 'hello');
 });
 
 app.listen(5000, () => {
