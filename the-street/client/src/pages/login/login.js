@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import {useHistory} from "react-router-dom";
 
 import API from "../../utils/API/user"
@@ -11,9 +11,6 @@ function Login() {
     const [loginObject, setLoginObject] = useState({
         email: ''
     });
-    const [isAdmin, setIsAdmin] = useState();
-    const [isLoggedIn, setIsLoggedIn] = useState();
-
 
     function userPage() {
         history.push('/user');
@@ -27,17 +24,6 @@ function Login() {
         const { name, value } = event.target;
         setLoginObject({ ...loginObject, [name]: value })
     };
- 
-    
-    // useEffect(() => {   
-    // const email = loginObject.email
-    // API.getUser(email)
-    //         .then(res => {
-    //                 setIsAdmin({ admin: res.data.isAdmin })
-    //             }
-    //         )
-    // }, [isLoggedIn]);
-
 
     function handleFormSubmit(event) {
         event.preventDefault();
@@ -45,8 +31,7 @@ function Login() {
             
            API.login(loginObject)
                 .then(res => {
-                    console.log(res);
-            
+                    
                     if (res.status === 200 && document.cookie.split(';').some((item) => item.trim().startsWith('admin='))) {
                         adminPage();
                     } else if (res.status === 200 && document.cookie.split(';').some((item) => item.trim().startsWith('user='))){
@@ -77,9 +62,9 @@ function Login() {
                     <input type="submit" className="btnSubmit" disabled={!(loginObject.email && loginObject.password)}
                         onClick={handleFormSubmit} value="Login" />
                 </div>
-                {/* <div className="form-group">
-                    <a href="#" className="ForgetPwd">Forget Password?</a>
-                </div> */}
+                <div className="form-group">
+                    <a href="/register" className="ForgetPwd">Need to Register?</a>
+                </div>
             </form>
         </div>
     )
