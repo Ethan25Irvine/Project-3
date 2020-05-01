@@ -1,8 +1,6 @@
 import React from 'react';
-import { Link, useLocation } from "react-router-dom";
-import './menu.css'
-
-
+import { Link, useLocation } from 'react-router-dom';
+import './menu.css';
 
 function MenuItem(props) {
 	return (
@@ -12,12 +10,9 @@ function MenuItem(props) {
 				<h5 className="card-title">{props.name}</h5>
 				<p className="card-text">{props.description}</p>
 				<button className="btn btn-primary">
-				<Link
-          to={props.url}
-          
-        >
-          <div className="optionsbtn">See options</div>
-        </Link>
+					<Link to={props.url}>
+						<div className="optionsbtn">See options</div>
+					</Link>
 				</button>
 			</div>
 		</div>

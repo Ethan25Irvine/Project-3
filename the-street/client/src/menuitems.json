@@ -25,6 +25,8 @@
 		"name": "Ramen",
 		"image": "https://s3-media0.fl.yelpcdn.com/bphoto/VuryV6cUXPUomrcEnYlbWQ/o.jpg",
 		"description": "very good ramen",
-		"url": "/ramen"
+		"url": "/ramen",
+		"option1": [ "Spicy", "Mild", "Non-spicy", "Veggie" ],
+		"option2": [ "Dumplings", "Rice Cakes" ]
 	}
 ]
