@@ -7,41 +7,38 @@
         
              const Items = [{
                 id: 1,
-                check: true,
+                check: false,
                 text: 'REAL FRUIT SMOOTHIES'
             }, {
                 id: 2,
-                check: true,
+                check: false,
                 text: 'SLUSHIES'
             }, {
                 id: 3,
-                check: true,
+                check: false,
                 text: "MILK SMOOTHIES"
             }, {
                 id: 4,
-                check: true,
+                check: false,
                 text: 'CHAI TEA SMOOTHIES'
             }, {
                 id: 5,
-                check: true,
+                check: false,
                 text: 'THAI COFFEE SMOOTHIE'
             }, {
                 id: 6,
-                check: true,
+                check: false,
                 text: 'THAI TEA SMOOTHIE'
             
             }, {
                 id: 7,
-                check: true,
+                check: false,
                 text: 'COFFEE SMOOTHIE'
             
             }, {
                 id: 8,
-                check: true,
+                check: false,
                 text: 'MOCHA SMOOTHIE'
-
-
-
             }]
         
     
