@@ -1,28 +1,38 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Order from './pages/Order';
-import './App.css';
-import Smoothie from "./pages/Smoothie";
-import Tea from "./pages/Tea";
-import Coffee from "./pages/Coffee";
-import Ramen from "./pages/Ramen";
+import withAuthAdmin from "./components/privateRoute/isAdmin";
+import withAuthUser from "./components/privateRoute/isUser";
+import AdminPage from "./pages/adminPage"
+import UserPage from "./pages/userPage"
+
+import Login from "./pages/login/login";
+import Register from"./pages/register/register";
+import Confirm from './pages/confirm/confrim';
+import Order from './pages/List/List';
+import Cart from './pages/cart/cart';
+
+
 
 
 function App() {
-	return (
-		<Router>
-		<div className="App">
-			<Switch>
-				
-				<Route exact path="/" component={Order}></Route>
-				<Route exact path="/smoothie" component={Smoothie}></Route>
-				<Route exact path="/tea" component={Tea}></Route>
-				<Route exact path="/coffee" component={Coffee}></Route>
-				<Route exact path="/ramen" component={Ramen}></Route>
-			</Switch>
-		</div>
-		</Router>
-	);
+  return (
+    <Router>
+      <div>
+      <Switch>
+        <Route exact path="/" component={Login}/>
+        <Route exact path="/confirm" component={Confirm}/>
+        <Route exact path="/login" component={Login}/>
+        <Route exact path="/register" component={Register}/>
+        <Route component={withAuthAdmin(AdminPage)} path="/admin" exact />
+        <Route component={withAuthUser(UserPage)} path="/user" exact />
+        <Route exact path="/order" component={Order}/>
+        {/* <Route exact path="/cart" component={Cart}/> */}
+      </Switch>
+    </div>
+    </Router>
+    
+    
+  );
 }
 
 export default App;
