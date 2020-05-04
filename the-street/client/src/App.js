@@ -9,6 +9,7 @@ import Login from "./pages/login/login";
 import Register from"./pages/register/register";
 import Confirm from './pages/confirm/confrim';
 import Order from './pages/List/List';
+import Cart from './pages/cart/cart';
 
 
 
@@ -25,6 +26,7 @@ function App() {
         <Route component={withAuthAdmin(AdminPage)} path="/admin" exact />
         <Route component={withAuthUser(UserPage)} path="/user" exact />
         <Route exact path="/order" component={Order}/>
+        <Route exact path="/cart" component={Cart}/>
       </Switch>
     </div>
     </Router>

@@ -21,9 +21,9 @@ const OrderSchema = new mongoose.Schema(
         price: Number
       }
     ],
-    orderedAt: {
-      type: Number
-    }
+    // orderedAt: {
+    //   type: Number
+    // }
   },
 );
 
