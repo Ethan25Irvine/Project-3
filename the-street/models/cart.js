@@ -6,6 +6,10 @@ const CartSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.String,
       ref: "User"
     },
+    userName: {
+      type: mongoose.Schema.Types.String,
+      ref: "User"
+    },
     products: [
       {
         productName: String,

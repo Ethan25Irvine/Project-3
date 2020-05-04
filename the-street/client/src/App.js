@@ -26,7 +26,7 @@ function App() {
         <Route component={withAuthAdmin(AdminPage)} path="/admin" exact />
         <Route component={withAuthUser(UserPage)} path="/user" exact />
         <Route exact path="/order" component={Order}/>
-        {/* <Route exact path="/cart" component={Cart}/> */}
+        <Route exact path="/cart" component={Cart}/>
       </Switch>
     </div>
     </Router>
