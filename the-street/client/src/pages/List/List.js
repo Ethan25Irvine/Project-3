@@ -11,18 +11,13 @@ function Order () {
 
         <ul>
             
-            
+           
             
              {Items.map(data=>{
              
            
-                
-               
-                // <ListItems 
-                //  data
-                
-                // />
-                
+                console.log(data)
+                {}
 
             })} 
 
