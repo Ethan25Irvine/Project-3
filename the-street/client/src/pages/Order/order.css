@@ -1,0 +1,17 @@
+.products {
+	margin-top: 3%;
+	margin-left: 120px;
+}
+body {
+	/* background-image: url('../images/dragongrayscale.jpg'); */
+	background-size: cover;
+}
+
+.header {
+	color: white;
+	background-color: black;
+}
+
+.navbars {
+	background-color: black;
+}

@@ -1,0 +1,31 @@
+.link {
+	color: white;
+}
+
+.link :hover {
+	color: white;
+	text-decoration: none;
+}
+.newborder {
+	border: none;
+}
+.navbars {
+	background-color: rgb(27, 27, 27);
+	color: rgb(255, 255, 255);
+	height: 50px;
+}
+
+.nav-items {
+	margin-top: 10px;
+	font-size: larger;
+}
+
+.smoothies {
+	margin-left: 100px;
+	width: 450px;
+	height: 600px;
+}
+
+.heading {
+	font-family: 'Delius', cursive;
+}

@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 
-
-import axios from 'axios'
+import axios from 'axios';
 
 function Contact() {
 	const [ firstName, setFirstName ] = useState('');
 	const [ lastName, setLastName ] = useState('');
 	const [ email, setEmail ] = useState('');
-  const [ message, setMessage ] = useState('');
-  
-   
-  const handleSubmit = (e) => {
+	const [ message, setMessage ] = useState('');
+
+	const handleSubmit = (e) => {
 		e.preventDefault();
 
 		const dataToSubmit = {
