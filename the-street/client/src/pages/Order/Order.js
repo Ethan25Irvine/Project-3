@@ -15,7 +15,7 @@ class Order extends Component {
 				<div className="row navbars">
 					<div className="col-lg-12 ">
 						<div className="row nav-items">
-							<div className="col-lg-2" />
+							<div className="col-lg-2 mr" />
 							<div className="col-lg-2">Order</div>
 							<div className="col-lg-2">Menu</div>
 							<div className="col-lg-2">About Us</div>

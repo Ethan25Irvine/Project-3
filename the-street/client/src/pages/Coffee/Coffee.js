@@ -21,7 +21,7 @@ function Coffee() {
 			<div className="row">
 				<div className="col-lg-12 navbars">
 					<div className="row nav-items">
-						<div className="col-lg-2" />
+						<div className="col-lg-2 mr" />
 						<div className="col-lg-2">
 							<Link to="/order" className="link">
 								<div>Order</div>
@@ -60,7 +60,7 @@ function Coffee() {
 								<img
 									alt=""
 									class="img-thumbnail p-0 border-0 image-main smoothies"
-									src="https://i.imgur.com/qCSYl75.jpg"
+									src="https://i.imgur.com/k5IkYI1.jpg"
 								/>
 							</div>
 						</div>
@@ -79,23 +79,17 @@ function Coffee() {
 								<br />
 								<div class="form-group">
 									<br />
-									<label for="exampleFormControlSelect1">Tea Base</label>
-									<select class="form-control" id="exampleFormControlSelect1">
-										<option>Black Tea</option>
-										<option>Green Tea</option>
-										<option>Thai Tea</option>
+									<label for="CoffeeChoice">Type</label>
+									<select class="form-control" id="CoffeeChoice">
+										<option>Hot Coffee</option>
+										<option>Iced Coffee</option>
+										<option>Lattes</option>
+										<option>Coffee Smoothie</option>
+										<option>Mocha Smoothie</option>
+										<option>Coffee Milk Tea</option>
+										<option>Vietnamese Iced Coffee</option>
 									</select>
 								</div>
-								<br />
-								<div>Flavors</div>
-								<div className="flavors">
-									{flavors.map((flavor) => (
-										<div className="indivflavor">
-											<Flavor name={flavor} />
-										</div>
-									))}
-								</div>
-								<br />
 								<br />
 								Toppings
 								<div className="toppings">

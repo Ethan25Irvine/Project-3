@@ -2,7 +2,7 @@
 	border: none;
 }
 .navbars {
-	background-color: rgb(27, 27, 27);
+	background-color: rgb(0, 0, 0);
 	color: rgb(255, 255, 255);
 	height: 50px;
 }
@@ -10,4 +10,11 @@
 .nav-items {
 	margin-top: 10px;
 	font-size: larger;
+}
+
+.navbar-background {
+	background-color: black;
+}
+.mr {
+	margin-right: 125px;
 }

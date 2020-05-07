@@ -13,5 +13,13 @@ body {
 }
 
 .navbars {
-	background-color: black;
+	background-color: rgb(0, 0, 0);
+}
+
+.mr {
+	margin-right: 125px;
+}
+
+body {
+	overflow-x: hidden;
 }

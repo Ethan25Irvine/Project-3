@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import items from '../../menuitems.json';
 import Product from '../../components/Product';
+import { Link, useLocation } from 'react-router-dom';
 import './ramen.css';
 class Ramen extends Component {
 	state = {
@@ -9,14 +10,30 @@ class Ramen extends Component {
 	render() {
 		return (
 			<div>
-				<div className="row">
+				<div className="row navbar-background">
 					<div className="col-lg-12 navbars">
 						<div className="row nav-items">
-							<div className="col-lg-2" />
-							<div className="col-lg-2">Order</div>
-							<div className="col-lg-2">Menu</div>
-							<div className="col-lg-2">About Us</div>
-							<div className="col-lg-2">Login</div>
+							<div className="col-lg-2 mr" />
+							<div className="col-lg-2">
+								<Link to="/order" className="link">
+									<div>Order</div>
+								</Link>
+							</div>
+							<div className="col-lg-2">
+								<Link to="/menu" className="link">
+									Menu
+								</Link>
+							</div>
+							<div className="col-lg-2">
+								<Link to="/about" className="link">
+									About Us
+								</Link>
+							</div>
+							<div className="col-lg-2">
+								<Link to="/login" className="link">
+									Login
+								</Link>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -50,7 +67,7 @@ class Ramen extends Component {
 										</select>
 									</div>
 									<br />
-									<br />
+
 									<div class="form-group">
 										<br />
 										<label for="FormControlSelect">Toppings</label>
@@ -69,11 +86,6 @@ class Ramen extends Component {
 						</div>
 					</div>
 				</div>
-				<footer>
-					<div className="row">
-						<div className="col-lg-12 navbars" />
-					</div>
-				</footer>
 			</div>
 		);
 	}

@@ -21,7 +21,7 @@ function Smoothie() {
 			<div className="row">
 				<div className="col-lg-12 navbars">
 					<div className="row nav-items">
-						<div className="col-lg-2" />
+						<div className="col-lg-2 mr" />
 						<div className="col-lg-2">
 							<Link to="/order" className="link">
 								<div>Order</div>
