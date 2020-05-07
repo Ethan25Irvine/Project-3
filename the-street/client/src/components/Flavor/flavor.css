@@ -1,0 +1,14 @@
+.flavors {
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: 20px;
+}
+.toppings {
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: 20px;
+}
+
+.indivflavor {
+	margin-right: 35px;
+}

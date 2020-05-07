@@ -1,10 +1,21 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import items from '../../menuitems.json';
 import Product from '../../components/Product';
 import './smoothie.css';
 import { Link, useLocation } from 'react-router-dom';
+import Flavor from '../../components/Flavor/flavor';
+import flavorList from '../../flavorList.json';
+import Toppings from '../../toppings.json';
 
 function Smoothie() {
+	const [ flavors, setFlavors ] = useState([]);
+	const [ toppings, setToppings ] = useState([]);
+
+	useEffect(() => {
+		setFlavors(flavorList);
+		setToppings(Toppings);
+	}, []);
+
 	return (
 		<div className="background">
 			<div className="row">
@@ -43,7 +54,7 @@ function Smoothie() {
 				<br />
 
 				<div class="row mb-5">
-					<div class="col-md-8">
+					<div class="col-md-7">
 						<div class="row">
 							<div class="col-md-12 mb-4 ">
 								<img
@@ -54,7 +65,7 @@ function Smoothie() {
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-5">
 						<div class="card options newborder">
 							<form>
 								<div class="form-group">
@@ -66,29 +77,39 @@ function Smoothie() {
 									</select>
 								</div>
 								<br />
+								<div>Flavors</div>
+								<div className="flavors">
+									{flavors.map((flavor) => (
+										<div className="indivflavor">
+											<Flavor name={flavor} />
+										</div>
+									))}
+								</div>
 								<br />
-								<div class="form-check form-check-inline">
-									<input
-										class="form-check-input"
-										type="checkbox"
-										id="inlineCheckbox1"
-										value="option1"
-									/>
-									<label class="form-check-label" for="inlineCheckbox1">
-										1
-									</label>
+								<div class="form-group">
+									<br />
+									<label for="exampleFormControlSelect1">Milk or Juice</label>
+									<select class="form-control" id="exampleFormControlSelect1">
+										<option>Apple Juice ( fruit smoothies)</option>
+										<option>Whole Milk</option>
+										<option>Soy Milk</option>
+										<option>Almond Milk</option>
+										<option>Coconut Milk</option>
+										<option>Rice Milk</option>
+										<option>Green Tea (fruit smoothies)</option>
+										<option>Black Tea (fruit smoothies)</option>
+									</select>
 								</div>
-								<div class="form-check form-check-inline">
-									<input
-										class="form-check-input"
-										type="checkbox"
-										id="inlineCheckbox2"
-										value="option2"
-									/>
-									<label class="form-check-label" for="inlineCheckbox2">
-										2
-									</label>
+								<br />
+								Toppings
+								<div className="toppings">
+									{toppings.map((topping) => (
+										<div className="indivflavor">
+											<Flavor name={topping} />
+										</div>
+									))}
 								</div>
+								<br />
 								<button type="submit" class="btn btn-primary">
 									Submit
 								</button>
@@ -97,11 +118,6 @@ function Smoothie() {
 					</div>
 				</div>
 			</div>
-			<footer>
-				<div className="row">
-					<div className="col-lg-12 navbars" />
-				</div>
-			</footer>
 		</div>
 	);
 }
