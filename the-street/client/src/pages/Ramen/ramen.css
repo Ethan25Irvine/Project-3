@@ -18,3 +18,8 @@
 .mr {
 	margin-right: 125px;
 }
+.heading {
+	font-family: chiller;
+	color: black;
+	font-size: 110px;
+}

@@ -4,17 +4,13 @@ import './menu.css';
 
 function MenuItem(props) {
 	return (
-		<div className="card cardmargin">
-			<img src={props.image} className="card-img-top productimage" alt={props.name} />
-			<div className="card-body">
-				<h5 className="card-title">{props.name}</h5>
-				<p className="card-text">{props.description}</p>
-				<Link to={props.url}>
-					<button className="btn btn-primary">
-						<div className="optionsbtn">See options</div>
-					</button>
-				</Link>
-			</div>
+		<div className="card">
+			<Link to={props.url}>
+				<img src={props.image} className="card-img-top productimage" alt={props.name} />
+				<div className="text-center">
+					<h5 className=" centered title">{props.name}</h5>
+				</div>
+			</Link>
 		</div>
 	);
 }

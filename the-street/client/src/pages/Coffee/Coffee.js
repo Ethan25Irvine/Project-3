@@ -6,45 +6,25 @@ import { Link, useLocation } from 'react-router-dom';
 import Flavor from '../../components/Flavor/flavor';
 import flavorList from '../../teas.json';
 import Toppings from '../../toppings.json';
+import Nav from '../../components/Navbar/nav';
 
 function Coffee() {
 	const [ flavors, setFlavors ] = useState([]);
 	const [ toppings, setToppings ] = useState([]);
+	function scrollup() {
+		window.scrollTo(0, 0);
+	}
 
 	useEffect(() => {
 		setFlavors(flavorList);
 		setToppings(Toppings);
+		scrollup();
 	}, []);
 
 	return (
 		<div className="background">
-			<div className="row">
-				<div className="col-lg-12 navbars">
-					<div className="row nav-items">
-						<div className="col-lg-2 mr" />
-						<div className="col-lg-2">
-							<Link to="/order" className="link">
-								<div>Order</div>
-							</Link>
-						</div>
-						<div className="col-lg-2">
-							<Link to="/menu" className="link">
-								Menu
-							</Link>
-						</div>
-						<div className="col-lg-2">
-							<Link to="/about" className="link">
-								About Us
-							</Link>
-						</div>
-						<div className="col-lg-2">
-							<Link to="/login" className="link">
-								Login
-							</Link>
-						</div>
-					</div>
-				</div>
-			</div>
+			<Nav />
+
 			<div className="container product-card">
 				<div className="row">
 					<div className="col-lg-12 text-center">

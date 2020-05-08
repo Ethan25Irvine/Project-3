@@ -4,45 +4,23 @@ import Product from '../../components/Product';
 import './di.css';
 import { Link, useLocation } from 'react-router-dom';
 import Flavor from '../../components/Flavor/flavor';
-
+import Nav from '../../components/Navbar/nav';
 import Toppings from '../../toppings.json';
 
-function Coffee() {
+function DI() {
 	const [ toppings, setToppings ] = useState([]);
+	function scrollup() {
+		window.scrollTo(0, 0);
+	}
 
 	useEffect(() => {
 		setToppings(Toppings);
+		scrollup();
 	}, []);
 
 	return (
 		<div className="background">
-			<div className="row">
-				<div className="col-lg-12 navbars">
-					<div className="row nav-items">
-						<div className="col-lg-2 mr" />
-						<div className="col-lg-2">
-							<Link to="/order" className="link">
-								<div>Order</div>
-							</Link>
-						</div>
-						<div className="col-lg-2">
-							<Link to="/menu" className="link">
-								Menu
-							</Link>
-						</div>
-						<div className="col-lg-2">
-							<Link to="/about" className="link">
-								About Us
-							</Link>
-						</div>
-						<div className="col-lg-2">
-							<Link to="/login" className="link">
-								Login
-							</Link>
-						</div>
-					</div>
-				</div>
-			</div>
+			<Nav />
 			<div className="container product-card">
 				<div className="row">
 					<div className="col-lg-12 text-center">
@@ -64,7 +42,7 @@ function Coffee() {
 						</div>
 					</div>
 					<div class="col-md-5">
-						<div class="card options newborder">
+						<div class=" options newborder">
 							<form>
 								<div class="form-group">
 									<br />
@@ -114,4 +92,4 @@ function Coffee() {
 	);
 }
 
-export default Coffee;
+export default DI;
