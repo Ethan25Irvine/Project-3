@@ -1,0 +1,45 @@
+.link {
+	color: white;
+}
+
+.link :hover {
+	color: white;
+	text-decoration: none;
+}
+.newborder {
+	border: none;
+}
+.navbars {
+	background-color: rgb(0, 0, 0);
+	color: rgb(255, 255, 255);
+	height: 50px;
+}
+
+.nav-items {
+	margin-top: 10px;
+	font-size: larger;
+}
+
+.smoothies {
+	margin-left: 100px;
+	width: 450px;
+	height: 600px;
+}
+
+.heading {
+	font-family: chiller;
+	color: black;
+	font-size: 110px;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+.flexbox {
+	display: none;
+}
+.mr {
+	margin-right: 125px;
+}
