@@ -70,8 +70,8 @@ function Coffee() {
 							<form>
 								<div class="form-group">
 									<br />
-									<label for="exampleFormControlSelect1">Size</label>
-									<select class="form-control" id="exampleFormControlSelect1">
+									<label for="size">Size</label>
+									<select class="form-control" id="size">
 										<option>Small</option>
 										<option>Large</option>
 									</select>
