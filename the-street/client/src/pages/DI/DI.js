@@ -45,15 +45,14 @@ function DI() {
 						<div class=" options newborder">
 							<form>
 								<div class="form-group">
-									<br />
 									<label for="size">Size</label>
 									<select class="form-control" id="size">
-										<option>Tiny</option>
-										<option>Mini</option>
-										<option>Small</option>
-										<option>Medium</option>
-										<option>Large</option>
-										<option>Extra Large</option>
+										<option id="4.00">Tiny ($4.00)</option>
+										<option id="5.00">Mini ($5.00)</option>
+										<option id="6.00">Small ($6.00)</option>
+										<option id="10.00">Medium ($10.00)</option>
+										<option id="12.00">Large ($12.00)</option>
+										<option id="16.00">Extra Large ($16.00)</option>
 									</select>
 								</div>
 								<br />
@@ -79,7 +78,19 @@ function DI() {
 										<option>Extra Large</option>
 									</select>
 								</div>
-								<br />
+								<div class="form-group">
+									<label for="Pickup-time">Pickup Time</label>
+									<input class="form-control" id="Pickup-time" aria-describedby="Pickup-time" />
+								</div>
+								<div class="form-group">
+									<label for="comments">Comments</label>
+									<input
+										class="form-control"
+										id="comments"
+										aria-describedby="comments"
+										placeholder=""
+									/>
+								</div>
 								<button type="submit" class="btn btn-primary">
 									Submit
 								</button>

@@ -57,6 +57,9 @@ footer {
 		height: 600px;
 	}
 }
+form {
+	margin-bottom: 20px;
+}
 @media only screen and (max-width: 1140px) {
 	.nav-item {
 		margin-right: 10%;
