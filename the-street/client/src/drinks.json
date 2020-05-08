@@ -1,0 +1,30 @@
+[
+	{
+		"id": 1,
+		"name": "Smoothie",
+		"image": "https://i.imgur.com/Oqvf7xS.jpg",
+		"description": "very good smoothie",
+		"url": "/smoothie"
+	},
+	{
+		"id": 2,
+		"name": "Tea",
+		"image": "https://i.imgur.com/qCSYl75.jpg",
+		"description": "very good tea",
+		"url": "/tea"
+	},
+	{
+		"id": 3,
+		"name": "Coffee",
+		"image": "https://i.imgur.com/bKP1F4W.jpg",
+		"description": "very good coffee",
+		"url": "/coffee"
+	},
+	{
+		"id": 4,
+		"name": "Slushie",
+		"image": "https://i.imgur.com/HUCztvl.jpg",
+		"description": "very good Slushie",
+		"url": "/Slushie"
+	}
+]
