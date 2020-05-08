@@ -6,45 +6,25 @@ import { Link, useLocation } from 'react-router-dom';
 import Flavor from '../../components/Flavor/flavor';
 import flavorList from '../../teas.json';
 import Toppings from '../../toppings.json';
+import Nav from '../../components/Navbar/nav';
 
 function Coffee() {
 	const [ flavors, setFlavors ] = useState([]);
 	const [ toppings, setToppings ] = useState([]);
+	function scrollup() {
+		window.scrollTo(0, 0);
+	}
 
 	useEffect(() => {
 		setFlavors(flavorList);
 		setToppings(Toppings);
+		scrollup();
 	}, []);
 
 	return (
 		<div className="background">
-			<div className="row">
-				<div className="col-lg-12 navbars">
-					<div className="row nav-items">
-						<div className="col-lg-2 mr" />
-						<div className="col-lg-2">
-							<Link to="/order" className="link">
-								<div>Order</div>
-							</Link>
-						</div>
-						<div className="col-lg-2">
-							<Link to="/menu" className="link">
-								Menu
-							</Link>
-						</div>
-						<div className="col-lg-2">
-							<Link to="/about" className="link">
-								About Us
-							</Link>
-						</div>
-						<div className="col-lg-2">
-							<Link to="/login" className="link">
-								Login
-							</Link>
-						</div>
-					</div>
-				</div>
-			</div>
+			<Nav />
+
 			<div className="container product-card">
 				<div className="row">
 					<div className="col-lg-12 text-center">
@@ -72,8 +52,8 @@ function Coffee() {
 									<br />
 									<label for="size">Size</label>
 									<select class="form-control" id="size">
-										<option>Small</option>
-										<option>Large</option>
+										<option id="3.00">Small ($3.00)</option>
+										<option id="3.50">Large ($3.50)</option>
 									</select>
 								</div>
 								<br />
@@ -99,7 +79,15 @@ function Coffee() {
 										</div>
 									))}
 								</div>
-								<br />
+								<div class="form-group">
+									<label for="comments">Comments</label>
+									<input
+										class="form-control"
+										id="comments"
+										aria-describedby="comments"
+										placeholder="add cream, half & half, etc."
+									/>
+								</div>
 								<button type="submit" class="btn btn-primary">
 									Submit
 								</button>

@@ -4,45 +4,23 @@ import Product from '../../components/Product';
 import './di.css';
 import { Link, useLocation } from 'react-router-dom';
 import Flavor from '../../components/Flavor/flavor';
-
+import Nav from '../../components/Navbar/nav';
 import Toppings from '../../toppings.json';
 
-function Coffee() {
+function DI() {
 	const [ toppings, setToppings ] = useState([]);
+	function scrollup() {
+		window.scrollTo(0, 0);
+	}
 
 	useEffect(() => {
 		setToppings(Toppings);
+		scrollup();
 	}, []);
 
 	return (
 		<div className="background">
-			<div className="row">
-				<div className="col-lg-12 navbars">
-					<div className="row nav-items">
-						<div className="col-lg-2 mr" />
-						<div className="col-lg-2">
-							<Link to="/order" className="link">
-								<div>Order</div>
-							</Link>
-						</div>
-						<div className="col-lg-2">
-							<Link to="/menu" className="link">
-								Menu
-							</Link>
-						</div>
-						<div className="col-lg-2">
-							<Link to="/about" className="link">
-								About Us
-							</Link>
-						</div>
-						<div className="col-lg-2">
-							<Link to="/login" className="link">
-								Login
-							</Link>
-						</div>
-					</div>
-				</div>
-			</div>
+			<Nav />
 			<div className="container product-card">
 				<div className="row">
 					<div className="col-lg-12 text-center">
@@ -64,18 +42,17 @@ function Coffee() {
 						</div>
 					</div>
 					<div class="col-md-5">
-						<div class="card options newborder">
+						<div class=" options newborder">
 							<form>
 								<div class="form-group">
-									<br />
 									<label for="size">Size</label>
 									<select class="form-control" id="size">
-										<option>Tiny</option>
-										<option>Mini</option>
-										<option>Small</option>
-										<option>Medium</option>
-										<option>Large</option>
-										<option>Extra Large</option>
+										<option id="4.00">Tiny ($4.00)</option>
+										<option id="5.00">Mini ($5.00)</option>
+										<option id="6.00">Small ($6.00)</option>
+										<option id="10.00">Medium ($10.00)</option>
+										<option id="12.00">Large ($12.00)</option>
+										<option id="16.00">Extra Large ($16.00)</option>
 									</select>
 								</div>
 								<br />
@@ -101,7 +78,19 @@ function Coffee() {
 										<option>Extra Large</option>
 									</select>
 								</div>
-								<br />
+								<div class="form-group">
+									<label for="Pickup-time">Pickup Time</label>
+									<input class="form-control" id="Pickup-time" aria-describedby="Pickup-time" />
+								</div>
+								<div class="form-group">
+									<label for="comments">Comments</label>
+									<input
+										class="form-control"
+										id="comments"
+										aria-describedby="comments"
+										placeholder=""
+									/>
+								</div>
 								<button type="submit" class="btn btn-primary">
 									Submit
 								</button>
@@ -114,4 +103,4 @@ function Coffee() {
 	);
 }
 
-export default Coffee;
+export default DI;
