@@ -1,10 +1,3 @@
-
-
-
-
-    
-
-        
              const Items = [{
                 id: 1,
                 check: false,

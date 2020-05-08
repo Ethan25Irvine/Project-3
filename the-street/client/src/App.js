@@ -33,6 +33,7 @@ function App() {
 					<Route exact path="/tea" component={Tea} />
 					<Route exact path="/coffee" component={Coffee} />
 					<Route exact path="/DI" component={DI} />
+					<Route exact path="/cart" component={Cart} />
 					{/* <Route exact path="/cart" component={Cart}/> */}
 				</Switch>
 			</div>
