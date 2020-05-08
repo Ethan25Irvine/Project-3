@@ -43,3 +43,26 @@ footer {
 .mr {
 	margin-right: 125px;
 }
+.header-background {
+	background-color: black;
+}
+.navbar-dark {
+	background-color: black;
+}
+
+@media only screen and (max-width: 1200px) {
+	.smoothies {
+		margin-left: 0px;
+		width: 450px;
+		height: 600px;
+	}
+}
+@media only screen and (max-width: 1140px) {
+	.nav-item {
+		margin-right: 10%;
+	}
+
+	#navbarNav {
+		margin-left: 6%;
+	}
+}
