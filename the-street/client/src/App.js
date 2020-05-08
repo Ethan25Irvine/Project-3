@@ -10,6 +10,7 @@ import Register from"./pages/register/register";
 import Confirm from './pages/confirm/confrim';
 import Order from './pages/List/List';
 import Cart from './pages/cart/cart';
+//import Rating from "./components/Ratings/ratings";
 
 
 
@@ -29,7 +30,9 @@ function App() {
         <Route exact path="/cart" component={Cart}/>
       </Switch>
     </div>
+    <MENU/>
     </Router>
+    
     
     
   );

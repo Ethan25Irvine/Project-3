@@ -43,8 +43,15 @@ const Cart = () => {
                     )} ) : <p>Loading...</p>
                     }
             </ol>
-            <button onClick={handleOnClick}>Submit Order</button>
-        </div>
+
+            
+            
+ </div>
+  
+  
+
+  
+  
     );
 };
 

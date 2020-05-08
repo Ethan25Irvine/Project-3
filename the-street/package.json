@@ -28,6 +28,7 @@
     "nodemon": "^1.18.7"
   },
   "dependencies": {
+    "@cogent-labs/react-rating-component": "^1.1.0",
     "axios": "^0.18.1",
     "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",
