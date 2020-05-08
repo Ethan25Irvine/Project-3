@@ -13,7 +13,7 @@ function Login() {
     });
 
     function userPage() {
-        history.push('/user');
+        history.push('/cart');
     }
 
     function adminPage() {
@@ -49,7 +49,8 @@ function Login() {
     };
 
     return (
-        <div className="col-md-6 login-form-1">
+        <div className='container'>
+        <div className="col-md-6 login-form-1 ">
             <h3>Login for Form 1</h3>
             <form>
                 <div className="form-group">
@@ -66,6 +67,7 @@ function Login() {
                     <a href="/register" className="ForgetPwd">Need to Register?</a>
                 </div>
             </form>
+        </div>
         </div>
     )
 };

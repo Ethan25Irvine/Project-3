@@ -37,7 +37,8 @@ function Register() {
     };
 
     return (
-        <div className="col-md-6 login-form-1 container">
+        <div className = "register-form-1 container">
+        <div className="col-md-12 ">
             <h3>Register Here</h3>
             <form>
                 <div className="form-group">
@@ -57,6 +58,7 @@ function Register() {
                         onClick={handleFormSubmit} value="Register" />
                 </div>     
             </form>
+        </div>
         </div>
     )
 };

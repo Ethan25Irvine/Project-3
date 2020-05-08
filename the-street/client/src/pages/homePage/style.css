@@ -43,22 +43,22 @@
 /* CODE FOR TRANSITIONING PICTURES */
 @keyframes slide{
     0%{
-        background-image: url('photos/streetboba44.jpg');
+        background-image: url('./photos/streetboba44.jpg');
     }
     20%{
-        background-image: url('photos/streetboba55.jpg');
+        background-image: url('./photos/streetboba55.jpg');
     }
     40%{
-        background-image: url('photos/streetboba33.jpg');
+        background-image: url('./photos/streetboba33.jpg');
     }
     60%{
-        background-image: url('photos/streetboba44.jpg');
+        background-image: url('./photos/streetboba44.jpg');
     }
     80%{
-        background-image: url('photos/streetboba55jpg');
+        background-image: url('./photos/streetboba55.jpg');
     }
     100%{
-        background-image: url('photos/streetboba44.jpg');
+        background-image: url('./photos/streetboba44.jpg');
     }
 }
 /* CODE FOR SMOOTH TRANSITION BETWEEN PAGES */
@@ -252,4 +252,19 @@ a:hover {
 .user{
     height:100px;
     width:100px;
+}
+.login-form-1{
+    background:white;
+    padding:10px;
+    text-align:center;
+    margin:auto;
+    margin-top: 23%;
+}
+.register-form-1{
+    background:white;
+    text-align:center;
+    margin:auto;
+    margin-top:10%;
+    padding:10px;
+    
 }
