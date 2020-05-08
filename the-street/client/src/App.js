@@ -27,16 +27,14 @@ function App() {
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/register" component={Register} />
 					<Route component={withAuthAdmin(AdminPage)} path="/admin" exact />
-					<Route component={withAuthUser(UserPage)} path="/user" exact />
-					<Route exact path="/order" component={Order} />
+					<Route exact path="/order" component={withAuthUser(Order)} />
 					<Route exact path="/ramen" component={Ramen} />
 					<Route exact path="/smoothie" component={Smoothie} />
 					<Route exact path="/tea" component={Tea} />
 					<Route exact path="/coffee" component={Coffee} />
-					<Route exact path="/DI" component={DI} />
-					<Route exact path="/cart" component={Cart} />
+					<Route exact path="/di" component={DI} />
+					<Route exact path="/cart" component={withAuthUser(Cart)} />
 					<Route exact path="/slushie" component={Slushie} />
-					{/* <Route exact path="/cart" component={Cart}/> */}
 				</Switch>
 			</div>
 		</Router>

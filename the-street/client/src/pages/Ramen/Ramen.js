@@ -7,6 +7,7 @@ class Ramen extends Component {
 	state = {
 		items
 	};
+
 	render() {
 		return (
 			<div>
@@ -78,8 +79,8 @@ class Ramen extends Component {
 											<option>None</option>
 										</select>
 									</div>
-									<button type="submit" class="btn btn-primary">
-										Submit
+									<button type="submit"  class="btn btn-primary">
+										Add to Cart
 									</button>
 								</form>
 							</div>
