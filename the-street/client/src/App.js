@@ -15,6 +15,7 @@ import Smoothie from './pages/Smoothie/Smoothie';
 import Tea from './pages/Tea/Tea';
 import Cart from './pages/cart/cart';
 import DI from './pages/DI/DI';
+import Slushie from './pages/Slushie/Slushie';
 
 function App() {
 	return (
@@ -34,6 +35,7 @@ function App() {
 					<Route exact path="/coffee" component={Coffee} />
 					<Route exact path="/DI" component={DI} />
 					<Route exact path="/cart" component={Cart} />
+					<Route exact path="/slushie" component={Slushie} />
 					{/* <Route exact path="/cart" component={Cart}/> */}
 				</Switch>
 			</div>

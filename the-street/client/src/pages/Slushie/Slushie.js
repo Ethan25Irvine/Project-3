@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 
 import Product from '../../components/Product';
-import './di.css';
+import '../Smoothie/smoothie.css';
 import { Link, useLocation } from 'react-router-dom';
 import Flavor from '../../components/Flavor/flavor';
-
+import flavorList from '../../slushieFlavors.json';
 import Toppings from '../../toppings.json';
 
-function Coffee() {
+function Smoothie() {
+	const [ flavors, setFlavors ] = useState([]);
 	const [ toppings, setToppings ] = useState([]);
 
 	useEffect(() => {
+		setFlavors(flavorList);
 		setToppings(Toppings);
 	}, []);
 
@@ -46,7 +48,7 @@ function Coffee() {
 			<div className="container product-card">
 				<div className="row">
 					<div className="col-lg-12 text-center">
-						<h1 className="heading">Diamond Ice</h1>
+						<h1 className="heading">Slushies</h1>
 					</div>
 				</div>
 				<br />
@@ -58,7 +60,7 @@ function Coffee() {
 								<img
 									alt=""
 									class="img-thumbnail p-0 border-0 image-main smoothies"
-									src="https://i.imgur.com/yNAQcdd.jpg"
+									src="https://i.imgur.com/HUCztvl.jpg"
 								/>
 							</div>
 						</div>
@@ -68,17 +70,36 @@ function Coffee() {
 							<form>
 								<div class="form-group">
 									<br />
-									<label for="size">Size</label>
-									<select class="form-control" id="size">
-										<option>Tiny</option>
-										<option>Mini</option>
+									<label for="exampleFormControlSelect1">Size</label>
+									<select class="form-control" id="exampleFormControlSelect1">
 										<option>Small</option>
-										<option>Medium</option>
 										<option>Large</option>
-										<option>Extra Large</option>
 									</select>
 								</div>
 								<br />
+								<div>Flavors</div>
+								<div className="flavors">
+									{flavors.map((flavor) => (
+										<div className="indivflavor">
+											<Flavor name={flavor} />
+										</div>
+									))}
+								</div>
+								<br />
+								<div class="form-group">
+									<br />
+									<label for="exampleFormControlSelect1">Milk or Juice</label>
+									<select class="form-control" id="exampleFormControlSelect1">
+										<option>Apple Juice (most common)</option>
+										<option>Whole Milk</option>
+										<option>Soy Milk</option>
+										<option>Almond Milk</option>
+										<option>Coconut Milk</option>
+										<option>Rice Milk</option>
+										<option>Green Tea</option>
+										<option>Black Tea</option>
+									</select>
+								</div>
 								<br />
 								Toppings
 								<div className="toppings">
@@ -87,19 +108,6 @@ function Coffee() {
 											<Flavor name={topping} />
 										</div>
 									))}
-								</div>
-								<br />
-								<div class="form-group">
-									<br />
-									<label for="milk">Size</label>
-									<select class="form-control" id="milk">
-										<option>Tiny</option>
-										<option>Mini</option>
-										<option>Small</option>
-										<option>Medium</option>
-										<option>Large</option>
-										<option>Extra Large</option>
-									</select>
 								</div>
 								<br />
 								<button type="submit" class="btn btn-primary">
@@ -114,4 +122,4 @@ function Coffee() {
 	);
 }
 
-export default Coffee;
+export default Smoothie;
