@@ -4,7 +4,7 @@ import './menu.css';
 
 function MenuItem(props) {
 	return (
-		<div className="card" style={{ width: '18rem' }}>
+		<div className="card cardmargin">
 			<img src={props.image} className="card-img-top productimage" alt={props.name} />
 			<div className="card-body">
 				<h5 className="card-title">{props.name}</h5>

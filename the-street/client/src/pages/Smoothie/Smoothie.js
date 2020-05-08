@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import items from '../../menuitems.json';
+
 import Product from '../../components/Product';
 import './smoothie.css';
 import { Link, useLocation } from 'react-router-dom';

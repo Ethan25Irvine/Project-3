@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import items from '../../menuitems.json';
+import items from '../../foods.json';
 import Product from '../../components/Product';
 import { Link, useLocation } from 'react-router-dom';
 import './ramen.css';
@@ -49,7 +49,7 @@ class Ramen extends Component {
 						<div class="col-md-8">
 							<div class="row">
 								<div class="col-md-12 mb-4">
-									<img alt="" class="img-thumbnail p-0 border-0 image-main" src={items[3].image} />
+									<img alt="" class="img-thumbnail p-0 border-0 image-main" src={items[0].image} />
 								</div>
 							</div>
 						</div>

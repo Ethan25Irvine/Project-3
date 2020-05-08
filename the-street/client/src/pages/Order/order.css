@@ -23,3 +23,7 @@ body {
 body {
 	overflow-x: hidden;
 }
+.products-food {
+	margin-top: 3%;
+	justify-content: center;
+}
