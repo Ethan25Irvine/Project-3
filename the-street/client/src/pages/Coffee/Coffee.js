@@ -52,8 +52,8 @@ function Coffee() {
 									<br />
 									<label for="size">Size</label>
 									<select class="form-control" id="size">
-										<option>Small</option>
-										<option>Large</option>
+										<option id="3.00">Small ($3.00)</option>
+										<option id="3.50">Large ($3.50)</option>
 									</select>
 								</div>
 								<br />
@@ -79,7 +79,15 @@ function Coffee() {
 										</div>
 									))}
 								</div>
-								<br />
+								<div class="form-group">
+									<label for="comments">Comments</label>
+									<input
+										class="form-control"
+										id="comments"
+										aria-describedby="comments"
+										placeholder="add cream, half & half, etc."
+									/>
+								</div>
 								<button type="submit" class="btn btn-primary">
 									Submit
 								</button>

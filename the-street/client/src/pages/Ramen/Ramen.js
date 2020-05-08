@@ -58,6 +58,21 @@ function Ramen() {
 										<option>None</option>
 									</select>
 								</div>
+								<br />
+								<div class="form-group">
+									<label for="Pickup-time">Pickup Time</label>
+									<input class="form-control" id="Pickup-time" aria-describedby="Pickup-time" />
+								</div>
+								<br />
+								<div class="form-group">
+									<label for="comments">Comments</label>
+									<input
+										class="form-control"
+										id="comments"
+										aria-describedby="comments"
+										placeholder=""
+									/>
+								</div>
 								<button type="submit" class="btn btn-primary">
 									Submit
 								</button>

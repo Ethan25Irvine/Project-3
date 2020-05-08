@@ -51,8 +51,8 @@ function Smoothie() {
 									<div class="form-group">
 										<label for="exampleFormControlSelect1">Size</label>
 										<select class="form-control" id="exampleFormControlSelect1">
-											<option>Small</option>
-											<option>Large</option>
+											<option id="4.75">Small ($4.75)</option>
+											<option id="5.25">Large ($5.25)</option>
 										</select>
 									</div>
 									<br />
@@ -66,7 +66,6 @@ function Smoothie() {
 									</div>
 									<br />
 									<div class="form-group">
-										<br />
 										<label for="exampleFormControlSelect1">Milk or Juice</label>
 										<select class="form-control" id="exampleFormControlSelect1">
 											<option>Apple Juice ( fruit smoothies)</option>
@@ -89,6 +88,19 @@ function Smoothie() {
 										))}
 									</div>
 									<br />
+									<div class="form-group">
+										<label for="Pickup-time">Pickup Time</label>
+										<input class="form-control" id="Pickup-time" aria-describedby="Pickup-time" />
+									</div>
+									<div class="form-group">
+										<label for="comments">Comments</label>
+										<input
+											class="form-control"
+											id="comments"
+											aria-describedby="comments"
+											placeholder=""
+										/>
+									</div>
 									<button type="submit" class="btn btn-primary">
 										Submit
 									</button>
