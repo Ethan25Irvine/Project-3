@@ -33,7 +33,7 @@ function Home(){
                         <li> <a href="">ORDER</a></li>
                         <li> <a href="menu.html">MENU</a></li>
                         <li> <a href="about.html">ABOUT US</a></li>
-                        <li> <a href="#" id="button">LOGIN</a></li>
+                        <li> <a href="/login" id="button">LOGIN</a></li>
                     </ul>
                 </h2>
             </div>

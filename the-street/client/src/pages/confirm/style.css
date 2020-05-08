@@ -2,3 +2,27 @@
     color: blue !important;
     cursor: pointer;
 }
+.successfulRegistration{
+    background:white;
+    text-align:center;
+    width:30%;
+    height:30%;
+    margin:auto;
+    margin-top:23%;
+    padding:30px;
+    display:block;
+    font-family: 'Lucinda console'
+}
+.ForgetPwd{
+    animation:none;
+    text-decoration: none;
+    color:white;
+    background:white;
+    /* position:auto; */
+    /* margin-top: 50px; */
+}
+.goHomeFromReg{
+    margin-left:10%;
+    background:white;
+    color:black;
+}

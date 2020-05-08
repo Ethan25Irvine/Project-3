@@ -37,8 +37,8 @@ function Register() {
     };
 
     return (
-        <div className = "register-form-1 container">
-        <div className="col-md-12 ">
+        <div className = "register-form-1 container col-md-4">
+        <div className="">
             <h3>Register Here</h3>
             <form>
                 <div className="form-group">

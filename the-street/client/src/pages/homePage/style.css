@@ -265,6 +265,11 @@ a:hover {
     text-align:center;
     margin:auto;
     margin-top:10%;
-    padding:10px;
+    padding:20px;
     
+}
+.ForgetPwd{
+    text-decoration: none;
+    color:black;
+
 }
