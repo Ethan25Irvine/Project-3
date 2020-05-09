@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import API from "../../utils/API/cart";
 
 import Product from '../../components/Product';
 import '../Smoothie/smoothie.css';
@@ -16,7 +17,8 @@ function Tea() {
 	const [ flavors, setFlavors ] = useState(flavorList);
 	const [ toppings, setToppings ] = useState(Toppings);
 	const [ liquid, setLiquid ] = useState({ modifierName: 'Apple Juice' });
-	const [ newFlavor, setNewFLavor ] = useState();
+	const [user, setUser] = useState();
+	const [username, setUserName] = useState();
 
 	function scrollup() {
 		window.scrollTo(0, 0);
@@ -24,6 +26,8 @@ function Tea() {
 
 	useEffect(() => {
 		scrollup();
+		setUser(localStorage.getItem("userId"));
+		setUserName(localStorage.getItem("userName"));
 	}, []);
 	function sizeChange(event) {
 		const { value } = event.target;
@@ -61,6 +65,57 @@ function Tea() {
 
 		let allModifiers = [ ...newFlavorArray, liquid, size ];
 		console.log(allModifiers);
+		let cartObject = {
+			userId: user,
+			userName: username,
+			products: [
+				{
+					productName: product,
+					modifiers: allModifiers.map(e => {
+						return e
+					}),
+					notes: comment,
+					price: () => {
+						if (size.modifierName === "Small") {
+							return 4.75
+						} else {
+							return 5.25
+						}
+					}
+				}
+			]
+		}
+		let updateCartObject = {
+			products: [
+				{
+					productName: product,
+					modifiers: allModifiers.map(e => {
+						return e
+					}),
+					notes: comment,
+					price: () => {
+						if (size.modifierName === "Small") {
+							return 4.75
+						} else {
+							return 5.25
+						}
+					}
+				}
+			]
+		}
+
+		API.getCart(user)
+		.then(res => {
+			console.log(res);
+			if (res.data == null) {
+				API.createCart(cartObject);
+				console.log("posted")
+			} else {
+				API.updateCart(user,  {$push: updateCartObject});
+				console.log("updated")
+			}
+		});
+
 	}
 
 	return (
@@ -131,10 +186,6 @@ function Tea() {
 									))}
 								</div>
 								<br />
-								<div class="form-group">
-									<label for="Pickup-time">Pickup Time</label>
-									<input class="form-control" id="Pickup-time" aria-describedby="Pickup-time" />
-								</div>
 								<br />
 								<div class="form-group">
 									<label for="comments">Comments</label>

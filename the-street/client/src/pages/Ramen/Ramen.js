@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import API from "../../utils/API/cart";
+
 import items from '../../foods.json';
 import Product from '../../components/Product';
 import { Link, useLocation } from 'react-router-dom';
@@ -11,10 +13,17 @@ function Ramen() {
 	const [ comment, setComment ] = useState('');
 	const [ toppings, setToppings ] = useState({ modifierName: 'Dumplings' });
 	const [ spice, setSpice ] = useState({ modifierName: 'Spicy' });
+	const [user, setUser] = useState();
+	const [username, setUserName] = useState();
+
 	function scrollup() {
 		window.scrollTo(0, 0);
 	}
-	scrollup();
+	useEffect(() => {
+		scrollup();
+		setUser(localStorage.getItem("userId"));
+		setUserName(localStorage.getItem("userName"));
+	}, []);
 
 	function commentChange(event) {
 		const { value } = event.target;
@@ -34,6 +43,43 @@ function Ramen() {
 
 		let allModifiers = [ spice, toppings ];
 		console.log(allModifiers);
+		let cartObject = {
+			userId: user,
+			userName: username,
+			products: [
+				{
+					productName: product,
+					modifiers: allModifiers.map(e => {
+						return e
+					}),
+					notes: comment,
+					
+				}
+			]
+		}
+		let updateCartObject = {
+			products: [
+				{
+					productName: product,
+					modifiers: allModifiers.map(e => {
+						return e
+					}),
+					notes: comment,
+				}
+			]
+		}
+
+		API.getCart(user)
+		.then(res => {
+			console.log(res);
+			if (res.data == null) {
+				API.createCart(cartObject);
+				console.log("posted")
+			} else {
+				API.updateCart(user,  {$push: updateCartObject});
+				console.log("updated")
+			}
+		});
 	}
 
 	return (
@@ -85,10 +131,6 @@ function Ramen() {
 									</select>
 								</div>
 								<br />
-								<div class="form-group">
-									<label for="Pickup-time">Pickup Time</label>
-									<input class="form-control" id="Pickup-time" aria-describedby="Pickup-time" />
-								</div>
 								<br />
 								<div class="form-group">
 									<label for="comments">Comments</label>

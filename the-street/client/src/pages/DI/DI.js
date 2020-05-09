@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import API from "../../utils/API/cart";
 
 import Product from '../../components/Product';
 import './di.css';
@@ -9,19 +10,23 @@ import Toppings from '../../ditoppings.json';
 
 function DI() {
 	const [ modifierArray, setModifierArray ] = useState([]);
-
 	const [ toppings, setToppings ] = useState(Toppings);
 	const [ product ] = useState('Diamond Ice');
 	const [ size, setSize ] = useState({ modifierName: 'tiny' });
 	const [ liquid, setLiquid ] = useState({ modifierName: 'Condensed Milk' });
-
+	const [user, setUser] = useState();
+	const [username, setUserName] = useState();
 	const [ comment, setComment ] = useState('');
+
 	function scrollup() {
 		window.scrollTo(0, 0);
+
 	}
 
 	useEffect(() => {
 		scrollup();
+		setUser(localStorage.getItem("userId"));
+		setUserName(localStorage.getItem("userName"));
 	}, []);
 	function sizeChange(event) {
 		const { value } = event.target;
@@ -46,10 +51,7 @@ function DI() {
 		});
 	}
 
-	let flavArray = [];
-
-	let toppArray = [];
-	let testArray = [];
+	
 	function handleFormSubmit(event) {
 		event.preventDefault();
 
@@ -62,6 +64,58 @@ function DI() {
 
 		let allModifiers = [ ...newFlavorArray, size, liquid ];
 		console.log(allModifiers);
+
+		let cartObject = {
+			userId: user,
+			userName: username,
+			products: [
+				{
+					productName: product,
+					modifiers: allModifiers.map(e => {
+						return e
+					}),
+					notes: comment,
+					price: () => {
+						if (size.modifierName === "Small") {
+							return 4.75
+						} else {
+							return 5.25
+						}
+					}
+				}
+			]
+		}
+		let updateCartObject = {
+			products: [
+				{
+					productName: product,
+					modifiers: allModifiers.map(e => {
+						return e
+					}),
+					notes: comment,
+					price: () => {
+						if (size.modifierName === "Small") {
+							return 4.75
+						} else {
+							return 5.25
+						}
+					}
+				}
+			]
+		}
+
+		API.getCart(user)
+		.then(res => {
+			console.log(res);
+			if (res.data == null) {
+				API.createCart(cartObject);
+				console.log("posted")
+			} else {
+				API.updateCart(user,  {$push: updateCartObject});
+				console.log("updated")
+			}
+		});
+
 	}
 	return (
 		<div className="background">
