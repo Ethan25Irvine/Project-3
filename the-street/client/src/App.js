@@ -20,12 +20,13 @@ import Cart from './pages/cart/cart';
 import DI from './pages/DI/DI';
 import Slushie from './pages/Slushie/Slushie';
 
+
 function App() {
 	return (
 		<Router>
 			<div>
 				<Switch>
-				<Route exact path="/" component={homePage} />
+					<Route exact path="/" component={homePage} />
 					<Route exact path="/about" component={About} />
 					<Route exact path="/home" component={homePage} />
 					{/* <Route exact path="/about" component={about}/> */}
