@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import userPic from '../homePage/photos/user.png';
 import { Link, useLocation } from 'react-router-dom';
 import API from '../../utils/API/user';
