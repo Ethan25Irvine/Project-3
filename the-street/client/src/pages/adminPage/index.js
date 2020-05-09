@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import Orders from '../../components/orders/orders';
 import Nav from '../../components/Navbar/nav';
-import { Redirect } from 'react-router-dom';
-import List from '../../components/cartList/cartList';
+
+
 import orderAPI from '../../utils/API/order';
+import cart from '../../utils/API/cart';
 
 const Dashboard = () => {
-	function delete_cookie(name) {
-		document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-	}
-	function redirect() {
-		window.location.href = '/login';
-	}
+	
 
-	function handleLogout() {
-		delete_cookie('admin');
-		redirect();
-	}
+	// useEffect(() => {
+	// 	orderAPI.getOrders(){
+	// 		setDisplay
+	// 	}
+	// }, []);
 
 	return (
 		<div>
