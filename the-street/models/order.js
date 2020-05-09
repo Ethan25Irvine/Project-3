@@ -22,7 +22,7 @@ const OrderSchema = new mongoose.Schema(
         price: Number
       }
     ],
-    pickupTime: Number
+    timestamp: { type: Date, default: Date.now}
     
   },
 );
