@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import withAuthAdmin from './components/privateRoute/isAdmin';
 import withAuthUser from './components/privateRoute/isUser';
-import AdminPage from './pages/adminPage';
+import AdminPage from './pages/adminPage/index';
 import homePage from './pages/homePage/home';
 import Menu from './pages/Menu/menu';
 // import about from './pages/about'

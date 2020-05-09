@@ -17,7 +17,7 @@ function Login() {
 	}
 
 	function adminPage() {
-		history.push('/order');
+		history.push('/admin');
 	}
 
 	function handleInputChange(event) {
@@ -25,28 +25,6 @@ function Login() {
 		setLoginObject({ ...loginObject, [name]: value });
 	}
 
-	function handleFormSubmit(event) {
-		event.preventDefault();
-
-		API.login(loginObject)
-			.then((res) => {
-				if (res.status === 200 && document.cookie.split(';').some((item) => item.trim().startsWith('admin='))) {
-					adminPage();
-				} else if (
-					res.status === 200 &&
-					document.cookie.split(';').some((item) => item.trim().startsWith('user='))
-				) {
-					userPage();
-				} else {
-					const error = new Error(res.error);
-					throw error;
-				}
-			})
-			.catch((err) => {
-				console.error(err);
-				alert('incorrect password or email');
-			});
-	}
 
     function handleFormSubmit(event) {
         event.preventDefault();
