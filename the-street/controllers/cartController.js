@@ -23,7 +23,7 @@ module.exports = {
   update: function (req, res) {
     const id  = (req.params.id)
     db.Cart
-      .findOneAndUpdate({ _id: id }, req.body)
+      .findOneAndUpdate({ userId: id }, req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

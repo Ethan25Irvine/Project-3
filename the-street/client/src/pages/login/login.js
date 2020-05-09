@@ -31,10 +31,12 @@ function Login() {
             
            API.login(loginObject)
                 .then(res => {
-                    
+                    console.log(res);
                     if (res.status === 200 && document.cookie.split(';').some((item) => item.trim().startsWith('admin='))) {
                         adminPage();
                     } else if (res.status === 200 && document.cookie.split(';').some((item) => item.trim().startsWith('user='))){
+                        localStorage.setItem("userId", res.data.userId);
+                        localStorage.setItem("userName", res.data.userName);
                         userPage();
                     }
                     else {

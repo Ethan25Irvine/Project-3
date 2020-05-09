@@ -17,7 +17,7 @@ export default {
     return axios.delete("/api/Cart/" + id);
   },
 //   updates Cart with the given cartId
-  updateCart: function(id){
-      return axios.put("api/cart/"+ id)
+  updateCart: function(id, CartData){
+      return axios.put("api/cart/"+ id, CartData)
   }
 };   
