@@ -10,7 +10,7 @@ router
     .post(cartController.create);
     
 
-// Matches with "/api/cart/:email"
+// Matches with "/api/cart/:id"
 router
     .route("/:id")
     .get(cartController.findByUserId)

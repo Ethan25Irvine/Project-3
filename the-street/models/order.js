@@ -18,12 +18,12 @@ const OrderSchema = new mongoose.Schema(
             modifierName: String,
           }
         ],
+        notes: String,
         price: Number
       }
     ],
-    // orderedAt: {
-    //   type: Number
-    // }
+    timestamp: { type: Date, default: Date.now}
+    
   },
 );
 

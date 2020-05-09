@@ -41,6 +41,7 @@ module.exports = {
             });
             res.cookie('admin', token)
               .sendStatus(200)
+              
               // .json({
               //   isAdmin: true
               // }); 
@@ -50,11 +51,10 @@ module.exports = {
             const token = jwt.sign(payload, secret, {
               expiresIn: 60
             });
+            
             res.cookie('user', token)
-              .sendStatus(200)
-              // .json({
-              //   isAdmin: false
-              // });              
+              .status(200) 
+              .json({userId: user._id, userName: user.name})            
           }
         });
       }
