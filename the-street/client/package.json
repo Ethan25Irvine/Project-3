@@ -1,7 +1,6 @@
 {
   "name": "the-street",
   "version": "0.1.0",
-  "private": true,
   "proxy": "http://localhost:8080",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -10,15 +9,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1",
-    "@progress/kendo-react-dateinputs": "3.13.0",
-    "@progress/kendo-react-intl": "3.13.0",
-    "@progress/kendo-react-tooltip": "3.13.0",
-    "@progress/kendo-react-common": "3.13.0",
-    "@progress/kendo-react-popup": "3.13.0",
-    "@progress/kendo-react-buttons": "3.13.0",
-    "@progress/kendo-date-math": "1.5.1",
-    "@progress/kendo-react-dropdowns": "3.13.0"
+    "react-scripts": "3.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
