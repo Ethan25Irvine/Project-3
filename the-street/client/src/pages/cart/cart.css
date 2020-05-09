@@ -22,5 +22,16 @@
 }
 
 .item-properties {
-    margin-top: 5%;
+	margin-top: 5%;
+}
+
+.product-name {
+	margin-top: 10%;
+}
+
+.product-modifiers {
+	margin-top: 4.7%;
+}
+.customer-name {
+	margin-top: 10%;
 }
