@@ -16,7 +16,7 @@ function Login() {
 	}
 
 	function adminPage() {
-		history.push('/order');
+		history.push('/admin');
 	}
 
 	function handleInputChange(event) {

@@ -9,7 +9,7 @@ module.exports = {
       },
       findAll: function (req, res) {
         db.Order
-          .find(req.query)
+          .find(req.query).sort({timestamp: -1})
           .then(dbModel => res.json(dbModel))
           .catch(err => res.status(422).json(err));
       }
