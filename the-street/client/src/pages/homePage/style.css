@@ -231,13 +231,6 @@ a:hover {
       border-radius: 5px;
       position: relative;
   }
-  input{
-      margin:20px auto;
-      display: block;
-      width:50%;
-      padding:8px;
-      border:1px solid gray;
-  }
 .close{
     position: absolute;
     top:-15px;
