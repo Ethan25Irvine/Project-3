@@ -3,11 +3,12 @@ import API from "../../utils/API/cart";
 
 import items from '../../foods.json';
 import Product from '../../components/Product';
-import { Link, useLocation } from 'react-router-dom';
+import { useHistory} from 'react-router-dom';
 import './ramen.css';
 import Nav from '../../components/Navbar/nav';
 
 function Ramen() {
+	const history = useHistory();
 	const [ modifierArray, setModifierArray ] = useState([]);
 	const [ product ] = useState('Ramen');
 	const [ comment, setComment ] = useState('');
@@ -79,6 +80,8 @@ function Ramen() {
 				API.updateCart(user,  {$push: updateCartObject});
 				console.log("updated")
 			}
+		}).then(()=>{
+			history.pushState("/order")
 		});
 	}
 

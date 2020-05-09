@@ -3,7 +3,7 @@ import API from "../../utils/API/cart";
 
 import Product from '../../components/Product';
 import '../Smoothie/smoothie.css';
-import { Link, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Flavor from '../../components/Flavor/flavor';
 import flavorList from '../../teas.json';
 import Toppings from '../../toppings.json';
@@ -12,7 +12,7 @@ import Nav from '../../components/Navbar/nav';
 
 function Coffee() {
 	const [ modifierArray, setModifierArray ] = useState([]);
-
+	const history = useHistory();
 	const [ toppings, setToppings ] = useState(Toppings);
 	const [ product ] = useState('Coffee');
 	const [ size, setSize ] = useState({ modifierName: 'Small' });
@@ -54,10 +54,6 @@ function Coffee() {
 		});
 	}
 
-	let flavArray = [];
-
-	let toppArray = [];
-	let testArray = [];
 	function handleFormSubmit(event) {
 		event.preventDefault();
 
@@ -119,6 +115,8 @@ function Coffee() {
 				API.updateCart(user,  {$push: updateCartObject});
 				console.log("updated")
 			}
+		}).then(()=>{
+			history.push("/order");
 		});
 	}
 	return (
