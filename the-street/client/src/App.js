@@ -13,6 +13,8 @@ import Cart from './pages/cart/cart';
 
 //CeRae Code
 import homePage from './pages/homePage/home'
+import about from './pages/about/about'
+
 import cart from './utils/API/cart';
 
 
@@ -24,6 +26,7 @@ function App() {
       <div>
       <Switch>
         <Route exact path="/" component={homePage}/>
+        <Route exact path="/about" component={about}/>
         <Route exact path="/confirm" component={Confirm}/>
         <Route exact path="/login" component={Login}/>
         <Route exact path="/register" component={Register}/>

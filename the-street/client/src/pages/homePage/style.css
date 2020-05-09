@@ -273,3 +273,13 @@ a:hover {
     color:black;
 
 }
+li{
+    font-size:15px
+}
+.aboutParagraph :hover{
+    opacity:0.5
+}
+.navigation{
+    text-align:center;
+    margin-left:40px;
+}

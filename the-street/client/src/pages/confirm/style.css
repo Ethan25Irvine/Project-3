@@ -26,3 +26,6 @@
     background:white;
     color:black;
 }
+.aboutParagraph :hover{
+    opacity: 0.5;
+}

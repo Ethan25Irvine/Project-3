@@ -50,6 +50,7 @@ function Login() {
     };
 
     return (
+        
         <div className='container'>
         <div className="col-md-6 login-form-1 ">
             <h3></h3>
@@ -71,8 +72,19 @@ function Login() {
                 </div>
             </form>
         </div>
+        <div id="navigation" className="navigation">
+                <h2>
+                    <ul id="nav-list">
+                        <li> <a href="">ORDER</a></li>
+                        <li> <a href="menu.html">MENU</a></li>
+                        <li> <a href="/about">ABOUT US</a></li>
+                        <li> <a href="/login" id="button">LOGIN</a></li>
+                    </ul>
+                </h2>
+            </div>
         </div>
     )
+    
 };
 
 export default Login;
