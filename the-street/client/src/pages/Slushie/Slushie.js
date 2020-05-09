@@ -3,13 +3,14 @@ import API from "../../utils/API/cart";
 
 import Product from '../../components/Product';
 import '../Smoothie/smoothie.css';
-import { Link, useLocation } from 'react-router-dom';
+import { useHistory} from 'react-router-dom';
 import Flavor from '../../components/Flavor/flavor';
 import flavorList from '../../slushieFlavors.json';
 import Toppings from '../../toppings.json';
 import Nav from '../../components/Navbar/nav';
 
 function Slushie() {
+	const history = useHistory();
 	const [ modifierArray, setModifierArray ] = useState([]);
 	const [ product ] = useState('Slushie');
 	const [ size, setSize ] = useState({ modifierName: 'Small' });
@@ -117,6 +118,8 @@ function Slushie() {
 				API.updateCart(user,  {$push: updateCartObject});
 				console.log("updated")
 			}
+		}).then(()=>{
+			history.push("/order")
 		});
 	}
 	return (

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import API from "../../utils/API/cart";
 // import Product from '../../components/Product';
 import './smoothie.css';
-// import { Link, useLocation } from 'react-router-dom';
+import { useHistory} from 'react-router-dom';
 import Flavor from '../../components/Flavor/flavor';
 import flavorList from '../../flavorList.json';
 import Toppings from '../../toppings.json';
@@ -20,7 +20,7 @@ function Smoothie() {
 	const [flavors, setFlavors] = useState(flavorList);
 	const [toppings, setToppings] = useState(Toppings);
 	const [liquid, setLiquid] = useState({ modifierName: "Apple Juice" });
-
+	const history = useHistory();
 
 
 	function scrollup() {
@@ -118,6 +118,8 @@ function Smoothie() {
 				API.updateCart(user,  {$push: updateCartObject});
 				console.log("updated")
 			}
+		}).then(()=>{
+			history.push();
 		});
 
 
