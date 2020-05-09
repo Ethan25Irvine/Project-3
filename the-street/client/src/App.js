@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import withAuthAdmin from './components/privateRoute/isAdmin';
 import withAuthUser from './components/privateRoute/isUser';
 import AdminPage from './pages/adminPage';
+import homePage from './pages/homePage/home';
+// import about from './pages/about'
+
 import UserPage from './pages/userPage';
 
 import Login from './pages/login/login';
@@ -22,7 +25,8 @@ function App() {
 		<Router>
 			<div>
 				<Switch>
-					<Route exact path="/" component={Login} />
+				<Route exact path="/" component={homePage}/>
+        		{/* <Route exact path="/about" component={about}/> */}
 					<Route exact path="/confirm" component={Confirm} />
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/register" component={Register} />
