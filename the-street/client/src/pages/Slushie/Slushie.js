@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import API from "../../utils/API/cart";
 
 import Product from '../../components/Product';
 import '../Smoothie/smoothie.css';
@@ -10,13 +11,14 @@ import Nav from '../../components/Navbar/nav';
 
 function Slushie() {
 	const [ modifierArray, setModifierArray ] = useState([]);
-	const [ product ] = useState('Smothie');
+	const [ product ] = useState('Slushie');
 	const [ size, setSize ] = useState({ modifierName: 'Small' });
 	const [ comment, setComment ] = useState('');
 	const [ flavors, setFlavors ] = useState(flavorList);
 	const [ toppings, setToppings ] = useState(Toppings);
 	const [ liquid, setLiquid ] = useState({ modifierName: 'Apple Juice' });
-	const [ newFlavor, setNewFLavor ] = useState();
+	const [user, setUser] = useState();
+	const [username, setUserName] = useState();
 
 	function scrollup() {
 		window.scrollTo(0, 0);
@@ -24,6 +26,8 @@ function Slushie() {
 
 	useEffect(() => {
 		scrollup();
+		setUser(localStorage.getItem("userId"));
+		setUserName(localStorage.getItem("userName"));
 	}, []);
 
 	function sizeChange(event) {
@@ -50,10 +54,7 @@ function Slushie() {
 		});
 	}
 
-	let flavArray = [];
 
-	let toppArray = [];
-	let testArray = [];
 	function handleFormSubmit(event) {
 		event.preventDefault();
 
@@ -66,6 +67,57 @@ function Slushie() {
 
 		let allModifiers = [ ...newFlavorArray, liquid, size ];
 		console.log(allModifiers);
+
+		let cartObject = {
+			userId: user,
+			userName: username,
+			products: [
+				{
+					productName: product,
+					modifiers: allModifiers.map(e => {
+						return e
+					}),
+					notes: comment,
+					price: () => {
+						if (size.modifierName === "Small") {
+							return 4.75
+						} else {
+							return 5.25
+						}
+					}
+				}
+			]
+		}
+		let updateCartObject = {
+			products: [
+				{
+					productName: product,
+					modifiers: allModifiers.map(e => {
+						return e
+					}),
+					notes: comment,
+					price: () => {
+						if (size.modifierName === "Small") {
+							return 4.75
+						} else {
+							return 5.25
+						}
+					}
+				}
+			]
+		}
+
+		API.getCart(user)
+		.then(res => {
+			console.log(res);
+			if (res.data == null) {
+				API.createCart(cartObject);
+				console.log("posted")
+			} else {
+				API.updateCart(user,  {$push: updateCartObject});
+				console.log("updated")
+			}
+		});
 	}
 	return (
 		<div className="background">
@@ -137,10 +189,6 @@ function Slushie() {
 									))}
 								</div>
 								<br />
-								<div class="form-group">
-									<label for="Pickup-time">Pickup Time</label>
-									<input class="form-control" id="Pickup-time" aria-describedby="Pickup-time" />
-								</div>
 								<div class="form-group">
 									<label for="comments">Comments</label>
 									<input
