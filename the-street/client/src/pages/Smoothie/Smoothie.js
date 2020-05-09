@@ -12,7 +12,7 @@ import Nav from '../../components/Navbar/nav';
 
 function Smoothie() {
 	const [modifierArray, setModifierArray] = useState([]);
-	const [product] = useState("Smothie");
+	const [product] = useState("Smoothie");
 	const [user, setUser] = useState();
 	const [username, setUserName] = useState();
 	const [size, setSize] = useState({ modifierName: "Small" });

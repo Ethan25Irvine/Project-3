@@ -7,16 +7,17 @@ import Nav from '../../components/Navbar/nav';
 import './cart.css';
 
 const Cart = () => {
-	const [ userId, setUserId ] = useState('5ea7a27ded515903068a7f0f');
-	const [ cartObject, setCartObject ] = useState();
-	const [ displayStatus, setDisplayStatus ] = useState('');
+	const [userId, setUserId] = useState(localStorage.getItem("userId"));
+	const [cartObject, setCartObject] = useState();
+	const [displayStatus, setDisplayStatus] = useState('');
 
 	useEffect(() => {
 		cartAPI.getCart(userId).then((res) => {
-			// console.log(res.data);
+			console.log(res.data);
 			const data = res.data;
 			setCartObject(data);
 			setDisplayStatus('none');
+
 		});
 	}, []);
 
@@ -30,7 +31,7 @@ const Cart = () => {
 		if (displayStatus === 'none') {
 			setDisplayStatus('block');
 		}
-		console.log(displayStatus);
+		// console.log(displayStatus);
 	}
 
 	return (
@@ -58,13 +59,22 @@ const Cart = () => {
 						<div className="card cart-card">
 							<ul className="list-group list-group-flush">
 								<li className="list-group-item">
+									{cartObject ? (
+										cartObject.products.map((res) => {
+											return <List product={res.productName} addons={res.modifiers} newKey={res.productName} />;
+										})
+									) : (
+											<p>Loading...</p>
+										)}
+								</li>
+								{/* <li className="list-group-item">
 									<div className="row">
 										<div className="col-lg-3">
 											<img src="https://i.imgur.com/Oqvf7xS.jpg" className="product-cart-image" />
 										</div>
 										<div className="col-lg-8 item-name item-properties">Smoothie</div>
 									</div>
-								</li>
+								</li> */}
 							</ul>
 						</div>
 					</div>
