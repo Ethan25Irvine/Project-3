@@ -5,8 +5,6 @@ import withAuthUser from './components/privateRoute/isUser';
 import AdminPage from './pages/adminPage';
 import homePage from './pages/homePage/home';
 
-
-
 import About from './pages/about/about';
 import Login from './pages/login/login';
 import Register from './pages/register/register';
@@ -19,7 +17,6 @@ import Tea from './pages/Tea/Tea';
 import Cart from './pages/cart/cart';
 import DI from './pages/DI/DI';
 import Slushie from './pages/Slushie/Slushie';
-import About from './pages/about/about';
 
 function App() {
 	return (
@@ -34,7 +31,7 @@ function App() {
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/register" component={Register} />
 					<Route component={withAuthAdmin(AdminPage)} path="/admin" exact />
-					<Route component={withAuthUser(Order)}exact path="/order"  />
+					<Route component={withAuthUser(Order)} exact path="/order" />
 					<Route exact path="/ramen" component={withAuthUser(Ramen)} />
 					<Route exact path="/smoothie" component={withAuthUser(Smoothie)} />
 					<Route exact path="/smoothies" component={withAuthUser(Smoothie)} />

@@ -4,16 +4,16 @@ import cartAPI from '../../utils/API/cart';
 import orderAPI from '../../utils/API/order';
 import List from '../../components/cartList/cartList';
 import Nav from '../../components/Navbar/nav';
-import {Redirect, useHistory} from "react-router-dom";
+import { Redirect, useHistory } from 'react-router-dom';
 import './cart.css';
 
 const Cart = () => {
-	const [userId, setUserId] = useState(localStorage.getItem("userId"));
-	const [cartObject, setCartObject] = useState();
-	const [displayStatus, setDisplayStatus] = useState('');
+	const [ userId, setUserId ] = useState(localStorage.getItem('userId'));
+	const [ cartObject, setCartObject ] = useState();
+	const [ displayStatus, setDisplayStatus ] = useState('');
 
 	useEffect(() => {
-		console.log(userId)
+		console.log(userId);
 		cartAPI.getCart(userId).then((res) => {
 			console.log(res.data);
 			// const data = res.data;
@@ -21,17 +21,14 @@ const Cart = () => {
 			setDisplayStatus('none');
 		});
 	}, []);
-	
+
 	function handleOnClick() {
 		const { _id, ...newData } = cartObject;
-		
+
 		// console.log(newData);
-		orderAPI.createOrder(newData)
-		.then(() => {
+		orderAPI.createOrder(newData).then(() => {
 			console.log(userId);
-			cartAPI.deleteCart(userId).then(
-				
-			)
+			cartAPI.deleteCart(userId).then();
 		});
 	}
 
@@ -57,23 +54,25 @@ const Cart = () => {
 								<li className="list-group-item">
 									{cartObject ? (
 										cartObject.products.map((res) => {
-											return <List product={res.productName} addons={res.modifiers} newKey={res.productName} />;
+											return (
+												<List
+													product={res.productName}
+													addons={res.modifiers}
+													newKey={res.productName}
+												/>
+											);
 										})
 									) : (
-											<h3 className="text-dark">Nothing in cart...</h3>
-										)}
+										<h3 className="text-dark">Nothing in cart...</h3>
+									)}
 								</li>
 							</ul>
 						</div>
 					</div>
 					<div className="col-lg-4 cart-summary">
 						<div className="card rounded-0">
-							<h5 className="card-header text-center">Summary</h5>
 							<div className="card-body">
-								<h5 className="card-title">Your pickup time: </h5>
-								<p className="card-text">Order type: Pay in person</p>
-								<h5 className="card-text">total: $$</h5>
-								<button disabled={! cartObject} className="btn btn-primary" onClick={handleClick}>
+								<button disabled={!cartObject} className="btn btn-primary" onClick={handleClick}>
 									Place Order
 								</button>
 

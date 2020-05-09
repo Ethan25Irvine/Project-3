@@ -29,12 +29,15 @@ function Login() {
 
 		API.login(loginObject)
 			.then((res) => {
+				console.log(res);
 				if (res.status === 200 && document.cookie.split(';').some((item) => item.trim().startsWith('admin='))) {
 					adminPage();
 				} else if (
 					res.status === 200 &&
 					document.cookie.split(';').some((item) => item.trim().startsWith('user='))
 				) {
+					localStorage.setItem('userId', res.data.userId);
+					localStorage.setItem('userName', res.data.userName);
 					userPage();
 				} else {
 					const error = new Error(res.error);
@@ -46,31 +49,6 @@ function Login() {
 				alert('incorrect password or email');
 			});
 	}
-
-    function handleFormSubmit(event) {
-        event.preventDefault();
-         
-            
-           API.login(loginObject)
-                .then(res => {
-                    console.log(res);
-                    if (res.status === 200 && document.cookie.split(';').some((item) => item.trim().startsWith('admin='))) {
-                        adminPage();
-                    } else if (res.status === 200 && document.cookie.split(';').some((item) => item.trim().startsWith('user='))){
-                        localStorage.setItem("userId", res.data.userId);
-                        localStorage.setItem("userName", res.data.userName);
-                        userPage();
-                    }
-                    else {
-                        const error = new Error(res.error);
-                        throw error;
-                    }
-                })
-                .catch(err => {
-                    console.error(err);
-                    alert('incorrect password or email');
-                }) 
-    };
 	return (
 		<div className="container">
 			<div className="col-md-6 login-form-1 ">
