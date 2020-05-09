@@ -12,8 +12,7 @@ function ListItems(props) {
                     return (
                         <li key= {res._id}>
                             {res.modifierName}
-                        </li>
-                        
+                        </li>                       
                     )
                 })
                 }

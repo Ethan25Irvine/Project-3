@@ -18,6 +18,7 @@ const CartSchema = new mongoose.Schema(
             modifierName: String,
           }
         ],
+        notes: String,
         price: Number
       }
     ]

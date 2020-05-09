@@ -14,7 +14,7 @@ function Login() {
     });
 
     function userPage() {
-        history.push('/cart');
+        history.push('/order');
     }
 
     function adminPage() {

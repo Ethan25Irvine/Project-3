@@ -1,0 +1,26 @@
+.all {
+	margin-top: 8%;
+}
+.cart-card {
+	width: 100%;
+}
+
+.cart-header {
+	margin-top: 10%;
+}
+
+.cart-h1 {
+	font-size: 60px;
+}
+
+.orderplaced {
+	margin-top: 5%;
+}
+.product-cart-image {
+	width: 100px;
+	height: 140px;
+}
+
+.item-properties {
+    margin-top: 5%;
+}

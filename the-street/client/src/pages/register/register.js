@@ -19,6 +19,8 @@ function Register() {
         event.preventDefault();
         if (registerObject.password !== registerObject.confirmPassword){
             alert("passwords do not match!");
+        } else if (registerObject.email === API.getUser(registerObject.email)){
+            alert("email is already in use");
         } else {
             API.register(
                 {

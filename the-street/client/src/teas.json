@@ -1,0 +1,22 @@
+[
+	{
+		"name": "Strawberry",
+		"isChecked": false
+	},
+	{
+		"name": "Mango",
+		"isChecked": false
+	},
+	{
+		"name": "Peach",
+		"isChecked": false
+	},
+	{
+		"name": "Passionfruit",
+		"isChecked": false
+	},
+	{
+		"name": "Lychee",
+		"isChecked": false
+	}
+]

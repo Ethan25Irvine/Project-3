@@ -1,0 +1,173 @@
+body {
+	/* background-image: url('../images/dragongrayscale.jpg'); */
+	background-size: cover;
+}
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+.products {
+	margin-top: 4%;
+	background-color: none !important;
+}
+.navbar .navbar-nav {
+	float: none;
+	vertical-align: top;
+}
+.table {
+	/* Allow the centering to work */
+	margin: 0 auto;
+	justify-content: center;
+}
+ul#navthings {
+	list-style: none;
+}
+ul#navthings li {
+	display: inline;
+}
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+.navbar .navbar-collapse {
+	text-align: center;
+}
+
+.header {
+	color: white;
+
+	font-size: 50px;
+	height: 15%;
+	margin-top: 30px;
+	padding-bottom: 10px;
+}
+.jumbotron-fluid {
+	background-color: none !important;
+}
+.header-background {
+	background-color: black;
+}
+
+.mr {
+	margin-right: 125px;
+}
+
+body {
+	overflow-x: hidden;
+	background-image: none;
+}
+.products-food {
+	margin-top: 1%;
+}
+.link {
+	color: white;
+}
+
+.link :hover {
+	color: white;
+	text-decoration: none;
+	text-decoration-color: white;
+}
+
+.nav-item {
+	margin-right: 13%;
+}
+
+#navbarNav {
+	margin-left: 6%;
+}
+
+@media only screen and (max-width: 1200px) {
+	.col-lg-3 {
+		margin-left: 25%;
+		margin-right: 10%;
+	}
+
+	.card {
+		width: 500px;
+		margin-top: 4%;
+	}
+
+	.productimage {
+		height: 700px;
+	}
+	.nav-item {
+		margin-right: 10%;
+	}
+
+	#navbarNav {
+		margin-left: 6%;
+	}
+}
+
+@media only screen and (max-width: 991px) {
+	.col-lg-3 {
+		margin-left: 14%;
+		margin-right: 10%;
+	}
+
+	.card {
+		width: 500px;
+		margin-top: 4%;
+	}
+
+	.productimage {
+		height: 700px;
+	}
+}
+@media only screen and (max-width: 767px) {
+	.col-lg-3 {
+		margin-left: 2%;
+		margin-right: 10%;
+	}
+
+	.card {
+		width: 500px;
+		margin-top: 4%;
+	}
+
+	.productimage {
+		height: 700px;
+	}
+}
+@media only screen and (max-width: 560px) {
+	.card {
+		width: 450px;
+		margin-top: 4%;
+	}
+
+	.productimage {
+		height: 650px;
+	}
+	.container {
+		margin: 0px;
+	}
+}
+@media only screen and (max-width: 510px) {
+	.card {
+		width: 325px;
+		margin-top: 4%;
+	}
+
+	.productimage {
+		height: 500px;
+	}
+	.container {
+		margin: 0px;
+	}
+}
+@media only screen and (max-width: 382px) {
+	.card {
+		width: 325px;
+		margin-top: 4%;
+	}
+
+	.productimage {
+		height: 420px;
+	}
+	.container {
+		margin: 0px;
+	}
+}
