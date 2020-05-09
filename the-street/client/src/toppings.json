@@ -1,31 +1,30 @@
-
 [
-    {
-        "name": "Boba",
-        "isClicked": false
-    },
-    {
-        "name": "Coffee Jelly",
-        "isClicked": false
-    },
-    {
-        "name": "Green Apple",
-        "isClicked": false
-    },
-    {
-        "name": "Lychee Jelly",
-        "isClicked": false
-    },
-    {
-        "name": "Mango Jelly",
-        "isClicked": false
-    },
-    {
-        "name": "Popping Babo",
-        "isClicked": false
-    },
-    {
-        "name": "Rainbow Jelly",
-        "isClicked": false
-    }
+	{
+		"name": "Boba",
+		"isClicked": false
+	},
+	{
+		"name": "Coffee Jelly",
+		"isClicked": false
+	},
+	{
+		"name": "Green Apple",
+		"isClicked": false
+	},
+	{
+		"name": "Lychee Jelly",
+		"isClicked": false
+	},
+	{
+		"name": "Mango Jelly",
+		"isClicked": false
+	},
+	{
+		"name": "Popping Boba",
+		"isClicked": false
+	},
+	{
+		"name": "Rainbow Jelly",
+		"isClicked": false
+	}
 ]

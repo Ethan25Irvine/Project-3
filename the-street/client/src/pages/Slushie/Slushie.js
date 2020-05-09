@@ -9,18 +9,64 @@ import Toppings from '../../toppings.json';
 import Nav from '../../components/Navbar/nav';
 
 function Slushie() {
-	const [ flavors, setFlavors ] = useState([]);
-	const [ toppings, setToppings ] = useState([]);
+	const [ modifierArray, setModifierArray ] = useState([]);
+	const [ product ] = useState('Smothie');
+	const [ size, setSize ] = useState({ modifierName: 'Small' });
+	const [ comment, setComment ] = useState('');
+	const [ flavors, setFlavors ] = useState(flavorList);
+	const [ toppings, setToppings ] = useState(Toppings);
+	const [ liquid, setLiquid ] = useState({ modifierName: 'Apple Juice' });
+	const [ newFlavor, setNewFLavor ] = useState();
+
 	function scrollup() {
 		window.scrollTo(0, 0);
 	}
 
 	useEffect(() => {
-		setFlavors(flavorList);
-		setToppings(Toppings);
 		scrollup();
 	}, []);
 
+	function sizeChange(event) {
+		const { value } = event.target;
+		setSize({ modifierName: value });
+	}
+
+	function commentChange(event) {
+		const { value } = event.target;
+		setComment(value);
+	}
+
+	function liquidOnCLick(event) {
+		const { value } = event.target;
+		setLiquid({ modifierName: value });
+	}
+
+	function flavorOnClick(event) {
+		const { name, checked } = event.target;
+		console.log(checked);
+
+		setModifierArray(function(previousFlavors) {
+			return { ...previousFlavors, [name]: checked };
+		});
+	}
+
+	let flavArray = [];
+
+	let toppArray = [];
+	let testArray = [];
+	function handleFormSubmit(event) {
+		event.preventDefault();
+
+		let newFlavorArray = [];
+		for (let key in modifierArray) {
+			if (modifierArray[key] === true) {
+				newFlavorArray.push({ modifierName: key });
+			}
+		}
+
+		let allModifiers = [ ...newFlavorArray, liquid, size ];
+		console.log(allModifiers);
+	}
 	return (
 		<div className="background">
 			<Nav />
@@ -50,7 +96,7 @@ function Slushie() {
 								<div class="form-group">
 									<br />
 									<label for="exampleFormControlSelect1">Size</label>
-									<select class="form-control" id="exampleFormControlSelect1">
+									<select class="form-control" id="exampleFormControlSelect1" onChange={sizeChange}>
 										<option id="3.50">Small ($3.50)</option>
 										<option id="4.00">Large ($4.00)</option>
 									</select>
@@ -60,14 +106,18 @@ function Slushie() {
 								<div className="flavors">
 									{flavors.map((flavor) => (
 										<div className="indivflavor">
-											<Flavor name={flavor} />
+											<Flavor name={flavor} onChange={flavorOnClick} />
 										</div>
 									))}
 								</div>
 								<div class="form-group">
 									<br />
 									<label for="exampleFormControlSelect1">Milk or Juice</label>
-									<select class="form-control" id="exampleFormControlSelect1">
+									<select
+										class="form-control"
+										id="exampleFormControlSelect1"
+										onChange={liquidOnCLick}
+									>
 										<option>Apple Juice (most common)</option>
 										<option>Whole Milk</option>
 										<option>Soy Milk</option>
@@ -82,7 +132,7 @@ function Slushie() {
 								<div className="toppings">
 									{toppings.map((topping) => (
 										<div className="indivflavor">
-											<Flavor name={topping} />
+											<Flavor name={topping.name} onChange={flavorOnClick} />
 										</div>
 									))}
 								</div>
@@ -100,8 +150,8 @@ function Slushie() {
 										placeholder=""
 									/>
 								</div>
-								<button type="submit" class="btn btn-primary">
-									Submit
+								<button type="submit" class="btn btn-primary" onClick={handleFormSubmit}>
+									Add to Cart
 								</button>
 							</form>
 						</div>

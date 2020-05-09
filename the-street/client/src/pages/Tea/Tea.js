@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import API from "../../utils/API/cart";
 
 import Product from '../../components/Product';
 import '../Smoothie/smoothie.css';
@@ -9,17 +10,113 @@ import Toppings from '../../toppings.json';
 import Nav from '../../components/Navbar/nav';
 
 function Tea() {
-	const [ flavors, setFlavors ] = useState([]);
-	const [ toppings, setToppings ] = useState([]);
+	const [ modifierArray, setModifierArray ] = useState([]);
+	const [ product ] = useState('Tea');
+	const [ size, setSize ] = useState({ modifierName: 'Small' });
+	const [ comment, setComment ] = useState('');
+	const [ flavors, setFlavors ] = useState(flavorList);
+	const [ toppings, setToppings ] = useState(Toppings);
+	const [ liquid, setLiquid ] = useState({ modifierName: 'Apple Juice' });
+	const [user, setUser] = useState();
+	const [username, setUserName] = useState();
+
 	function scrollup() {
 		window.scrollTo(0, 0);
 	}
 
 	useEffect(() => {
-		setFlavors(flavorList);
-		setToppings(Toppings);
 		scrollup();
+		setUser(localStorage.getItem("userId"));
+		setUserName(localStorage.getItem("userName"));
 	}, []);
+	function sizeChange(event) {
+		const { value } = event.target;
+		setSize({ modifierName: value });
+	}
+
+	function commentChange(event) {
+		const { value } = event.target;
+		setComment(value);
+	}
+
+	function liquidOnCLick(event) {
+		const { value } = event.target;
+		setLiquid({ modifierName: value });
+	}
+
+	function flavorOnClick(event) {
+		const { name, checked } = event.target;
+		console.log(checked);
+
+		setModifierArray(function(previousFlavors) {
+			return { ...previousFlavors, [name]: checked };
+		});
+	}
+
+	function handleFormSubmit(event) {
+		event.preventDefault();
+
+		let newFlavorArray = [];
+		for (let key in modifierArray) {
+			if (modifierArray[key] === true) {
+				newFlavorArray.push({ modifierName: key });
+			}
+		}
+
+		let allModifiers = [ ...newFlavorArray, liquid, size ];
+		console.log(allModifiers);
+		let cartObject = {
+			userId: user,
+			userName: username,
+			products: [
+				{
+					productName: product,
+					modifiers: allModifiers.map(e => {
+						return e
+					}),
+					notes: comment,
+					price: () => {
+						if (size.modifierName === "Small") {
+							return 4.75
+						} else {
+							return 5.25
+						}
+					}
+				}
+			]
+		}
+		let updateCartObject = {
+			products: [
+				{
+					productName: product,
+					modifiers: allModifiers.map(e => {
+						return e
+					}),
+					notes: comment,
+					price: () => {
+						if (size.modifierName === "Small") {
+							return 4.75
+						} else {
+							return 5.25
+						}
+					}
+				}
+			]
+		}
+
+		API.getCart(user)
+		.then(res => {
+			console.log(res);
+			if (res.data == null) {
+				API.createCart(cartObject);
+				console.log("posted")
+			} else {
+				API.updateCart(user,  {$push: updateCartObject});
+				console.log("updated")
+			}
+		});
+
+	}
 
 	return (
 		<div className="background">
@@ -50,7 +147,7 @@ function Tea() {
 								<div class="form-group">
 									<br />
 									<label for="exampleFormControlSelect1">Size</label>
-									<select class="form-control" id="exampleFormControlSelect1">
+									<select class="form-control" id="exampleFormControlSelect1" onChange={sizeChange}>
 										<option id="3.00">Small ($3.00)</option>
 										<option id="3.50">Large ($3.50)</option>
 									</select>
@@ -59,7 +156,11 @@ function Tea() {
 								<div class="form-group">
 									<br />
 									<label for="exampleFormControlSelect1">Tea Base</label>
-									<select class="form-control" id="exampleFormControlSelect1">
+									<select
+										class="form-control"
+										id="exampleFormControlSelect1"
+										onChange={liquidOnCLick}
+									>
 										<option>Black Tea</option>
 										<option>Green Tea</option>
 										<option>Thai Tea</option>
@@ -70,7 +171,7 @@ function Tea() {
 								<div className="flavors">
 									{flavors.map((flavor) => (
 										<div className="indivflavor">
-											<Flavor name={flavor} />
+											<Flavor {...flavor} onChange={flavorOnClick} />
 										</div>
 									))}
 								</div>
@@ -80,15 +181,11 @@ function Tea() {
 								<div className="toppings">
 									{toppings.map((topping) => (
 										<div className="indivflavor">
-											<Flavor name={topping} />
+											<Flavor name={topping.name} onChange={flavorOnClick} />
 										</div>
 									))}
 								</div>
 								<br />
-								<div class="form-group">
-									<label for="Pickup-time">Pickup Time</label>
-									<input class="form-control" id="Pickup-time" aria-describedby="Pickup-time" />
-								</div>
 								<br />
 								<div class="form-group">
 									<label for="comments">Comments</label>
@@ -99,8 +196,8 @@ function Tea() {
 										placeholder=""
 									/>
 								</div>
-								<button type="submit" class="btn btn-primary">
-									Submit
+								<button type="submit" class="btn btn-primary" onClick={handleFormSubmit}>
+									Add to Cart
 								</button>
 							</form>
 						</div>

@@ -10,8 +10,6 @@ import Nav from '../../components/Navbar/nav';
 
 
 
-
-
 function Smoothie() {
 	const [modifierArray, setModifierArray] = useState([]);
 	const [product] = useState("Smothie");
@@ -163,7 +161,7 @@ function Smoothie() {
 									</div>
 									<br />
 									<div>Flavors</div>
-									<div className="flavors" >
+									<div className="flavors">
 										{flavors.map((flavor) => (
 											<div className="indivflavor">
 												<Flavor {...flavor} onChange={flavorOnClick} />
@@ -173,7 +171,11 @@ function Smoothie() {
 									<br />
 									<div class="form-group">
 										<label for="exampleFormControlSelect1">Milk or Juice</label>
-										<select class="form-control" id="exampleFormControlSelect1" onChange={liquidOnCLick}>
+										<select
+											class="form-control"
+											id="exampleFormControlSelect1"
+											onChange={liquidOnCLick}
+										>
 											<option value="Apple Juice">Apple Juice ( fruit smoothies)</option>
 											<option>Whole Milk</option>
 											<option>Soy Milk</option>
