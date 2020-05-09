@@ -4,6 +4,7 @@ import withAuthAdmin from './components/privateRoute/isAdmin';
 import withAuthUser from './components/privateRoute/isUser';
 import AdminPage from './pages/adminPage';
 import homePage from './pages/homePage/home';
+import Menu from './pages/Menu/menu';
 // import about from './pages/about'
 
 import UserPage from './pages/userPage';
@@ -28,6 +29,7 @@ function App() {
 				<Switch>
 					<Route exact path="/" component={homePage} />
 					<Route exact path="/about" component={About} />
+					<Route exact path="/Menu" component={Menu} />
 					<Route exact path="/home" component={homePage} />
 					{/* <Route exact path="/about" component={about}/> */}
 					<Route exact path="/confirm" component={Confirm} />

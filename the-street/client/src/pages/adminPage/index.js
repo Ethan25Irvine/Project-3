@@ -26,7 +26,7 @@ const Dashboard = () => {
 			</div>
 			<div className="container">
 				<ul class="list-group">
-					<li class="list-group-item">
+					<li className="list-group-item">
 						<div className="row">
 							<div className="col-lg-3">
 								<div className="customer-name">

@@ -1,23 +1,13 @@
 import React from 'react';
-import './style.css';
+import '../homePage/style.css';
 import { Link, useLocation } from 'react-router-dom';
-// import { useState,useEffect } from 'react';
 
-function Home() {
-	return (
-		<div className="slider">
+function Menu (){
+    return(
+        <div className="slider">
 			<div className="load" />
 			<div className="content">
 				<div className="principal">
-					<h1>
-						THE STREET
-						{/* <p className='nameBoba'>boba cafe</p> */}
-					</h1>
-
-					<p>
-						“People say graffiti is ugly, irresponsible and childish... but that's only if it's done
-						properly.” ― Banksy, Wall and Piece
-					</p>
 					<div id="navigation" className="navigation">
 						<h2>
 							<ul className="nav-list">
@@ -37,8 +27,8 @@ function Home() {
 								</li>
 								<li className="home-link">
 									<a>
-										<Link to="/Menu">
-											<div>MENU</div>
+										<Link to="/home">
+											<div>HOME</div>
 										</Link>
 									</a>
 								</li>
@@ -52,11 +42,15 @@ function Home() {
 								</li>
 							</ul>
 						</h2>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
-}
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    
+                    
 
-export default Home;
+
+		
+    )
+}
+export default Menu;
