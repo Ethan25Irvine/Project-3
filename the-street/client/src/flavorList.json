@@ -1,27 +1,105 @@
+
 [
-	"Strawberry",
-	"Banana",
-	"Mango",
-	"Peach",
-	"Pineapple",
-	"Blueberry",
-	"Raspberry",
-	"Kiwi",
-	"Passionfruit",
-	"Lychee",
-	"Watermelon",
-	"Green Mango",
-	"Orange",
-	"Grape",
-	"Rose",
-	"Taro",
-	"Melon",
-	"Coconut",
-	"Chocolate",
-	"Peanut Butter",
-	"Matcha Green Tea",
-	"Mocha",
-	"Coffee",
-	"Milk Tea",
-	"Thai Tea"
+	{	
+		"name": "Banana",
+		"isChecked": false
+	},
+	{	
+		"name": "Blueberry",
+		"isChecked": false
+	},
+	{	
+		"name": "Chocolate",
+		"isChecked": false
+	},
+	{	
+		"name": "Coconut",
+		"isChecked": false
+	},
+	
+	{	
+		"name": "Coffee",
+		"isChecked": false
+	},
+	{	
+		"name": "Grape",
+		"isChecked": false
+	},
+	{	
+		"name": "Green Mango",
+		"isChecked": false
+	},
+	
+	{	
+		"name": "Kiwi",
+		"isChecked": false
+	},	
+	{	
+		"name": "Lychee",
+		"isChecked": false
+	},
+	{	
+		"name": "Mango",
+		"isChecked": false
+	},
+	{	
+		"name": "Matcha Green Tea",
+		"isChecked": false
+	},
+	{	
+		"name": "Melon",
+		"isChecked": false
+	},
+	{	
+		"name": "Milk Tea",
+		"isChecked": false
+	},	
+	{	
+		"name": "Mocha",
+		"isChecked": false
+	},	
+	{	
+		"name": "Orange",
+		"isChecked": false
+	},
+	{	
+		"name": "Passionfruit",
+		"isChecked": false
+	},
+	{	
+		"name": "Peach",
+		"isChecked": false
+	},
+	{	
+		"name": "Peanut Butter",
+		"isChecked": false
+	},
+	{	
+		"name": "Pineapple",
+		"isChecked": false
+	},
+	{	
+		"name": "Raspberry",
+		"isChecked": false
+	},	
+	{	
+		"name": "Rose",
+		"isChecked": false
+	},	
+	{	
+		"name": "Strawberry",
+		"isChecked": false
+	},
+	{	
+		"name": "Thai Tea",
+		"isChecked": false
+	},
+	{	
+		"name": "Taro",
+		"isChecked": false
+	},	
+	{	
+		"name": "Watermellon",
+		"isChecked": false
+	}
 ]

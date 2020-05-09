@@ -11,7 +11,6 @@ const Dashboard = () => {
 
 	function handleLogout() {
 		delete_cookie('admin');
-
 		redirect();
 	}
 

@@ -13,7 +13,7 @@ function Login() {
     });
 
     function userPage() {
-        history.push('/user');
+        history.push('/order');
     }
 
     function adminPage() {
