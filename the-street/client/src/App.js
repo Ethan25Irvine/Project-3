@@ -21,7 +21,6 @@ import Tea from './pages/Tea/Tea';
 import Cart from './pages/cart/cart';
 import DI from './pages/DI/DI';
 import Slushie from './pages/Slushie/Slushie';
-import About from './pages/about/about';
 
 function App() {
 	return (
