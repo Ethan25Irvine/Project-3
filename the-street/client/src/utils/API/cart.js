@@ -14,10 +14,11 @@ export default {
   },
   // Deletes the Cart with the given cartId
   deleteCart: function(id) {
-    return axios.delete("/api/Cart/" + id);
+    console.log(id);
+    return axios.delete("/api/cart/" + id);
   },
 //   updates Cart with the given cartId
-  updateCart: function(id){
-      return axios.put("api/cart/"+ id)
+  updateCart: function(id, CartData){
+      return axios.put("api/cart/"+ id, CartData)
   }
 };   

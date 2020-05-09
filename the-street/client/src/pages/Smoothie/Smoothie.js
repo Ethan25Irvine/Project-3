@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import API from "../../utils/API/cart";
 // import Product from '../../components/Product';
 import './smoothie.css';
 // import { Link, useLocation } from 'react-router-dom';
@@ -7,17 +7,21 @@ import Flavor from '../../components/Flavor/flavor';
 import flavorList from '../../flavorList.json';
 import Toppings from '../../toppings.json';
 import Nav from '../../components/Navbar/nav';
-import { checkPropTypes } from 'prop-types';
+
+
 
 function Smoothie() {
-	const [ modifierArray, setModifierArray ] = useState([]);
-	const [ product ] = useState('Smothie');
-	const [ size, setSize ] = useState({ modifierName: 'Small' });
-	const [ comment, setComment ] = useState('');
-	const [ flavors, setFlavors ] = useState(flavorList);
-	const [ toppings, setToppings ] = useState(Toppings);
-	const [ liquid, setLiquid ] = useState({ modifierName: 'Apple Juice' });
-	const [ newFlavor, setNewFLavor ] = useState();
+	const [modifierArray, setModifierArray] = useState([]);
+	const [product] = useState("Smoothie");
+	const [user, setUser] = useState();
+	const [username, setUserName] = useState();
+	const [size, setSize] = useState({ modifierName: "Small" });
+	const [comment, setComment] = useState("");
+	const [flavors, setFlavors] = useState(flavorList);
+	const [toppings, setToppings] = useState(Toppings);
+	const [liquid, setLiquid] = useState({ modifierName: "Apple Juice" });
+
+
 
 	function scrollup() {
 		window.scrollTo(0, 0);
@@ -25,48 +29,100 @@ function Smoothie() {
 
 	useEffect(() => {
 		scrollup();
+		setUser(localStorage.getItem("userId"));
+		setUserName(localStorage.getItem("userName"));
 	}, []);
 
 	function sizeChange(event) {
-		const { value } = event.target;
+		const { value } = event.target
 		setSize({ modifierName: value });
-	}
+	};
 
 	function commentChange(event) {
-		const { value } = event.target;
-		setComment(value);
-	}
+		const { value } = event.target
+		setComment(value)
+	};
 
 	function liquidOnCLick(event) {
-		const { value } = event.target;
+		const { value } = event.target
 		setLiquid({ modifierName: value });
 	}
 
 	function flavorOnClick(event) {
-		const { name, checked } = event.target;
-		console.log(checked);
+		const { name, checked } = event.target
+		console.log(checked)
 
-		setModifierArray(function(previousFlavors) {
-			return { ...previousFlavors, [name]: checked };
+
+		setModifierArray(function (previousFlavors) {
+			return { ...previousFlavors, [name]: checked }
 		});
-	}
+	};
 
-	let flavArray = [];
-
-	let toppArray = [];
-	let testArray = [];
 	function handleFormSubmit(event) {
 		event.preventDefault();
 
-		let newFlavorArray = [];
+		let newFlavorArray = []
 		for (let key in modifierArray) {
 			if (modifierArray[key] === true) {
-				newFlavorArray.push({ modifierName: key });
+				newFlavorArray.push({ modifierName: key })
 			}
 		}
+		let allModifiers = [...newFlavorArray, liquid, size]
+		// console.log(allModifiers)
+		let cartObject = {
+			userId: user,
+			userName: username,
+			products: [
+				{
+					productName: product,
+					modifiers: allModifiers.map(e => {
+						return e
+					}),
+					notes: comment,
+					price: () => {
+						if (size.modifierName === "Small") {
+							return 4.75
+						} else {
+							return 5.25
+						}
+					}
+				}
+			]
+		}
+		let updateCartObject = {
+			products: [
+				{
+					productName: product,
+					modifiers: allModifiers.map(e => {
+						return e
+					}),
+					notes: comment,
+					price: () => {
+						if (size.modifierName === "Small") {
+							return 4.75
+						} else {
+							return 5.25
+						}
+					}
+				}
+			]
+		}
 
-		let allModifiers = [ ...newFlavorArray, liquid, size ];
-		console.log(allModifiers);
+		API.getCart(user)
+		.then(res => {
+			console.log(res);
+			if (res.data == null) {
+				API.createCart(cartObject);
+				console.log("posted")
+			} else {
+				API.updateCart(user,  {$push: updateCartObject});
+				console.log("updated")
+			}
+		});
+
+
+
+
 	}
 
 	return (
@@ -98,17 +154,9 @@ function Smoothie() {
 								<form>
 									<div class="form-group">
 										<label for="exampleFormControlSelect1">Size</label>
-										<select
-											class="form-control"
-											id="exampleFormControlSelect1"
-											onChange={sizeChange}
-										>
-											<option key="Small" id="Small" value="Small">
-												Small ($4.75)
-											</option>
-											<option key="Large" id="Large" value="Large">
-												Large ($5.25)
-											</option>
+										<select class="form-control" id="exampleFormControlSelect1" onChange={sizeChange}>
+											<option key="Small" id="Small" value="Small">Small ($4.75)</option>
+											<option key="Large" id="Large" value="Large" >Large ($5.25) </option>
 										</select>
 									</div>
 									<br />
