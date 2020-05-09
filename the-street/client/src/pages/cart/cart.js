@@ -4,6 +4,7 @@ import cartAPI from '../../utils/API/cart';
 import orderAPI from '../../utils/API/order';
 import List from '../../components/cartList/cartList';
 import Nav from '../../components/Navbar/nav';
+import {Redirect} from "react-router-dom";
 import './cart.css';
 
 const Cart = () => {
@@ -12,18 +13,25 @@ const Cart = () => {
 	const [displayStatus, setDisplayStatus] = useState('');
 
 	useEffect(() => {
+		console.log(userId)
 		cartAPI.getCart(userId).then((res) => {
 			console.log(res.data);
-			const data = res.data;
-			setCartObject(data);
+			// const data = res.data;
+			setCartObject(res.data);
 			setDisplayStatus('none');
-
 		});
 	}, []);
-
+	
 	function handleOnClick() {
-		orderAPI.createOrder(cartObject).then((res) => {
-			alert('order was sent');
+		const { _id, ...newData } = cartObject;
+		
+		// console.log(newData);
+		orderAPI.createOrder(newData)
+		.then(() => {
+			console.log(userId);
+			cartAPI.deleteCart(userId).then(
+				window.location.href("/")
+			)
 		});
 	}
 
@@ -31,6 +39,7 @@ const Cart = () => {
 		if (displayStatus === 'none') {
 			setDisplayStatus('block');
 		}
+		handleOnClick();
 		// console.log(displayStatus);
 	}
 
@@ -38,18 +47,6 @@ const Cart = () => {
 		<div>
 			<Nav />
 			<Logout />
-			{/* <h1>Cart</h1>
-			<ol>
-				{cartObject ? (
-					cartObject.products.map((res) => {
-						return <List product={res.productName} addons={res.modifiers} newKey={res.productName} />;
-					})
-				) : (
-					<p>Loading...</p>
-				)}
-			</ol>
-			<button onClick={handleOnClick}>Submit Order</button> */}
-
 			<div className="container">
 				<div className="text-center cart-header">
 					<h1 className="cart-h1">Cart</h1>
@@ -64,17 +61,9 @@ const Cart = () => {
 											return <List product={res.productName} addons={res.modifiers} newKey={res.productName} />;
 										})
 									) : (
-											<p>Loading...</p>
+											<h3 className="text-dark">Nothing in cart...</h3>
 										)}
 								</li>
-								{/* <li className="list-group-item">
-									<div className="row">
-										<div className="col-lg-3">
-											<img src="https://i.imgur.com/Oqvf7xS.jpg" className="product-cart-image" />
-										</div>
-										<div className="col-lg-8 item-name item-properties">Smoothie</div>
-									</div>
-								</li> */}
 							</ul>
 						</div>
 					</div>

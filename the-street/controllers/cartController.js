@@ -28,9 +28,9 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   remove: function (req, res) {
-    const { _id } = (req.params._id)
+    const id  = (req.params.id)
     db.Cart
-      .findById({ _id: _id })
+      .findOne({ userId: id })
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));

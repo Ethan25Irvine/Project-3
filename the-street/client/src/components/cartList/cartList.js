@@ -1,5 +1,5 @@
 import React from "react";
-import { checkPropTypes } from "prop-types";
+
 
 
 
@@ -49,19 +49,19 @@ function ListItems(props) {
         }
     }
     return (
-        <li key={props.newKey} className="mt-5 list-group-item">
+        <li key={props.newKey} className="mt-5 list-group-item text-dark">
 
-            <div className="row">
+            <div className="row ">
                 <div className="col-lg-3">
                     <Image product={props.product}/>
                     
                 </div>
-                <div className="container col-lg-8">
+                <div className="container col-lg-8 text-center">
                     <h1 >{props.product}</h1>
-                    <ul className="offset-lg-3 list-group">
+                    <ul className="list-group text-dark">
                         {props.addons.map(res => {
                             return (
-                                <li key={res._id} className="list-group-item">
+                                <li key={res._id} className="list-group-item text-dark">
                                     {res.modifierName}
                                 </li>
                             )
