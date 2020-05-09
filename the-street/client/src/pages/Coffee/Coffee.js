@@ -9,18 +9,60 @@ import Toppings from '../../toppings.json';
 import Nav from '../../components/Navbar/nav';
 
 function Coffee() {
-	const [ flavors, setFlavors ] = useState([]);
-	const [ toppings, setToppings ] = useState([]);
+	const [ modifierArray, setModifierArray ] = useState([]);
+
+	const [ toppings, setToppings ] = useState(Toppings);
+	const [ product ] = useState('Smothie');
+	const [ size, setSize ] = useState({ modifierName: 'Small' });
+	const [ type, setType ] = useState({ modifierName: 'Hot Coffee' });
+	const [ comment, setComment ] = useState('');
 	function scrollup() {
 		window.scrollTo(0, 0);
 	}
 
 	useEffect(() => {
-		setFlavors(flavorList);
-		setToppings(Toppings);
 		scrollup();
 	}, []);
+	function sizeChange(event) {
+		const { value } = event.target;
+		setSize({ modifierName: value });
+	}
+	function typeChange(event) {
+		const { value } = event.target;
+		setType({ modifierName: value });
+	}
 
+	function commentChange(event) {
+		const { value } = event.target;
+		setComment(value);
+	}
+
+	function flavorOnClick(event) {
+		const { name, checked } = event.target;
+		console.log(checked);
+
+		setModifierArray(function(previousFlavors) {
+			return { ...previousFlavors, [name]: checked };
+		});
+	}
+
+	let flavArray = [];
+
+	let toppArray = [];
+	let testArray = [];
+	function handleFormSubmit(event) {
+		event.preventDefault();
+
+		let newFlavorArray = [];
+		for (let key in modifierArray) {
+			if (modifierArray[key] === true) {
+				newFlavorArray.push({ modifierName: key });
+			}
+		}
+
+		let allModifiers = [ ...newFlavorArray, type, size ];
+		console.log(allModifiers);
+	}
 	return (
 		<div className="background">
 			<Nav />
@@ -33,34 +75,41 @@ function Coffee() {
 				</div>
 				<br />
 
-				<div class="row mb-5">
-					<div class="col-md-7">
-						<div class="row">
-							<div class="col-md-12 mb-4 ">
+				<div className="row mb-5">
+					<div className="col-md-7">
+						<div className="row">
+							<div className="col-md-12 mb-4 ">
 								<img
 									alt=""
-									class="img-thumbnail p-0 border-0 image-main smoothies"
+									className="img-thumbnail p-0 border-0 image-main smoothies"
 									src="https://i.imgur.com/k5IkYI1.jpg"
 								/>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-5">
-						<div class="card options newborder">
+					<div className="col-md-5">
+						<div className="card options newborder">
 							<form>
-								<div class="form-group">
-									<br />
-									<label for="size">Size</label>
-									<select class="form-control" id="size">
-										<option id="3.00">Small ($3.00)</option>
-										<option id="3.50">Large ($3.50)</option>
+								<div className="form-group">
+									<label for="exampleFormControlSelect1">Size</label>
+									<select
+										className="form-control"
+										id="exampleFormControlSelect1"
+										onChange={sizeChange}
+									>
+										<option key="Small" id="Small" value="Small">
+											Small ($3.00)
+										</option>
+										<option key="Large" id="Large" value="Large">
+											Large ($3.50)
+										</option>
 									</select>
 								</div>
 								<br />
-								<div class="form-group">
+								<div className="form-group">
 									<br />
 									<label for="CoffeeChoice">Type</label>
-									<select class="form-control" id="CoffeeChoice">
+									<select className="form-control" id="CoffeeChoice" onChange={typeChange}>
 										<option>Hot Coffee</option>
 										<option>Iced Coffee</option>
 										<option>Lattes</option>
@@ -75,7 +124,7 @@ function Coffee() {
 								<div className="toppings">
 									{toppings.map((topping) => (
 										<div className="indivflavor">
-											<Flavor name={topping} />
+											<Flavor name={topping.name} onChange={flavorOnClick} />
 										</div>
 									))}
 								</div>
@@ -88,8 +137,8 @@ function Coffee() {
 										placeholder="add cream, half & half, etc."
 									/>
 								</div>
-								<button type="submit" class="btn btn-primary">
-									Submit
+								<button type="submit" class="btn btn-primary" onClick={handleFormSubmit}>
+									Add to Cart
 								</button>
 							</form>
 						</div>

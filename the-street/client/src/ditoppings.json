@@ -1,1 +1,26 @@
-[ "Strawberries", "Pineapples", "Cantaloupe", "Honeydew Melon", "Red beans", "Mochi" ]
+[
+	{
+		"name": "Strawberries",
+		"isClicked": false
+	},
+	{
+		"name": "Pineapples",
+		"isClicked": false
+	},
+	{
+		"name": "Cantaloupe",
+		"isClicked": false
+	},
+	{
+		"name": "Honeydew Melon",
+		"isClicked": false
+	},
+	{
+		"name": "Red Beans",
+		"isClicked": false
+	},
+	{
+		"name": "Mochi",
+		"isClicked": false
+	}
+]
