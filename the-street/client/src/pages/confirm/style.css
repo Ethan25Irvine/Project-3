@@ -13,10 +13,10 @@
     display:block;
     font-family: 'Lucinda console'
 }
-.ForgetPwd{
+.forgetPwd{
     animation:none;
     text-decoration: none;
-    color:white;
+    /* color:white; */
     background:white;
     /* position:auto; */
     /* margin-top: 50px; */
@@ -28,4 +28,9 @@
 }
 .aboutParagraph :hover{
     opacity: 0.5;
+}
+.successfulRegistration{
+    margin-top:0;
+    /* text-decoration:none; */
+    /* color:black; */
 }
