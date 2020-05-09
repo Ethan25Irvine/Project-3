@@ -1,25 +1,115 @@
 import React, { useEffect, useState } from 'react';
 
-import Product from '../../components/Product';
+// import Product from '../../components/Product';
 import './smoothie.css';
-import { Link, useLocation } from 'react-router-dom';
+// import { Link, useLocation } from 'react-router-dom';
 import Flavor from '../../components/Flavor/flavor';
 import flavorList from '../../flavorList.json';
 import Toppings from '../../toppings.json';
 import Nav from '../../components/Navbar/nav';
+import { checkPropTypes } from 'prop-types';
+
+
 
 function Smoothie() {
-	const [ flavors, setFlavors ] = useState([]);
-	const [ toppings, setToppings ] = useState([]);
+	const [modifierArray, setModifierArray] = useState([]);
+	const [product] = useState( "Smothie");
+	const [size, setSize] = useState("Small");
+	const [comment, setComment] = useState("");
+	const [flavors, setFlavors] = useState(flavorList);
+	const [toppings, setToppings] = useState(Toppings); 
+	const [liquid, setLiquid] = useState("Apple Juice");
+	const [newFlavor, setNewFLavor] = useState();
+
+
 	function scrollup() {
 		window.scrollTo(0, 0);
 	}
 
 	useEffect(() => {
-		setFlavors(flavorList);
-		setToppings(Toppings);
 		scrollup();
 	}, []);
+
+	function sizeChange(event){
+		const {value} = event.target
+		setSize(value);
+	};
+
+	function commentChange (event){
+		const {value} = event.target
+		setComment(value)
+	};
+
+	function liquidOnCLick(event){
+		const {value} = event.target
+		setLiquid(value);
+	}
+
+	function flavorOnClick(event){
+		const {checked, value} = event.target
+		console.log(checked)
+		flavors.forEach(e => {
+			if (e.name === value ){
+				e.isChecked = checked
+			}
+		})
+			
+			setFlavors(flavors);
+	};
+
+	function toppingOnClick(event){
+		const {checked, value} = event.target
+		console.log(checked)
+		toppings.forEach(e => {
+			if (e.name === value ){
+				e.isChecked = checked
+			}
+		})
+			
+			setToppings(toppings);
+	};
+
+	function FlavLoop(){
+		flavors.map(e =>{
+				if (e.isChecked === true){
+					// console.log(e.name)
+					// flavArray.push(e.name); 
+					// console.log(flavArray)
+					setModifierArray([...modifierArray, {modifierName: e.name}])
+				}
+				// setNewFLavor(flavArray)
+				
+			});
+
+			// flavArray.map(e => {
+					
+			// 	})
+	}
+
+	let flavArray = [];
+	let toppArray = [];
+	function handleFormSubmit(event){
+		event.preventDefault();
+
+		FlavLoop();
+
+		// setModifierArray(
+		// 	[
+		// 		...modifierArray,
+		// 		{
+		// 			modifierName: size
+		// 		},
+		// 		{
+		// 			modifierName: liquid-*x
+		// 		},
+		
+		// 	]
+		// )
+		
+
+
+		
+	}
 
 	return (
 		<div>
@@ -50,32 +140,32 @@ function Smoothie() {
 								<form>
 									<div class="form-group">
 										<label for="exampleFormControlSelect1">Size</label>
-										<select class="form-control" id="exampleFormControlSelect1">
-											<option id="4.75">Small ($4.75)</option>
-											<option id="5.25">Large ($5.25)</option>
+										<select class="form-control" id="exampleFormControlSelect1" onChange= {sizeChange}>
+											<option key="Small" id="Small" value="Small">Small ($4.75)</option>
+											<option key="Large" id="Large" value="Large" >Large ($5.25) </option>
 										</select>
 									</div>
 									<br />
 									<div>Flavors</div>
-									<div className="flavors">
+									<div className="flavors" >
 										{flavors.map((flavor) => (
 											<div className="indivflavor">
-												<Flavor name={flavor} />
+												<Flavor {...flavor} onClick={flavorOnClick}/>
 											</div>
 										))}
 									</div>
 									<br />
 									<div class="form-group">
 										<label for="exampleFormControlSelect1">Milk or Juice</label>
-										<select class="form-control" id="exampleFormControlSelect1">
-											<option>Apple Juice ( fruit smoothies)</option>
+										<select class="form-control" id="exampleFormControlSelect1" onChange={liquidOnCLick}>
+											<option value="Apple Juice">Apple Juice ( fruit smoothies)</option>
 											<option>Whole Milk</option>
 											<option>Soy Milk</option>
 											<option>Almond Milk</option>
 											<option>Coconut Milk</option>
 											<option>Rice Milk</option>
-											<option>Green Tea (fruit smoothies)</option>
-											<option>Black Tea (fruit smoothies)</option>
+											<option value="Green Tea">Green Tea (fruit smoothies)</option>
+											<option value="Black Tea">Black Tea (fruit smoothies)</option>
 										</select>
 									</div>
 									<br />
@@ -83,15 +173,11 @@ function Smoothie() {
 									<div className="toppings">
 										{toppings.map((topping) => (
 											<div className="indivflavor">
-												<Flavor name={topping} />
+												<Flavor name={topping.name} onClick={toppingOnClick}/>
 											</div>
 										))}
 									</div>
 									<br />
-									<div class="form-group">
-										<label for="Pickup-time">Pickup Time</label>
-										<input class="form-control" id="Pickup-time" aria-describedby="Pickup-time" />
-									</div>
 									<div class="form-group">
 										<label for="comments">Comments</label>
 										<input
@@ -99,10 +185,11 @@ function Smoothie() {
 											id="comments"
 											aria-describedby="comments"
 											placeholder=""
+											onChange = {commentChange}
 										/>
 									</div>
-									<button type="submit" class="btn btn-primary">
-										Submit
+									<button type="submit" class="btn btn-primary" onClick={handleFormSubmit}>
+										Add to Cart
 									</button>
 								</form>
 							</div>
