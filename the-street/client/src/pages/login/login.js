@@ -3,6 +3,7 @@ import {useHistory} from "react-router-dom";
 import userPic from "../homePage/photos/user.png"
 
 import API from "../../utils/API/user"
+import "../homePage/style.css"
 
 
 

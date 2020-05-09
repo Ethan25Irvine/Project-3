@@ -3,17 +3,6 @@ import './style.css'
 // import { useState,useEffect } from 'react';
 
 function Home(){
-    // const [display, setDisplay] = useState();
-    // const onClick = () => {
-    //     setDisplay({display:true});
-    // }
-    // useEffect(()=>{
-    //         if ({display}===true) {
-    //             document.querySelector(".popup").style.display = "flex";
-    //         } else {
-    //             document.querySelector(".popup").style.display = "none";
-    //         }
-    // });
 
     return(    
     <div className="slider">
