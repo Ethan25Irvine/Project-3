@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Orders from '../../components/orders/orders';
+import Nav from '../../components/Navbar/nav'
 
 const Dashboard = () => {
 	function delete_cookie(name) {
@@ -16,6 +17,7 @@ const Dashboard = () => {
 
 	return (
 		<div>
+			<Nav/>
 			<h1>This is for admins</h1>
 			<div className="card" style={{ width: '18rem' }}>
 				<ul className="list-group list-group-flush" />

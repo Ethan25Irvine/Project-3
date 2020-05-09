@@ -14,11 +14,11 @@ import { checkPropTypes } from 'prop-types';
 function Smoothie() {
 	const [modifierArray, setModifierArray] = useState([]);
 	const [product] = useState( "Smothie");
-	const [size, setSize] = useState("Small");
+	const [size, setSize] = useState({modifierName: "Small"});
 	const [comment, setComment] = useState("");
 	const [flavors, setFlavors] = useState(flavorList);
 	const [toppings, setToppings] = useState(Toppings); 
-	const [liquid, setLiquid] = useState("Apple Juice");
+	const [liquid, setLiquid] = useState({modifierName: "Apple Juice"});
 	const [newFlavor, setNewFLavor] = useState();
 
 
@@ -32,7 +32,7 @@ function Smoothie() {
 
 	function sizeChange(event){
 		const {value} = event.target
-		setSize(value);
+		setSize({modifierName: value});
 	};
 
 	function commentChange (event){
@@ -42,73 +42,62 @@ function Smoothie() {
 
 	function liquidOnCLick(event){
 		const {value} = event.target
-		setLiquid(value);
+		setLiquid({modifierName: value});
 	}
 
 	function flavorOnClick(event){
-		const {checked, value} = event.target
+		const {name, checked} = event.target
 		console.log(checked)
-		flavors.forEach(e => {
-			if (e.name === value ){
-				e.isChecked = checked
-			}
-		})
+		
 			
-			setFlavors(flavors);
-	};
-
-	function toppingOnClick(event){
-		const {checked, value} = event.target
-		console.log(checked)
-		toppings.forEach(e => {
-			if (e.name === value ){
-				e.isChecked = checked
-			}
-		})
-			
-			setToppings(toppings);
-	};
-
-	function FlavLoop(){
-		flavors.map(e =>{
-				if (e.isChecked === true){
-					// console.log(e.name)
-					// flavArray.push(e.name); 
-					// console.log(flavArray)
-					setModifierArray([...modifierArray, {modifierName: e.name}])
-				}
-				// setNewFLavor(flavArray)
-				
+			setModifierArray(function (previousFlavors){
+				return {...previousFlavors, [name] : checked}
 			});
+	};
 
-			// flavArray.map(e => {
+	// function toppingOnClick(event){
+	// 	const {name, checked} = event.target
+	// 	console.log(checked)
+		
+			
+	// 		setModifierArray(function (previousFlavors){
+	// 			return {...previousFlavors, [name] : checked}
+	// 		});
+	// };
+	let flavArray = [];
+	function FlavLoop(){
+		// flavors.map(e =>{
+		// 		if (e.isChecked === true){
+		// 			// console.log(e.name)
+		// 			flavArray.push(e.name); 
 					
-			// 	})
+				
+		// 		}
+		// 		// setNewFLavor(flavArray)
+				
+		// 	})
+		// 	console.log(flavArray);
+
+		// 	// flavArray.map(e => {
+					
+		// 	// 	})
 	}
 
-	let flavArray = [];
+	
 	let toppArray = [];
+	let testArray = [];
 	function handleFormSubmit(event){
 		event.preventDefault();
-
-		FlavLoop();
-
-		// setModifierArray(
-		// 	[
-		// 		...modifierArray,
-		// 		{
-		// 			modifierName: size
-		// 		},
-		// 		{
-		// 			modifierName: liquid-*x
-		// 		},
 		
-		// 	]
-		// )
+		let newFlavorArray = []
+		for (let key in modifierArray) {
+			if(modifierArray[key] === true) {
+			 newFlavorArray.push({modifierName : key})
+			}
+		}
 		
-
-
-		
+		let allModifiers = [...newFlavorArray, liquid, size]
+		console.log(allModifiers)
 	}
 
 	return (
@@ -150,7 +139,7 @@ function Smoothie() {
 									<div className="flavors" >
 										{flavors.map((flavor) => (
 											<div className="indivflavor">
-												<Flavor {...flavor} onClick={flavorOnClick}/>
+												<Flavor {...flavor} onChange={flavorOnClick}/>
 											</div>
 										))}
 									</div>
@@ -173,7 +162,7 @@ function Smoothie() {
 									<div className="toppings">
 										{toppings.map((topping) => (
 											<div className="indivflavor">
-												<Flavor name={topping.name} onClick={toppingOnClick}/>
+												<Flavor name={topping.name} onChange={flavorOnClick}/>
 											</div>
 										))}
 									</div>
