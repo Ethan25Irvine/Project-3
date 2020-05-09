@@ -10,13 +10,16 @@ function Order() {
 	const [ drinks, setDrinks ] = useState([]);
 	const [ foods, setFoods ] = useState([]);
 
+
 	useEffect(() => {
 		setDrinks(drinkMenu);
 		setFoods(foodMenu);
+		
 	}, []);
 	// Map over this.state.items and render a FriendCard component for each friend object
 
 	return (
+
 		<div>
 			<div className="header-background">
 				<Nav />
@@ -60,7 +63,7 @@ function Order() {
 				<br />
 			</div>
 		</div>
-	);
+	)
 }
 
 export default Order;
