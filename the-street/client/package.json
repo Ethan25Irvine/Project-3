@@ -1,6 +1,9 @@
 {
   "name": "the-street",
   "version": "0.1.0",
+  "engines": {
+    "node": "v13.8.0"
+  },
   "proxy": "http://localhost:8080",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
