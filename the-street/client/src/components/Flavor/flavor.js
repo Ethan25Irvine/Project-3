@@ -5,7 +5,7 @@ function Flavor(props) {
 	return (
 		<div>
 			<div>
-				<input key= {props.name} class="form-check-input" type="checkbox" onClick={props.onClick} id={props.name} value={props.name}/>
+				<input key= {props.name} class="form-check-input" type="checkbox" onChange={props.onChange} id={props.name} name={props.name}/>
 				
 					{props.name}
 				

@@ -62,7 +62,7 @@ const Cart = () => {
 										<div className="col-lg-3">
 											<img src="https://i.imgur.com/Oqvf7xS.jpg" className="product-cart-image" />
 										</div>
-										<div className="col-lg-8">Smoothie</div>
+										<div className="col-lg-8 item-name item-properties">Smoothie</div>
 									</div>
 								</li>
 							</ul>
