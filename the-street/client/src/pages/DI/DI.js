@@ -5,19 +5,64 @@ import './di.css';
 import { Link, useLocation } from 'react-router-dom';
 import Flavor from '../../components/Flavor/flavor';
 import Nav from '../../components/Navbar/nav';
-import Toppings from '../../toppings.json';
+import Toppings from '../../ditoppings.json';
 
 function DI() {
-	const [ toppings, setToppings ] = useState([]);
+	const [ modifierArray, setModifierArray ] = useState([]);
+
+	const [ toppings, setToppings ] = useState(Toppings);
+	const [ product ] = useState('Diamond Ice');
+	const [ size, setSize ] = useState({ modifierName: 'tiny' });
+	const [ liquid, setLiquid ] = useState({ modifierName: 'Condensed Milk' });
+
+	const [ comment, setComment ] = useState('');
 	function scrollup() {
 		window.scrollTo(0, 0);
 	}
 
 	useEffect(() => {
-		setToppings(Toppings);
 		scrollup();
 	}, []);
+	function sizeChange(event) {
+		const { value } = event.target;
+		setSize({ modifierName: value });
+	}
 
+	function commentChange(event) {
+		const { value } = event.target;
+		setComment(value);
+	}
+	function liquidOnCLick(event) {
+		const { value } = event.target;
+		setLiquid({ modifierName: value });
+	}
+
+	function flavorOnClick(event) {
+		const { name, checked } = event.target;
+		console.log(checked);
+
+		setModifierArray(function(previousFlavors) {
+			return { ...previousFlavors, [name]: checked };
+		});
+	}
+
+	let flavArray = [];
+
+	let toppArray = [];
+	let testArray = [];
+	function handleFormSubmit(event) {
+		event.preventDefault();
+
+		let newFlavorArray = [];
+		for (let key in modifierArray) {
+			if (modifierArray[key] === true) {
+				newFlavorArray.push({ modifierName: key });
+			}
+		}
+
+		let allModifiers = [ ...newFlavorArray, size, liquid ];
+		console.log(allModifiers);
+	}
 	return (
 		<div className="background">
 			<Nav />
@@ -46,13 +91,25 @@ function DI() {
 							<form>
 								<div class="form-group">
 									<label for="size">Size</label>
-									<select class="form-control" id="size">
-										<option id="4.00">Tiny ($4.00)</option>
-										<option id="5.00">Mini ($5.00)</option>
-										<option id="6.00">Small ($6.00)</option>
-										<option id="10.00">Medium ($10.00)</option>
-										<option id="12.00">Large ($12.00)</option>
-										<option id="16.00">Extra Large ($16.00)</option>
+									<select class="form-control" id="size" onChange={sizeChange}>
+										<option id="4.00" value="T``iny">
+											Tiny ($4.00)
+										</option>
+										<option id="5.00" value="Mini">
+											Mini ($5.00)
+										</option>
+										<option id="6.00" value="Small">
+											Small ($6.00)
+										</option>
+										<option id="10.00" value="Medium">
+											Medium ($10.00)
+										</option>
+										<option id="12.00" value="Large">
+											Large ($12.00)
+										</option>
+										<option id="16.00" value="Extra Large">
+											Extra Large ($16.00)
+										</option>
 									</select>
 								</div>
 								<br />
@@ -61,21 +118,21 @@ function DI() {
 								<div className="toppings">
 									{toppings.map((topping) => (
 										<div className="indivflavor">
-											<Flavor name={topping} />
+											<Flavor name={topping.name} onChange={flavorOnClick} />
 										</div>
 									))}
 								</div>
 								<br />
 								<div class="form-group">
 									<br />
-									<label for="milk">Size</label>
-									<select class="form-control" id="milk">
-										<option>Tiny</option>
-										<option>Mini</option>
-										<option>Small</option>
-										<option>Medium</option>
-										<option>Large</option>
-										<option>Extra Large</option>
+									<label for="milk">Milk Options</label>
+									<select class="form-control" id="milk" onChange={liquidOnCLick}>
+										<option>Condensed Milk (most common)</option>
+										<option>Whole Milk</option>
+										<option>Soy Milk</option>
+										<option>Almond Milk</option>
+										<option>Coconut Milk</option>
+										<option>Rice Milk</option>
 									</select>
 								</div>
 								<div class="form-group">
@@ -91,8 +148,8 @@ function DI() {
 										placeholder=""
 									/>
 								</div>
-								<button type="submit" class="btn btn-primary">
-									Submit
+								<button type="submit" class="btn btn-primary" onClick={handleFormSubmit}>
+									Add to Cart
 								</button>
 							</form>
 						</div>

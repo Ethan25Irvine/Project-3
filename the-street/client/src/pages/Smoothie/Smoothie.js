@@ -9,18 +9,15 @@ import Toppings from '../../toppings.json';
 import Nav from '../../components/Navbar/nav';
 import { checkPropTypes } from 'prop-types';
 
-
-
 function Smoothie() {
-	const [modifierArray, setModifierArray] = useState([]);
-	const [product] = useState( "Smothie");
-	const [size, setSize] = useState({modifierName: "Small"});
-	const [comment, setComment] = useState("");
-	const [flavors, setFlavors] = useState(flavorList);
-	const [toppings, setToppings] = useState(Toppings); 
-	const [liquid, setLiquid] = useState({modifierName: "Apple Juice"});
-	const [newFlavor, setNewFLavor] = useState();
-
+	const [ modifierArray, setModifierArray ] = useState([]);
+	const [ product ] = useState('Smothie');
+	const [ size, setSize ] = useState({ modifierName: 'Small' });
+	const [ comment, setComment ] = useState('');
+	const [ flavors, setFlavors ] = useState(flavorList);
+	const [ toppings, setToppings ] = useState(Toppings);
+	const [ liquid, setLiquid ] = useState({ modifierName: 'Apple Juice' });
+	const [ newFlavor, setNewFLavor ] = useState();
 
 	function scrollup() {
 		window.scrollTo(0, 0);
@@ -30,74 +27,46 @@ function Smoothie() {
 		scrollup();
 	}, []);
 
-	function sizeChange(event){
-		const {value} = event.target
-		setSize({modifierName: value});
-	};
-
-	function commentChange (event){
-		const {value} = event.target
-		setComment(value)
-	};
-
-	function liquidOnCLick(event){
-		const {value} = event.target
-		setLiquid({modifierName: value});
+	function sizeChange(event) {
+		const { value } = event.target;
+		setSize({ modifierName: value });
 	}
 
-	function flavorOnClick(event){
-		const {name, checked} = event.target
-		console.log(checked)
-		
-			
-			setModifierArray(function (previousFlavors){
-				return {...previousFlavors, [name] : checked}
-			});
-	};
+	function commentChange(event) {
+		const { value } = event.target;
+		setComment(value);
+	}
 
-	// function toppingOnClick(event){
-	// 	const {name, checked} = event.target
-	// 	console.log(checked)
-		
-			
-	// 		setModifierArray(function (previousFlavors){
-	// 			return {...previousFlavors, [name] : checked}
-	// 		});
-	// };
+	function liquidOnCLick(event) {
+		const { value } = event.target;
+		setLiquid({ modifierName: value });
+	}
+
+	function flavorOnClick(event) {
+		const { name, checked } = event.target;
+		console.log(checked);
+
+		setModifierArray(function(previousFlavors) {
+			return { ...previousFlavors, [name]: checked };
+		});
+	}
+
 	let flavArray = [];
-	function FlavLoop(){
-		// flavors.map(e =>{
-		// 		if (e.isChecked === true){
-		// 			// console.log(e.name)
-		// 			flavArray.push(e.name); 
-					
-				
-		// 		}
-		// 		// setNewFLavor(flavArray)
-				
-		// 	})
-		// 	console.log(flavArray);
 
-		// 	// flavArray.map(e => {
-					
-		// 	// 	})
-	}
-
-	
 	let toppArray = [];
 	let testArray = [];
-	function handleFormSubmit(event){
+	function handleFormSubmit(event) {
 		event.preventDefault();
-		
-		let newFlavorArray = []
+
+		let newFlavorArray = [];
 		for (let key in modifierArray) {
-			if(modifierArray[key] === true) {
-			 newFlavorArray.push({modifierName : key})
+			if (modifierArray[key] === true) {
+				newFlavorArray.push({ modifierName: key });
 			}
 		}
-		
-		let allModifiers = [...newFlavorArray, liquid, size]
-		console.log(allModifiers)
+
+		let allModifiers = [ ...newFlavorArray, liquid, size ];
+		console.log(allModifiers);
 	}
 
 	return (
@@ -129,24 +98,36 @@ function Smoothie() {
 								<form>
 									<div class="form-group">
 										<label for="exampleFormControlSelect1">Size</label>
-										<select class="form-control" id="exampleFormControlSelect1" onChange= {sizeChange}>
-											<option key="Small" id="Small" value="Small">Small ($4.75)</option>
-											<option key="Large" id="Large" value="Large" >Large ($5.25) </option>
+										<select
+											class="form-control"
+											id="exampleFormControlSelect1"
+											onChange={sizeChange}
+										>
+											<option key="Small" id="Small" value="Small">
+												Small ($4.75)
+											</option>
+											<option key="Large" id="Large" value="Large">
+												Large ($5.25)
+											</option>
 										</select>
 									</div>
 									<br />
 									<div>Flavors</div>
-									<div className="flavors" >
+									<div className="flavors">
 										{flavors.map((flavor) => (
 											<div className="indivflavor">
-												<Flavor {...flavor} onChange={flavorOnClick}/>
+												<Flavor {...flavor} onChange={flavorOnClick} />
 											</div>
 										))}
 									</div>
 									<br />
 									<div class="form-group">
 										<label for="exampleFormControlSelect1">Milk or Juice</label>
-										<select class="form-control" id="exampleFormControlSelect1" onChange={liquidOnCLick}>
+										<select
+											class="form-control"
+											id="exampleFormControlSelect1"
+											onChange={liquidOnCLick}
+										>
 											<option value="Apple Juice">Apple Juice ( fruit smoothies)</option>
 											<option>Whole Milk</option>
 											<option>Soy Milk</option>
@@ -162,7 +143,7 @@ function Smoothie() {
 									<div className="toppings">
 										{toppings.map((topping) => (
 											<div className="indivflavor">
-												<Flavor name={topping.name} onChange={flavorOnClick}/>
+												<Flavor name={topping.name} onChange={flavorOnClick} />
 											</div>
 										))}
 									</div>
@@ -174,7 +155,7 @@ function Smoothie() {
 											id="comments"
 											aria-describedby="comments"
 											placeholder=""
-											onChange = {commentChange}
+											onChange={commentChange}
 										/>
 									</div>
 									<button type="submit" class="btn btn-primary" onClick={handleFormSubmit}>

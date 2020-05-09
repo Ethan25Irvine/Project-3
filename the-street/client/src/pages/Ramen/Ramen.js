@@ -6,10 +6,36 @@ import './ramen.css';
 import Nav from '../../components/Navbar/nav';
 
 function Ramen() {
+	const [ modifierArray, setModifierArray ] = useState([]);
+	const [ product ] = useState('Ramen');
+	const [ comment, setComment ] = useState('');
+	const [ toppings, setToppings ] = useState({ modifierName: 'Dumplings' });
+	const [ spice, setSpice ] = useState({ modifierName: 'Spicy' });
 	function scrollup() {
 		window.scrollTo(0, 0);
 	}
 	scrollup();
+
+	function commentChange(event) {
+		const { value } = event.target;
+		setComment(value);
+	}
+	function spiceOnCLick(event) {
+		const { value } = event.target;
+		setSpice({ modifierName: value });
+	}
+	function toppingsOnCLick(event) {
+		const { value } = event.target;
+		setToppings({ modifierName: value });
+	}
+
+	function handleFormSubmit(event) {
+		event.preventDefault();
+
+		let allModifiers = [ spice, toppings ];
+		console.log(allModifiers);
+	}
+
 	return (
 		<div>
 			<Nav />
@@ -40,21 +66,21 @@ function Ramen() {
 								<div class="form-group">
 									<br />
 									<label for="exampleFormControlSelect1">Spice level</label>
-									<select class="form-control" id="exampleFormControlSelect1">
-										<option>Spicy</option>
-										<option>Mild</option>
-										<option>Not spicy</option>
-										<option>Veggie</option>
+									<select class="form-control" id="exampleFormControlSelect1" onChange={spiceOnCLick}>
+										<option value="Spicy">Spicy</option>
+										<option value="Mild">Mild</option>
+										<option value="Not Spicy">Not Spicy</option>
+										<option value="Veggie">Veggie</option>
 									</select>
 								</div>
 
 								<div class="form-group">
 									<br />
 									<label for="FormControlSelect">Toppings</label>
-									<select class="form-control" id="FormControlSelect">
-										<option>Dumplings</option>
-										<option>Rice Cakes</option>
-										<option>Dumplings + Rice Cakes</option>
+									<select class="form-control" id="FormControlSelect" onChange={toppingsOnCLick}>
+										<option value="Dumplings">Dumplings</option>
+										<option value="Rice Cakes">Rice Cakes</option>
+										<option value="Dumplings + Rice Cakes">Dumplings + Rice Cakes</option>
 										<option>None</option>
 									</select>
 								</div>
@@ -73,8 +99,8 @@ function Ramen() {
 										placeholder=""
 									/>
 								</div>
-								<button type="submit" class="btn btn-primary">
-									Submit
+								<button type="submit" class="btn btn-primary" onClick={handleFormSubmit}>
+									Add to Cart
 								</button>
 							</form>
 						</div>
