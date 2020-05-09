@@ -11,7 +11,7 @@ const Cart = () => {
 	const [userId, setUserId] = useState(localStorage.getItem("userId"));
 	const [cartObject, setCartObject] = useState();
 	const [displayStatus, setDisplayStatus] = useState('');
-
+	const history = useHistory();
 	useEffect(() => {
 		console.log(userId)
 		cartAPI.getCart(userId).then((res) => {
@@ -30,7 +30,7 @@ const Cart = () => {
 		.then(() => {
 			console.log(userId);
 			cartAPI.deleteCart(userId).then(
-				
+				history.push("/")
 			)
 		});
 	}
