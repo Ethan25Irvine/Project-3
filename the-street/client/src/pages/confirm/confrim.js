@@ -4,10 +4,13 @@ import "./style.css";
 function Confirm (){
 
     return(
-        <div>
+        <div className ="successfulRegistration">
             <h5>You have been successfully registered to order from The Street Boba Café</h5>
             <div className="form-group">
-                    <a href="/login" className="ForgetPwd">Login Here?</a>
+                <br/>
+                <br/>
+                    <a href="/login" className="ForgetPwd btn btn-dark">Login Here</a>
+                    <a href="/" className="goHomeFromReg btn btn-dark">Home Page</a>
             </div>
         </div>
     )

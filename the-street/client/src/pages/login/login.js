@@ -1,7 +1,9 @@
 import React, { useState} from "react";
 import {useHistory} from "react-router-dom";
+import userPic from "../homePage/photos/user.png"
 
 import API from "../../utils/API/user"
+import "../homePage/style.css"
 
 
 
@@ -51,8 +53,12 @@ function Login() {
     };
 
     return (
-        <div className="col-md-6 login-form-1">
-            <h3>Login for Form 1</h3>
+        
+        <div className='container'>
+        <div className="col-md-6 login-form-1 ">
+            <h3></h3>
+        <img src={userPic} alt="User" className="user"/>
+            
             <form>
                 <div className="form-group">
                     <input type="text" name="email" onChange={handleInputChange} autoComplete="username" className="form-control" placeholder="Your Email *" />
@@ -61,7 +67,7 @@ function Login() {
                     <input type="password" name="password" onChange={handleInputChange} autoComplete="current-password" className="form-control" placeholder="Your Password *" />
                 </div>
                 <div className="form-group">
-                    <input type="submit" className="btnSubmit" disabled={!(loginObject.email && loginObject.password)}
+                    <input type="submit" className="btnSubmit btn-dark" disabled={!(loginObject.email && loginObject.password)}
                         onClick={handleFormSubmit} value="Login" />
                 </div>
                 <div className="form-group">
@@ -69,7 +75,19 @@ function Login() {
                 </div>
             </form>
         </div>
+        <div id="navigation" className="navigation">
+                <h2>
+                    <ul id="nav-list">
+                        <li> <a href="">ORDER</a></li>
+                        <li> <a href="menu.html">MENU</a></li>
+                        <li> <a href="/about">ABOUT US</a></li>
+                        <li> <a href="/" id="button">HOME</a></li>
+                    </ul>
+                </h2>
+            </div>
+        </div>
     )
+    
 };
 
 export default Login;
