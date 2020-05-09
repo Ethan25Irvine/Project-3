@@ -4,7 +4,7 @@ import cartAPI from '../../utils/API/cart';
 import orderAPI from '../../utils/API/order';
 import List from '../../components/cartList/cartList';
 import Nav from '../../components/Navbar/nav';
-import {Redirect} from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 import './cart.css';
 
 const Cart = () => {
@@ -30,7 +30,7 @@ const Cart = () => {
 		.then(() => {
 			console.log(userId);
 			cartAPI.deleteCart(userId).then(
-				window.location.href("/")
+				
 			)
 		});
 	}
@@ -46,7 +46,6 @@ const Cart = () => {
 	return (
 		<div>
 			<Nav />
-			<Logout />
 			<div className="container">
 				<div className="text-center cart-header">
 					<h1 className="cart-h1">Cart</h1>
@@ -74,7 +73,7 @@ const Cart = () => {
 								<h5 className="card-title">Your pickup time: </h5>
 								<p className="card-text">Order type: Pay in person</p>
 								<h5 className="card-text">total: $$</h5>
-								<button href="#" className="btn btn-primary" onClick={handleClick}>
+								<button disabled={! cartObject} className="btn btn-primary" onClick={handleClick}>
 									Place Order
 								</button>
 

@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import Logout from "../../components/logout/userLogout";
 function Nav() {
 	return (
 		<div>
 			<nav className="navbar navbar-expand-lg navbar-dark">
 				<a className="navbar-brand">
-					<Link to="/home" className="link">
-						<div className="thestreet">THE STREET</div>
+					<Link to="/home">
+						<div className="thestreet link">THE STREET</div>
 					</Link>
 				</a>
 				<button
@@ -26,43 +27,44 @@ function Nav() {
 							<ul className="navbar-nav" id="navthings">
 								<li className="nav-item">
 									<a className="nav-link">
-										<Link to="/" className="link">
-											<div>HOME</div>
+										<Link to="/" >
+											<div className="link">HOME</div>
 										</Link>
 									</a>
 								</li>
 								<li className="nav-item">
 									<a className="nav-link">
-										<Link to="/menu" className="link">
-											<div>MENU</div>
+										<Link to="/menu" >
+											<div className="link">MENU</div>
 										</Link>
 									</a>
 								</li>
 								<li className="nav-item">
 									<a className="nav-link">
-										<Link to="/about" className="link">
-											<div>ABOUT</div>
+										<Link to="/about" >
+											<div className="link">ABOUT</div>
 										</Link>
 									</a>
 								</li>
 								<li className="nav-item">
 									<a className="nav-link">
-										<Link to="/order" className="link">
-											<div>ORDER</div>
+										<Link to="/order" >
+											<div className="link">ORDER</div>
 										</Link>
 									</a>
 								</li>
 								<li className="nav-item">
 									<a className="nav-link">
-										<Link to="/login" className="link">
-											<div>LOGIN</div>
+										<Link to="/">
+											<Logout className="link"/>
 										</Link>
+										
 									</a>
 								</li>
 								<li className="nav-item">
 									<a className="nav-link">
-										<Link to="/cart" className="link">
-											<div>
+										<Link to="/cart" >
+											<div className="link">
 												<i class="fas fa-shopping-cart" />
 											</div>
 										</Link>
