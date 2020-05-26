@@ -4,33 +4,32 @@ import cartAPI from '../../utils/API/cart';
 import orderAPI from '../../utils/API/order';
 import List from '../../components/cartList/cartList';
 import Nav from '../../components/Navbar/nav';
-import {Redirect, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import './cart.css';
 
 const Cart = () => {
 	const [userId, setUserId] = useState(localStorage.getItem("userId"));
 	const [cartObject, setCartObject] = useState();
 	const [displayStatus, setDisplayStatus] = useState('');
+	// const [productArray, setProductArray] = useState();
 	const history = useHistory();
 	useEffect(() => {
-		console.log(userId)
+		// console.log(userId)
 		cartAPI.getCart(userId).then((res) => {
-			console.log(res.data);
-			// const data = res.data;
+			// console.log(res.data);
 			setCartObject(res.data);
+			// setProductArray(res.data.products);
 			setDisplayStatus('none');
 		});
 	}, []);
 	
 	function handleOnClick() {
 		const { _id, ...newData } = cartObject;
-		
-		// console.log(newData);
 		orderAPI.createOrder(newData)
 		.then(() => {
-			console.log(userId);
+			// console.log(userId);
 			cartAPI.deleteCart(userId).then(
-				history.push("/")
+				history.push("/order")
 			)
 		});
 	}
@@ -40,10 +39,11 @@ const Cart = () => {
 			setDisplayStatus('block');
 		}
 		handleOnClick();
-		// console.log(displayStatus);
 	}
 
+
 	return (
+		
 		<div>
 			<Nav />
 			<div className="container">
@@ -54,15 +54,16 @@ const Cart = () => {
 					<div className="col-lg-8">
 						<div className="card cart-card">
 							<ul className="list-group list-group-flush">
-								<li className="list-group-item">
+								
+								
 									{cartObject ? (
 										cartObject.products.map((res) => {
-											return <List product={res.productName} addons={res.modifiers} newKey={res.productName} />;
+											return <List id={res._id} product={res.productName} addons={res.modifiers} Key={res._id} />;
 										})
 									) : (
-											<h3 className="text-dark">Nothing in cart...</h3>
+											<h3 className="text-dark text-center">Nothing in cart...</h3>
 										)}
-								</li>
+								
 							</ul>
 						</div>
 					</div>

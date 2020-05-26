@@ -81,7 +81,7 @@ function Ramen() {
 				console.log("updated")
 			}
 		}).then(()=>{
-			history.pushState("/order")
+			history.push("/order")
 		});
 	}
 
