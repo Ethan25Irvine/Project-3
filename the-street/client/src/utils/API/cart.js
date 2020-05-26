@@ -14,7 +14,6 @@ export default {
   },
   // Deletes the Cart with the given cartId
   deleteCart: function(id) {
-    console.log(id);
     return axios.delete("/api/cart/" + id);
   },
 //   updates Cart with the given cartId
