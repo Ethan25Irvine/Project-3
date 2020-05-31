@@ -11,14 +11,17 @@ const Cart = () => {
 	const [userId, setUserId] = useState(localStorage.getItem("userId"));
 	const [cartObject, setCartObject] = useState();
 	const [displayStatus, setDisplayStatus] = useState('');
-	// const [productArray, setProductArray] = useState();
+	const [cartEmpty, setCartEmpty] = useState(true);
 	const history = useHistory();
 	useEffect(() => {
 		// console.log(userId)
 		cartAPI.getCart(userId).then((res) => {
-			// console.log(res.data);
-			setCartObject(res.data);
-			// setProductArray(res.data.products);
+			console.log(res.data.products);
+			if (res.data.products.length > 0){
+				setCartEmpty(false);
+				setCartObject(res.data);
+				
+			}
 			setDisplayStatus('none');
 		});
 	}, []);
@@ -40,7 +43,7 @@ const Cart = () => {
 		}
 		handleOnClick();
 	}
-
+	
 
 	return (
 		
@@ -54,14 +57,11 @@ const Cart = () => {
 					<div className="col-lg-8">
 						<div className="card cart-card">
 							<ul className="list-group list-group-flush">
-								
-								
-									{cartObject ? (
-										cartObject.products.map((res) => {
-											return <List id={res._id} product={res.productName} addons={res.modifiers} Key={res._id} />;
-										})
+
+									{cartEmpty ? (
+										<h3 className="text-dark text-center">Nothing in cart...</h3>
 									) : (
-											<h3 className="text-dark text-center">Nothing in cart...</h3>
+										<List />										
 										)}
 								
 							</ul>
