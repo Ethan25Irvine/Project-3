@@ -12,11 +12,17 @@ const Cart = () => {
 	const [cartObject, setCartObject] = useState();
 	const [displayStatus, setDisplayStatus] = useState('');
 	const [cartEmpty, setCartEmpty] = useState(true);
-	const history = useHistory();
+	const [orderPlaced, setOrderPlaced] = useState(false);
+	const [totalPrice, setTotalPrice] = useState(0);
 	useEffect(() => {
 		// console.log(userId)
+		let newPrice = 0;
 		cartAPI.getCart(userId).then((res) => {
-			console.log(res.data.products);
+			console.log(res.data);
+			res.data.products.map(data => {
+				newPrice = newPrice + data.price
+				setTotalPrice(newPrice)
+			});
 			if (res.data.products.length > 0){
 				setCartEmpty(false);
 				setCartObject(res.data);
@@ -26,23 +32,21 @@ const Cart = () => {
 		});
 	}, []);
 	
-	function handleOnClick() {
+	function handleOnClick(event) {
+		event.preventDefault();
 		const { _id, ...newData } = cartObject;
 		orderAPI.createOrder(newData)
 		.then(() => {
 			// console.log(userId);
 			cartAPI.deleteCart(userId).then(
-				history.push("/order")
+				setDisplayStatus('block'),
+				setOrderPlaced(true)
 			)
 		});
 	}
 
-	function handleClick() {
-		if (displayStatus === 'none') {
-			setDisplayStatus('block');
-		}
-		handleOnClick();
-	}
+	
+	
 	
 
 	return (
@@ -69,17 +73,20 @@ const Cart = () => {
 					</div>
 					<div className="col-lg-4 cart-summary">
 						<div className="card rounded-0">
-							<h5 className="card-header text-center">Summary</h5>
+							<h5 className="card-header text-center">Details</h5>
 							<div className="card-body">
-								<h5 className="card-title">Your pickup time: </h5>
-								<p className="card-text">Order type: Pay in person</p>
-								<h5 className="card-text">total: $$</h5>
-								<button disabled={! cartObject} className="btn btn-primary" onClick={handleClick}>
+								<h5 className="card-title">All orders will be ready within 10 minutes of order </h5>
+								<h5 className="card-text">All orders will be paid in store</h5>
+								<p className="card-text">(Also accept card payments over the phone)</p>
+									<h5 className="card-text">Total: ${totalPrice}</h5>
+									<p className="card-text text-warning">(Tax not included)</p>
+								
+								<button disabled={! cartObject || orderPlaced} className="btn btn-dark" onClick={handleOnClick}>
 									Place Order
 								</button>
 
-								<p className="orderplaced" id="orderplaced" style={{ display: displayStatus }}>
-									order placed successfully
+								<p className="orderplaced text-success" id="orderplaced" style={{ display: displayStatus }}>
+									Order placed successfully
 								</p>
 							</div>
 						</div>

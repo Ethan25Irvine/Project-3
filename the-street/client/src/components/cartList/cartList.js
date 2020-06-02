@@ -95,6 +95,7 @@ function ListItems() {
                                         }
 
                                     </ul>
+                                    <p className="text-danger">{res.notes}</p>
                                     <button type="submit" id={res._id} onClick={handleOnClick} className="close" aria-label="Close">
                                         <span aria-hidden="true" id={res._id} className="text-danger">&times;</span>
                                     </button>
@@ -104,7 +105,7 @@ function ListItems() {
                         </li>
                     </div>
                 )) : (
-                    <h3>Nothing in cart...</h3>
+                    <h3 className="text-center">Nothing in cart...</h3>
                 )
             }
         </div >

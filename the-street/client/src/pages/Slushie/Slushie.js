@@ -14,6 +14,7 @@ function Slushie() {
 	const [ modifierArray, setModifierArray ] = useState([]);
 	const [ product ] = useState('Slushie');
 	const [ size, setSize ] = useState({ modifierName: 'Small' });
+	const [totalPrice, setTotalPrice]= useState(4.75);
 	const [ comment, setComment ] = useState('');
 	const [ flavors, setFlavors ] = useState(flavorList);
 	const [ toppings, setToppings ] = useState(Toppings);
@@ -34,6 +35,9 @@ function Slushie() {
 	function sizeChange(event) {
 		const { value } = event.target;
 		setSize({ modifierName: value });
+		if (value === "Large"){
+			setTotalPrice(5.25)
+		}
 	}
 
 	function commentChange(event) {
@@ -79,13 +83,7 @@ function Slushie() {
 						return e
 					}),
 					notes: comment,
-					price: () => {
-						if (size.modifierName === "Small") {
-							return 4.75
-						} else {
-							return 5.25
-						}
-					}
+					price: totalPrice
 				}
 			]
 		}
@@ -97,13 +95,7 @@ function Slushie() {
 						return e
 					}),
 					notes: comment,
-					price: () => {
-						if (size.modifierName === "Small") {
-							return 4.75
-						} else {
-							return 5.25
-						}
-					}
+					price: totalPrice
 				}
 			]
 		}

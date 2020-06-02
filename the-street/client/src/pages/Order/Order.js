@@ -23,12 +23,17 @@ function Order() {
 		<div>
 			<div className="header-background">
 				<Nav />
-				<div className="header">
+				{/* <div className="header">
 					<div className="container">
 						<h1 className="display-4 text-center header">Place your order for pickup</h1>
 					</div>
-				</div>
+				</div> */}
 			</div>
+			<div className="header">
+					<div className="container">
+						<h1 className="display-4 text-dark text-center header">Place your order for pickup</h1>
+					</div>
+				</div>
 			<div className="container text-center">
 				<div className="products row text-center">
 					{drinks.map((item) => (
