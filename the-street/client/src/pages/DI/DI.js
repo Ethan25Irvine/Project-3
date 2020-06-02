@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import API from "../../utils/API/cart";
 
-import Product from '../../components/Product';
+
 import './di.css';
 import { useHistory } from 'react-router-dom';
 import Flavor from '../../components/Flavor/flavor';
 import Nav from '../../components/Navbar/nav';
 import Toppings from '../../ditoppings.json';
 
+
 function DI() {
 	const [ modifierArray, setModifierArray ] = useState([]);
+	const [price, setPrice]= useState(4);
 	const [ toppings, setToppings ] = useState(Toppings);
 	const [ product ] = useState('Diamond Ice');
 	const [ size, setSize ] = useState({ modifierName: 'tiny' });
@@ -32,6 +34,21 @@ function DI() {
 	function sizeChange(event) {
 		const { value } = event.target;
 		setSize({ modifierName: value });
+		if (value === "Tiny"){
+			setPrice(4);
+		} else if (value === "Mini"){
+			setPrice(5);
+		} else if (value === "Small"){
+			setPrice(6);
+		} else if (value === "Medium"){
+			setPrice(10);
+		} else if (value === "Large"){
+			setPrice(12);
+		} else (
+			setPrice(16)
+		)
+			
+		
 	}
 
 	function commentChange(event) {
@@ -41,11 +58,12 @@ function DI() {
 	function liquidOnCLick(event) {
 		const { value } = event.target;
 		setLiquid({ modifierName: value });
+		
 	}
 
 	function flavorOnClick(event) {
 		const { name, checked } = event.target;
-		console.log(checked);
+		
 
 		setModifierArray(function(previousFlavors) {
 			return { ...previousFlavors, [name]: checked };
@@ -64,7 +82,7 @@ function DI() {
 		}
 
 		let allModifiers = [ ...newFlavorArray, size, liquid ];
-		console.log(allModifiers);
+		
 
 		let cartObject = {
 			userId: user,
@@ -76,13 +94,7 @@ function DI() {
 						return e
 					}),
 					notes: comment,
-					price: () => {
-						if (size.modifierName === "Small") {
-							return 4.75
-						} else {
-							return 5.25
-						}
-					}
+					price: price
 				}
 			]
 		}
@@ -94,13 +106,7 @@ function DI() {
 						return e
 					}),
 					notes: comment,
-					price: () => {
-						if (size.modifierName === "Small") {
-							return 4.75
-						} else {
-							return 5.25
-						}
-					}
+					price: price
 				}
 			]
 		}
@@ -110,10 +116,10 @@ function DI() {
 			console.log(res);
 			if (res.data == null) {
 				API.createCart(cartObject);
-				console.log("posted")
+				// console.log("posted")
 			} else {
 				API.updateCart(user,  {$push: updateCartObject});
-				console.log("updated")
+				// console.log("updated")
 			}
 		}).then(()=>{
 			history.push("/order");
@@ -149,7 +155,7 @@ function DI() {
 								<div class="form-group">
 									<label for="size">Size</label>
 									<select class="form-control" id="size" onChange={sizeChange}>
-										<option id="4.00" value="T``iny">
+										<option id="4.00" value="Tiny">
 											Tiny ($4.00)
 										</option>
 										<option id="5.00" value="Mini">
@@ -193,19 +199,16 @@ function DI() {
 									</select>
 								</div>
 								<div class="form-group">
-									<label for="Pickup-time">Pickup Time</label>
-									<input class="form-control" id="Pickup-time" aria-describedby="Pickup-time" />
-								</div>
-								<div class="form-group">
 									<label for="comments">Comments</label>
 									<input
+										onChange= {commentChange}
 										class="form-control"
 										id="comments"
 										aria-describedby="comments"
 										placeholder=""
 									/>
 								</div>
-								<button type="submit" class="btn btn-primary" onClick={handleFormSubmit}>
+								<button type="submit" class="btn btn-dark" onClick={handleFormSubmit}>
 									Add to Cart
 								</button>
 							</form>

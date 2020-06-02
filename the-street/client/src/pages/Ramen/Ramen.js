@@ -14,6 +14,7 @@ function Ramen() {
 	const [ comment, setComment ] = useState('');
 	const [ toppings, setToppings ] = useState({ modifierName: 'Dumplings' });
 	const [ spice, setSpice ] = useState({ modifierName: 'Spicy' });
+	const [totalPrice, setTotalPrice]= useState(3.99);
 	const [user, setUser] = useState();
 	const [username, setUserName] = useState();
 
@@ -37,6 +38,11 @@ function Ramen() {
 	function toppingsOnCLick(event) {
 		const { value } = event.target;
 		setToppings({ modifierName: value });
+		if (value === "Dumplings + Rice Cakes"){
+			setTotalPrice(5.99)
+		} else if (value === "Dumplings" || "Rice Cakes"){
+			setTotalPrice(4.99)
+		} 
 	}
 
 	function handleFormSubmit(event) {
@@ -54,6 +60,7 @@ function Ramen() {
 						return e
 					}),
 					notes: comment,
+					price: totalPrice
 					
 				}
 			]
@@ -66,6 +73,7 @@ function Ramen() {
 						return e
 					}),
 					notes: comment,
+					price: totalPrice,
 				}
 			]
 		}
@@ -81,7 +89,7 @@ function Ramen() {
 				console.log("updated")
 			}
 		}).then(()=>{
-			history.pushState("/order")
+			history.push("/order")
 		});
 	}
 
@@ -127,10 +135,11 @@ function Ramen() {
 									<br />
 									<label for="FormControlSelect">Toppings</label>
 									<select class="form-control" id="FormControlSelect" onChange={toppingsOnCLick}>
-										<option value="Dumplings">Dumplings</option>
-										<option value="Rice Cakes">Rice Cakes</option>
-										<option value="Dumplings + Rice Cakes">Dumplings + Rice Cakes</option>
-										<option>None</option>
+										<option value="None">None</option>
+										<option value="Dumplings">Dumplings (+ $1.00)</option>
+										<option value="Rice Cakes">Rice Cakes (+ $1.00)</option>
+										<option value="Dumplings + Rice Cakes">Dumplings + Rice Cakes (+ $2.00)</option>
+										
 									</select>
 								</div>
 								<br />
@@ -142,9 +151,10 @@ function Ramen() {
 										id="comments"
 										aria-describedby="comments"
 										placeholder=""
+										onChange={commentChange}
 									/>
 								</div>
-								<button type="submit" class="btn btn-primary" onClick={handleFormSubmit}>
+								<button type="submit" class="btn btn-dark" onClick={handleFormSubmit}>
 									Add to Cart
 								</button>
 							</form>

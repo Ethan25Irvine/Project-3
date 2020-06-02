@@ -16,7 +16,7 @@ const Logout = (props) => {
 
     return (
         
-            <div className={props.className} onClick={() => handleLogout()}>LOG OUT</div>
+            <p className={props.className} onClick={() => handleLogout()}>LOGOUT</p>
         
     );
 }

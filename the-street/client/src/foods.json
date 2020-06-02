@@ -4,13 +4,13 @@
 		"name": "Ramen",
 		"image": "https://i.pinimg.com/originals/62/ec/87/62ec87229d24ee2f7f45d701e710227b.jpg",
 		"description": "very good Ramen",
-		"url": "/Ramen"
+		"url": "/ramen"
 	},
 	{
 		"id": 2,
 		"name": "Diamond Ice",
 		"image": "https://i.imgur.com/yNAQcdd.jpg",
 		"description": "very good Diamond Ice",
-		"url": "/DI"
+		"url": "/di"
 	}
 ]

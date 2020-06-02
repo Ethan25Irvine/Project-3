@@ -1,13 +1,15 @@
-import React from 'react';
+import React from "react";
 import { Link, useLocation } from 'react-router-dom';
 import Logout from "../../components/logout/userLogout";
+import "./style.css"
 function Nav() {
+
 	return (
 		<div>
 			<nav className="navbar navbar-expand-lg navbar-dark">
-				<a className="navbar-brand">
+				<a className="navbar-brand nav-link">
 					<Link to="/home">
-						<div className="thestreet link">THE STREET</div>
+						<div className="thestreet">THE STREET</div>
 					</Link>
 				</a>
 				<button
@@ -28,45 +30,42 @@ function Nav() {
 								<li className="nav-item">
 									<a className="nav-link">
 										<Link to="/" >
-											<div className="link">HOME</div>
+											<div >HOME</div>
 										</Link>
 									</a>
 								</li>
 								<li className="nav-item">
 									<a className="nav-link">
 										<Link to="/menu" >
-											<div className="link">MENU</div>
+											<div >MENU</div>
 										</Link>
 									</a>
 								</li>
 								<li className="nav-item">
 									<a className="nav-link">
 										<Link to="/about" >
-											<div className="link">ABOUT</div>
+											<div>ABOUT</div>
 										</Link>
 									</a>
 								</li>
 								<li className="nav-item">
 									<a className="nav-link">
 										<Link to="/order" >
-											<div className="link">ORDER</div>
+											<div>ORDER</div>
 										</Link>
 									</a>
 								</li>
 								<li className="nav-item">
 									<a className="nav-link">
 										<Link to="/">
-											<Logout className="link"/>
+											<Logout />
 										</Link>
-										
 									</a>
 								</li>
 								<li className="nav-item">
 									<a className="nav-link">
 										<Link to="/cart" >
-											<div className="link">
-												<i class="fas fa-shopping-cart" />
-											</div>
+											<i className="fas fa-shopping-cart" />
 										</Link>
 									</a>
 								</li>

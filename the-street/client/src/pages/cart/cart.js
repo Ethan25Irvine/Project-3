@@ -4,46 +4,53 @@ import cartAPI from '../../utils/API/cart';
 import orderAPI from '../../utils/API/order';
 import List from '../../components/cartList/cartList';
 import Nav from '../../components/Navbar/nav';
-import {Redirect, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import './cart.css';
 
 const Cart = () => {
 	const [userId, setUserId] = useState(localStorage.getItem("userId"));
 	const [cartObject, setCartObject] = useState();
 	const [displayStatus, setDisplayStatus] = useState('');
-	const history = useHistory();
+	const [cartEmpty, setCartEmpty] = useState(true);
+	const [orderPlaced, setOrderPlaced] = useState(false);
+	const [totalPrice, setTotalPrice] = useState(0);
 	useEffect(() => {
-		console.log(userId)
+		// console.log(userId)
+		let newPrice = 0;
 		cartAPI.getCart(userId).then((res) => {
 			console.log(res.data);
-			// const data = res.data;
-			setCartObject(res.data);
+			res.data.products.map(data => {
+				newPrice = newPrice + data.price
+				setTotalPrice(newPrice)
+			});
+			if (res.data.products.length > 0){
+				setCartEmpty(false);
+				setCartObject(res.data);
+				
+			}
 			setDisplayStatus('none');
 		});
 	}, []);
 	
-	function handleOnClick() {
+	function handleOnClick(event) {
+		event.preventDefault();
 		const { _id, ...newData } = cartObject;
-		
-		// console.log(newData);
 		orderAPI.createOrder(newData)
 		.then(() => {
-			console.log(userId);
+			// console.log(userId);
 			cartAPI.deleteCart(userId).then(
-				history.push("/")
+				setDisplayStatus('block'),
+				setOrderPlaced(true)
 			)
 		});
 	}
 
-	function handleClick() {
-		if (displayStatus === 'none') {
-			setDisplayStatus('block');
-		}
-		handleOnClick();
-		// console.log(displayStatus);
-	}
+	
+	
+	
 
 	return (
+		
 		<div>
 			<Nav />
 			<div className="container">
@@ -54,31 +61,32 @@ const Cart = () => {
 					<div className="col-lg-8">
 						<div className="card cart-card">
 							<ul className="list-group list-group-flush">
-								<li className="list-group-item">
-									{cartObject ? (
-										cartObject.products.map((res) => {
-											return <List product={res.productName} addons={res.modifiers} newKey={res.productName} />;
-										})
+
+									{cartEmpty ? (
+										<h3 className="text-dark text-center">Nothing in cart...</h3>
 									) : (
-											<h3 className="text-dark">Nothing in cart...</h3>
+										<List />										
 										)}
-								</li>
+								
 							</ul>
 						</div>
 					</div>
 					<div className="col-lg-4 cart-summary">
 						<div className="card rounded-0">
-							<h5 className="card-header text-center">Summary</h5>
+							<h5 className="card-header text-center">Details</h5>
 							<div className="card-body">
-								<h5 className="card-title">Your pickup time: </h5>
-								<p className="card-text">Order type: Pay in person</p>
-								<h5 className="card-text">total: $$</h5>
-								<button disabled={! cartObject} className="btn btn-primary" onClick={handleClick}>
+								<h5 className="card-title">All orders will be ready within 10 minutes of order </h5>
+								<h5 className="card-text">All orders will be paid in store</h5>
+								<p className="card-text">(Also accept card payments over the phone)</p>
+									<h5 className="card-text">Total: ${totalPrice}</h5>
+									<p className="card-text text-warning">(Tax not included)</p>
+								
+								<button disabled={! cartObject || orderPlaced} className="btn btn-dark" onClick={handleOnClick}>
 									Place Order
 								</button>
 
-								<p className="orderplaced" id="orderplaced" style={{ display: displayStatus }}>
-									order placed successfully
+								<p className="orderplaced text-success" id="orderplaced" style={{ display: displayStatus }}>
+									Order placed successfully
 								</p>
 							</div>
 						</div>
