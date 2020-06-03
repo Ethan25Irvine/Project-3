@@ -158,7 +158,7 @@ function DI() {
 						<div class=" options newborder">
 							<form>
 								<div class="form-group">
-									<label for="size">Size</label>
+									<label for="size"><strong>Size</strong></label>
 									<select class="form-control" id="size" onChange={sizeChange}>
 										<option id="4.00" value="Tiny">
 											Tiny ($4.00)
@@ -182,7 +182,7 @@ function DI() {
 								</div>
 								<br />
 								<br />
-								Toppings (+ $0.50)
+								<strong>Toppings</strong> (+ $0.50)
 								<div className="toppings">
 									{toppings.map((topping) => (
 										<div className="indivflavor">
@@ -193,7 +193,7 @@ function DI() {
 								<br />
 								<div class="form-group">
 									<br />
-									<label for="milk">Milk Options</label>
+									<label for="milk"><strong>Milk Options</strong></label>
 									<select class="form-control" id="milk" onChange={liquidOnCLick}>
 										<option>Condensed Milk (most common)</option>
 										<option>Whole Milk</option>
@@ -204,7 +204,7 @@ function DI() {
 									</select>
 								</div>
 								<div class="form-group">
-									<label for="comments">Comments</label>
+									<label for="comments"><strong>Comments</strong></label>
 									<input
 										onChange= {commentChange}
 										class="form-control"

@@ -168,7 +168,7 @@ function Tea() {
 							<form>
 								<div class="form-group">
 									<br />
-									<label for="exampleFormControlSelect1">Size</label>
+									<label for="exampleFormControlSelect1"><strong>Size</strong></label>
 									<select class="form-control" id="exampleFormControlSelect1" onChange={sizeChange}>
 										<option id="3.00" value="Small">Small ($3.00)</option>
 										<option id="3.50" value="Large">Large ($3.50)</option>
@@ -177,7 +177,7 @@ function Tea() {
 								<br />
 								<div class="form-group">
 									<br />
-									<label for="exampleFormControlSelect1">Tea Base</label>
+									<label for="exampleFormControlSelect1"><strong>Tea Base</strong></label>
 									<select
 										class="form-control"
 										id="exampleFormControlSelect1"
@@ -189,7 +189,7 @@ function Tea() {
 									</select>
 								</div>
 								<br />
-								<div>Flavors</div>
+								<div><strong>Flavors</strong></div>
 								<div className="flavors">
 									{flavors.map((flavor) => (
 										<div className="indivflavor">
@@ -199,7 +199,7 @@ function Tea() {
 								</div>
 								<br />
 								<br />
-								Toppings (+ $0.50)
+								<div><strong>Toppings</strong> (+ $0.50)</div>
 								<div className="toppings">
 									{toppings.map((topping) => (
 										<div className="indivflavor">
@@ -210,7 +210,7 @@ function Tea() {
 								<br />
 								<br />
 								<div class="form-group">
-									<label for="comments">Comments</label>
+									<label for="comments"><strong>Comments</strong></label>
 									<input
 										class="form-control"
 										id="comments"
