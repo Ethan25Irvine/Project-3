@@ -165,14 +165,14 @@ function Slushie() {
 							<form>
 								<div class="form-group">
 									<br />
-									<label for="exampleFormControlSelect1">Size</label>
+									<label for="exampleFormControlSelect1"><strong>Size</strong></label>
 									<select class="form-control" id="exampleFormControlSelect1" onChange={sizeChange}>
 										<option id="3.50" value="Small">Small ($3.50)</option>
 										<option id="4.00" value="Large">Large ($4.00)</option>
 									</select>
 								</div>
 								<br />
-								<div>Flavors</div>
+								<div><strong>Flavors</strong></div>
 								<div className="flavors">
 									{flavors.map((flavor) => (
 										<div className="indivflavor">
@@ -182,7 +182,7 @@ function Slushie() {
 								</div>
 								<div class="form-group">
 									<br />
-									<label for="exampleFormControlSelect1">Milk or Juice</label>
+									<label for="exampleFormControlSelect1"><strong>Milk or Juice</strong></label>
 									<select
 										class="form-control"
 										id="exampleFormControlSelect1"
@@ -200,7 +200,7 @@ function Slushie() {
 
 
 								</div>
-								Toppings (+ $0.50)
+								<strong>Toppings</strong> (+ $0.50)
 								
 								<div className="toppings">
 									{toppings.map((topping) => (
@@ -211,7 +211,7 @@ function Slushie() {
 								</div>
 								<br />
 								<div class="form-group">
-									<label for="comments">Comments</label>
+									<label for="comments"><strong>Comments</strong></label>
 									<input
 										class="form-control"
 										id="comments"

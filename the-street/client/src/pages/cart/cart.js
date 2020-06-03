@@ -79,9 +79,9 @@ const Cart = () => {
 								<h5 className="card-text">All orders will be paid in store</h5>
 								<p className="card-text">(Also we accept card payments over the phone)</p>
 								<div className="mb-3">
-									<p className="total">Subtotal: ${totalPrice.toFixed(2)}</p>
-									<p className="total border-bottom border-dark">Tax: ${(totalPrice*0.08).toFixed(2)}</p>
-									<p className="total">Ammount Due: ${(totalPrice*0.08 + totalPrice).toFixed(2)}</p>
+									<p className="total"><strong>Subtotal:</strong> ${totalPrice.toFixed(2)}</p>
+									<p className="total border-bottom border-dark"><strong>Tax:</strong> ${(totalPrice*0.078).toFixed(2)}</p>
+									<p className="total"><strong>Ammount Due</strong> ${(totalPrice*0.078 + totalPrice).toFixed(2)}</p>
 								</div>
 								<button disabled={! cartObject || orderPlaced} className="btn btn-dark" onClick={handleOnClick}>
 									Place Order

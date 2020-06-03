@@ -121,7 +121,7 @@ function Ramen() {
 							<form>
 								<div class="form-group">
 									<br />
-									<label for="exampleFormControlSelect1">Spice level</label>
+									<label for="exampleFormControlSelect1"><strong>Spice level</strong></label>
 									<select class="form-control" id="exampleFormControlSelect1" onChange={spiceOnCLick}>
 										<option value="Spicy">Spicy</option>
 										<option value="Mild">Mild</option>
@@ -132,7 +132,7 @@ function Ramen() {
 
 								<div class="form-group">
 									<br />
-									<label for="FormControlSelect">Toppings</label>
+									<label for="FormControlSelect"><strong>Toppings</strong></label>
 									<select class="form-control" id="FormControlSelect" onChange={toppingsOnCLick}>
 										<option value="None">None</option>
 										<option value="Dumplings">Dumplings (+ $1.00)</option>
@@ -144,7 +144,7 @@ function Ramen() {
 								<br />
 								<br />
 								<div class="form-group">
-									<label for="comments">Comments</label>
+									<label for="comments"><strong>Comments</strong></label>
 									<input
 										class="form-control"
 										id="comments"

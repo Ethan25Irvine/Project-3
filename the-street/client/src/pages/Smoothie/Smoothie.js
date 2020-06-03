@@ -171,14 +171,14 @@ function Smoothie() {
 							<div class=" options newborder">
 								<form>
 									<div class="form-group">
-										<label for="exampleFormControlSelect1">Size</label>
+										<label for="exampleFormControlSelect1"><strong>Size</strong></label>
 										<select class="form-control" id="exampleFormControlSelect1" onChange={sizeChange}>
 											<option key="Small" id="Small" value="Small">Small ($4.75)</option>
 											<option key="Large" id="Large" value="Large" >Large ($5.25) </option>
 										</select>
 									</div>
 									<br />
-									<div>Flavors</div>
+									<div><strong>Flavors</strong></div>
 									<div className="flavors">
 										{flavors.map((flavor) => (
 											<div className="indivflavor">
@@ -188,7 +188,7 @@ function Smoothie() {
 									</div>
 									<br />
 									<div class="form-group">
-										<label for="exampleFormControlSelect1">Milk or Juice</label>
+										<label for="exampleFormControlSelect1"><strong>Milk or Juice</strong></label>
 										<select
 											class="form-control"
 											id="exampleFormControlSelect1"
@@ -205,7 +205,7 @@ function Smoothie() {
 										</select>
 									</div>
 									<br />
-									Toppings (+ $0.50)
+									<strong>Toppings</strong> (+ $0.50)
 									<div className="toppings">
 										{toppings.map((topping) => (
 											<div className="indivflavor">
@@ -215,7 +215,7 @@ function Smoothie() {
 									</div>
 									<br />
 									<div class="form-group">
-										<label for="comments">Comments</label>
+										<label for="comments"><strong>Comments</strong></label>
 										<input
 											class="form-control"
 											id="comments"

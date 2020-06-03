@@ -150,7 +150,7 @@ function Coffee() {
 						<div className="card options newborder">
 							<form>
 								<div className="form-group">
-									<label for="exampleFormControlSelect1">Size</label>
+									<label for="exampleFormControlSelect1"><strong>Size</strong></label>
 									<select
 										className="form-control"
 										id="exampleFormControlSelect1"
@@ -167,7 +167,7 @@ function Coffee() {
 								<br />
 								<div className="form-group">
 									<br />
-									<label for="CoffeeChoice">Type of Coffee</label>
+									<label for="CoffeeChoice"><strong>Type of Coffee</strong></label>
 									<select className="form-control" id="CoffeeChoice" onChange={typeChange}>
 										<option>Hot Coffee (Decaf is Availble)</option>
 										<option>Iced Coffee</option>
@@ -179,7 +179,7 @@ function Coffee() {
 									</select>
 								</div>
 								<br />
-								Toppings
+								<strong>Toppings</strong> (+ $0.50)
 								<div className="toppings">
 									{toppings.map((topping) => (
 										<div className="indivflavor">
@@ -187,8 +187,9 @@ function Coffee() {
 										</div>
 									))}
 								</div>
+								<br />
 								<div class="form-group">
-									<label for="comments">Comments</label>
+									<label for="comments"><strong>Comments</strong></label>
 									<input
 										class="form-control"
 										id="comments"
@@ -197,6 +198,7 @@ function Coffee() {
 										onChange={commentChange}
 									/>
 								</div>
+								<br />
 								<h3>Total: ${totalPrice.toFixed(2)}</h3>
 								<button type="submit" class="btn btn-dark" onClick={handleFormSubmit}>
 									Add to Cart
