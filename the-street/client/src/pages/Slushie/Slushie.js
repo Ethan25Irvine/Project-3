@@ -14,7 +14,9 @@ function Slushie() {
 	const [ modifierArray, setModifierArray ] = useState([]);
 	const [ product ] = useState('Slushie');
 	const [ size, setSize ] = useState({ modifierName: 'Small' });
-	const [totalPrice, setTotalPrice]= useState(4.75);
+	const [newPrice, setNewPrice] = useState(3.5);
+	const [totalPrice, setTotalPrice]= useState(newPrice);
+	const [milkPrice, setMilkPrice] = useState(0);
 	const [ comment, setComment ] = useState('');
 	const [ flavors, setFlavors ] = useState(flavorList);
 	const [ toppings, setToppings ] = useState(Toppings);
@@ -25,6 +27,9 @@ function Slushie() {
 	function scrollup() {
 		window.scrollTo(0, 0);
 	}
+	useEffect(()=>{
+		setTotalPrice(newPrice);
+	}, [newPrice]);
 
 	useEffect(() => {
 		scrollup();
@@ -34,10 +39,13 @@ function Slushie() {
 
 	function sizeChange(event) {
 		const { value } = event.target;
-		setSize({ modifierName: value });
+		
 		if (value === "Large"){
-			setTotalPrice(5.25)
+			setNewPrice(4 + totalPrice - 3.5);
+		} else {
+			setNewPrice(3.5 + totalPrice - 4);
 		}
+		setSize({ modifierName: value });
 	}
 
 	function commentChange(event) {
@@ -47,13 +55,27 @@ function Slushie() {
 
 	function liquidOnCLick(event) {
 		const { value } = event.target;
+		if (value === "Milk"){
+			setMilkPrice(.5);
+		} else {
+			setMilkPrice(0);
+		}
 		setLiquid({ modifierName: value });
 	}
-
-	function flavorOnClick(event) {
+	function flavorOnClick(event){
 		const { name, checked } = event.target;
-		console.log(checked);
-
+		setModifierArray(function(previousFlavors) {
+			return { ...previousFlavors, [name]: checked };
+		});
+	}
+	function toppingOnClick(event) {
+		const { name, checked } = event.target;
+		if (checked === true){
+			setTotalPrice(totalPrice + .5)
+		} else {
+			setTotalPrice(totalPrice - .5)
+		}
+		
 		setModifierArray(function(previousFlavors) {
 			return { ...previousFlavors, [name]: checked };
 		});
@@ -71,7 +93,7 @@ function Slushie() {
 		}
 
 		let allModifiers = [ ...newFlavorArray, liquid, size ];
-		console.log(allModifiers);
+		// console.log(allModifiers);
 
 		let cartObject = {
 			userId: user,
@@ -83,10 +105,11 @@ function Slushie() {
 						return e
 					}),
 					notes: comment,
-					price: totalPrice
+					price: totalPrice + milkPrice
 				}
 			]
 		}
+
 		let updateCartObject = {
 			products: [
 				{
@@ -95,24 +118,25 @@ function Slushie() {
 						return e
 					}),
 					notes: comment,
-					price: totalPrice
+					price: totalPrice + milkPrice
 				}
 			]
 		}
 
 		API.getCart(user)
-		.then(res => {
-			console.log(res);
-			if (res.data == null) {
-				API.createCart(cartObject);
-				console.log("posted")
-			} else {
-				API.updateCart(user,  {$push: updateCartObject});
-				console.log("updated")
-			}
-		}).then(()=>{
-			history.push("/order")
-		});
+			.then(res => {
+				console.log(res);
+				if (res.data == null) {
+					API.createCart(cartObject);
+					// console.log("posted")
+				} else {
+					API.updateCart(user,  {$push: updateCartObject});
+					// console.log("updated")
+				}
+			})
+			.then(()=>{
+				history.push("/cart")
+			});
 	}
 	return (
 		<div className="background">
@@ -123,8 +147,7 @@ function Slushie() {
 						<h1 className="heading">Slushies</h1>
 					</div>
 				</div>
-				<br />
-
+				<br/>
 				<div class="row mb-5">
 					<div class="col-md-7">
 						<div class="row">
@@ -144,8 +167,8 @@ function Slushie() {
 									<br />
 									<label for="exampleFormControlSelect1">Size</label>
 									<select class="form-control" id="exampleFormControlSelect1" onChange={sizeChange}>
-										<option id="3.50">Small ($3.50)</option>
-										<option id="4.00">Large ($4.00)</option>
+										<option id="3.50" value="Small">Small ($3.50)</option>
+										<option id="4.00" value="Large">Large ($4.00)</option>
 									</select>
 								</div>
 								<br />
@@ -167,19 +190,22 @@ function Slushie() {
 									>
 										<option>Apple Juice (most common)</option>
 										<option>Whole Milk</option>
-										<option>Soy Milk</option>
-										<option>Almond Milk</option>
-										<option>Coconut Milk</option>
-										<option>Rice Milk</option>
+										<option value="Milk">Soy Milk ($0.50)</option>
+										<option value="Milk">Almond Milk ($0.50)</option>
+										<option value= "Milk">Coconut Milk ($0.50)</option>
+										<option value= "Milk">Rice Milk ($0.50)</option>
 										<option>Green Tea</option>
 										<option>Black Tea</option>
 									</select>
+
+
 								</div>
-								Toppings
+								Toppings (+ $0.50)
+								
 								<div className="toppings">
 									{toppings.map((topping) => (
 										<div className="indivflavor">
-											<Flavor name={topping.name} onChange={flavorOnClick} />
+											<Flavor name={topping.name} onChange={toppingOnClick} />
 										</div>
 									))}
 								</div>
@@ -191,9 +217,11 @@ function Slushie() {
 										id="comments"
 										aria-describedby="comments"
 										placeholder=""
+										onChange={commentChange}
 									/>
 								</div>
-								<button type="submit" class="btn btn-primary" onClick={handleFormSubmit}>
+								<h3>Total: ${(totalPrice + milkPrice).toFixed(2)}</h3>
+								<button type="submit" class="btn btn-dark" onClick={handleFormSubmit}>
 									Add to Cart
 								</button>
 							</form>

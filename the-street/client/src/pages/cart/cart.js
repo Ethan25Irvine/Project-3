@@ -75,12 +75,14 @@ const Cart = () => {
 						<div className="card rounded-0">
 							<h5 className="card-header text-center">Details</h5>
 							<div className="card-body">
-								<h5 className="card-title">All orders will be ready within 10 minutes of order </h5>
+								<h5 className="card-title">All orders will be ready within 10 minutes of placing order </h5>
 								<h5 className="card-text">All orders will be paid in store</h5>
-								<p className="card-text">(Also accept card payments over the phone)</p>
-									<h5 className="card-text">Total: ${totalPrice}</h5>
-									<p className="card-text text-warning">(Tax not included)</p>
-								
+								<p className="card-text">(Also we accept card payments over the phone)</p>
+								<div className="mb-3">
+									<p className="total">Subtotal: ${totalPrice.toFixed(2)}</p>
+									<p className="total border-bottom border-dark">Tax: ${(totalPrice*0.08).toFixed(2)}</p>
+									<p className="total">Ammount Due: ${(totalPrice*0.08 + totalPrice).toFixed(2)}</p>
+								</div>
 								<button disabled={! cartObject || orderPlaced} className="btn btn-dark" onClick={handleOnClick}>
 									Place Order
 								</button>

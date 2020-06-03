@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import API from "../../utils/API/cart";
 // import Product from '../../components/Product';
 import './smoothie.css';
-import { useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Flavor from '../../components/Flavor/flavor';
 import flavorList from '../../flavorList.json';
 import Toppings from '../../toppings.json';
@@ -16,6 +16,9 @@ function Smoothie() {
 	const [user, setUser] = useState();
 	const [username, setUserName] = useState();
 	const [size, setSize] = useState({ modifierName: "Small" });
+	const [newPrice, setNewPrice] = useState(3.5);
+	const [totalPrice, setTotalPrice] = useState(newPrice);
+	const [milkPrice, setMilkPrice] = useState(0);
 	const [comment, setComment] = useState("");
 	const [flavors, setFlavors] = useState(flavorList);
 	const [toppings, setToppings] = useState(Toppings);
@@ -33,10 +36,20 @@ function Smoothie() {
 		setUserName(localStorage.getItem("userName"));
 	}, []);
 
+	useEffect(() => {
+		setTotalPrice(newPrice);
+	}, [newPrice]);
+
 	function sizeChange(event) {
-		const { value } = event.target
+		const { value } = event.target;
+
+		if (value === "Large") {
+			setNewPrice(4 + totalPrice - 3.5);
+		} else {
+			setNewPrice(3.5 + totalPrice - 4);
+		}
 		setSize({ modifierName: value });
-	};
+	}
 
 	function commentChange(event) {
 		const { value } = event.target
@@ -44,20 +57,35 @@ function Smoothie() {
 	};
 
 	function liquidOnCLick(event) {
-		const { value } = event.target
+		const { value } = event.target;
+		if (value === "Milk") {
+			setMilkPrice(.5);
+		} else {
+			setMilkPrice(0);
+		}
 		setLiquid({ modifierName: value });
 	}
 
 	function flavorOnClick(event) {
 		const { name, checked } = event.target
-		console.log(checked)
-
-
+		// console.log(checked)
 		setModifierArray(function (previousFlavors) {
 			return { ...previousFlavors, [name]: checked }
 		});
 	};
 
+	function toppingOnClick(event) {
+		const { name, checked } = event.target;
+		if (checked === true){
+			setTotalPrice(totalPrice + .5)
+		} else {
+			setTotalPrice(totalPrice - .5)
+		}
+		
+		setModifierArray(function(previousFlavors) {
+			return { ...previousFlavors, [name]: checked };
+		});
+	}
 	function handleFormSubmit(event) {
 		event.preventDefault();
 
@@ -79,13 +107,7 @@ function Smoothie() {
 						return e
 					}),
 					notes: comment,
-					price: () => {
-						if (size.modifierName === "Small") {
-							return 4.75
-						} else {
-							return 5.25
-						}
-					}
+					price: totalPrice + milkPrice
 				}
 			]
 		}
@@ -97,30 +119,24 @@ function Smoothie() {
 						return e
 					}),
 					notes: comment,
-					price: () => {
-						if (size.modifierName === "Small") {
-							return 4.75
-						} else {
-							return 5.25
-						}
-					}
+					price: () => totalPrice + milkPrice
 				}
 			]
 		}
 
 		API.getCart(user)
-		.then(res => {
-			console.log(res);
-			if (res.data == null) {
-				API.createCart(cartObject);
-				console.log("posted")
-			} else {
-				API.updateCart(user,  {$push: updateCartObject});
-				console.log("updated")
-			}
-		}).then(()=>{
-			history.push();
-		});
+			.then(res => {
+				console.log(res);
+				if (res.data == null) {
+					API.createCart(cartObject);
+					// console.log("posted")
+				} else {
+					API.updateCart(user, { $push: updateCartObject });
+					// console.log("updated")
+				}
+			}).then(() => {
+				history.push();
+			});
 
 
 
@@ -180,20 +196,20 @@ function Smoothie() {
 										>
 											<option value="Apple Juice">Apple Juice ( fruit smoothies)</option>
 											<option>Whole Milk</option>
-											<option>Soy Milk</option>
-											<option>Almond Milk</option>
-											<option>Coconut Milk</option>
-											<option>Rice Milk</option>
-											<option value="Green Tea">Green Tea (fruit smoothies)</option>
-											<option value="Black Tea">Black Tea (fruit smoothies)</option>
+											<option value="Milk">Soy Milk</option>
+											<option value="Milk">Almond Milk</option>
+											<option value="Milk">Coconut Milk</option>
+											<option value="Milk">Rice Milk</option>
+											<option>Green Tea (fruit smoothies)</option>
+											<option>Black Tea (fruit smoothies)</option>
 										</select>
 									</div>
 									<br />
-									Toppings
+									Toppings (+ $0.50)
 									<div className="toppings">
 										{toppings.map((topping) => (
 											<div className="indivflavor">
-												<Flavor name={topping.name} onChange={flavorOnClick} />
+												<Flavor name={topping.name} onChange={toppingOnClick} />
 											</div>
 										))}
 									</div>
@@ -208,7 +224,8 @@ function Smoothie() {
 											onChange={commentChange}
 										/>
 									</div>
-									<button type="submit" class="btn btn-primary" onClick={handleFormSubmit}>
+									<h3>Total: ${(totalPrice + milkPrice).toFixed(2)}</h3>
+									<button type="submit" class="btn btn-dark" onClick={handleFormSubmit}>
 										Add to Cart
 									</button>
 								</form>

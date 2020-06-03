@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import API from "../../utils/API/cart";
-
-import items from '../../foods.json';
-import Product from '../../components/Product';
-import { useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './ramen.css';
 import Nav from '../../components/Navbar/nav';
 
 function Ramen() {
 	const history = useHistory();
-	const [ modifierArray, setModifierArray ] = useState([]);
-	const [ product ] = useState('Ramen');
-	const [ comment, setComment ] = useState('');
-	const [ toppings, setToppings ] = useState({ modifierName: 'Dumplings' });
-	const [ spice, setSpice ] = useState({ modifierName: 'Spicy' });
-	const [totalPrice, setTotalPrice]= useState(3.99);
+	const [product] = useState('Ramen');
+	const [comment, setComment] = useState('');
+	const [toppings, setToppings] = useState({ modifierName: 'Dumplings' });
+	const [spice, setSpice] = useState({ modifierName: 'Spicy' });
+	const [totalPrice, setTotalPrice] = useState(3.99);
 	const [user, setUser] = useState();
 	const [username, setUserName] = useState();
 
@@ -31,24 +27,26 @@ function Ramen() {
 		const { value } = event.target;
 		setComment(value);
 	}
+
 	function spiceOnCLick(event) {
 		const { value } = event.target;
 		setSpice({ modifierName: value });
 	}
+
 	function toppingsOnCLick(event) {
 		const { value } = event.target;
 		setToppings({ modifierName: value });
-		if (value === "Dumplings + Rice Cakes"){
+		if (value === "Dumplings + Rice Cakes") {
 			setTotalPrice(5.99)
-		} else if (value === "Dumplings" || "Rice Cakes"){
+		} else if (value === "Dumplings" || "Rice Cakes") {
 			setTotalPrice(4.99)
-		} 
+		}
 	}
 
 	function handleFormSubmit(event) {
 		event.preventDefault();
 
-		let allModifiers = [ spice, toppings ];
+		let allModifiers = [spice, toppings];
 		console.log(allModifiers);
 		let cartObject = {
 			userId: user,
@@ -61,10 +59,11 @@ function Ramen() {
 					}),
 					notes: comment,
 					price: totalPrice
-					
+
 				}
 			]
 		}
+
 		let updateCartObject = {
 			products: [
 				{
@@ -79,18 +78,18 @@ function Ramen() {
 		}
 
 		API.getCart(user)
-		.then(res => {
-			console.log(res);
-			if (res.data == null) {
-				API.createCart(cartObject);
-				console.log("posted")
-			} else {
-				API.updateCart(user,  {$push: updateCartObject});
-				console.log("updated")
-			}
-		}).then(()=>{
-			history.push("/order")
-		});
+			.then(res => {
+				console.log(res);
+				if (res.data == null) {
+					API.createCart(cartObject);
+					// console.log("posted")
+				} else {
+					API.updateCart(user, { $push: updateCartObject });
+					// console.log("updated")
+				}
+			}).then(() => {
+				history.push("/cart")
+			});
 	}
 
 	return (
@@ -138,8 +137,8 @@ function Ramen() {
 										<option value="None">None</option>
 										<option value="Dumplings">Dumplings (+ $1.00)</option>
 										<option value="Rice Cakes">Rice Cakes (+ $1.00)</option>
-										<option value="Dumplings + Rice Cakes">Dumplings + Rice Cakes (+ $2.00)</option>
-										
+										<option value="Dumplings + Rice Cakes">Dumplings + Rice Cakes (+ $1.00)</option>
+
 									</select>
 								</div>
 								<br />
@@ -154,6 +153,7 @@ function Ramen() {
 										onChange={commentChange}
 									/>
 								</div>
+								<h3>Total: ${totalPrice.toFixed(2)}</h3>
 								<button type="submit" class="btn btn-dark" onClick={handleFormSubmit}>
 									Add to Cart
 								</button>

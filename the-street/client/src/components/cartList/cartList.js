@@ -75,16 +75,15 @@ function ListItems() {
         <div>
             {productArray ? (
                 productArray.map(res =>
-                    <div>
+                    <div className="border-bottom border-dark container">
                         <li id={res._id} key={res._id} className="mt-5 list-group-item text-dark">
-                            <div className="row ">
+                            <div className="row">
                                 <div className="col-lg-3">
                                     <Image product={res.productName} />
                                 </div>
-                                <div className="container col-lg-8 text-center">
+                                <div className="col-lg-8 text-center">
                                     <h1 >{res.productName}</h1>
                                     <ul className="list-group text-dark">
-
                                         {res.modifiers.map(res => {
                                                 return (
                                                     <li key={res._id} className="list-group-item text-dark">
@@ -93,15 +92,14 @@ function ListItems() {
                                                 )
                                             })
                                         }
-
                                     </ul>
                                     <p className="text-danger">{res.notes}</p>
                                     <button type="submit" id={res._id} onClick={handleOnClick} className="close" aria-label="Close">
                                         <span aria-hidden="true" id={res._id} className="text-danger">&times;</span>
                                     </button>
                                 </div>
-
                             </div>
+                            <h3 className="text-right">${(res.price).toFixed(2)}</h3>
                         </li>
                     </div>
                 )) : (
