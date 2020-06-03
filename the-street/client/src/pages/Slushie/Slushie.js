@@ -109,6 +109,7 @@ function Slushie() {
 				}
 			]
 		}
+
 		let updateCartObject = {
 			products: [
 				{
@@ -123,18 +124,19 @@ function Slushie() {
 		}
 
 		API.getCart(user)
-		.then(res => {
-			console.log(res);
-			if (res.data == null) {
-				API.createCart(cartObject);
-				// console.log("posted")
-			} else {
-				API.updateCart(user,  {$push: updateCartObject});
-				// console.log("updated")
-			}
-		}).then(()=>{
-			history.push("/cart")
-		});
+			.then(res => {
+				console.log(res);
+				if (res.data == null) {
+					API.createCart(cartObject);
+					// console.log("posted")
+				} else {
+					API.updateCart(user,  {$push: updateCartObject});
+					// console.log("updated")
+				}
+			})
+			.then(()=>{
+				history.push("/cart")
+			});
 	}
 	return (
 		<div className="background">
@@ -145,8 +147,7 @@ function Slushie() {
 						<h1 className="heading">Slushies</h1>
 					</div>
 				</div>
-				<br />
-
+				<br/>
 				<div class="row mb-5">
 					<div class="col-md-7">
 						<div class="row">
@@ -189,17 +190,18 @@ function Slushie() {
 									>
 										<option>Apple Juice (most common)</option>
 										<option>Whole Milk</option>
-										<option value="Milk">Soy Milk</option>
-										<option value="Milk">Almond Milk</option>
-										<option value= "Milk">Coconut Milk</option>
-										<option value= "Milk">Rice Milk</option>
+										<option value="Milk">Soy Milk ($0.50)</option>
+										<option value="Milk">Almond Milk ($0.50)</option>
+										<option value= "Milk">Coconut Milk ($0.50)</option>
+										<option value= "Milk">Rice Milk ($0.50)</option>
 										<option>Green Tea</option>
 										<option>Black Tea</option>
 									</select>
 
 
 								</div>
-								Toppings
+								Toppings (+ $0.50)
+								
 								<div className="toppings">
 									{toppings.map((topping) => (
 										<div className="indivflavor">
@@ -218,7 +220,7 @@ function Slushie() {
 										onChange={commentChange}
 									/>
 								</div>
-								<h3>Total: ${totalPrice + milkPrice}</h3>
+								<h3>Total: ${(totalPrice + milkPrice).toFixed(2)}</h3>
 								<button type="submit" class="btn btn-dark" onClick={handleFormSubmit}>
 									Add to Cart
 								</button>

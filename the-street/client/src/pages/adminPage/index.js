@@ -15,7 +15,7 @@ const Dashboard = () => {
 			setData(res.data);
 			
 	});
-}, 60000)
+}, [6000])
 
 
 

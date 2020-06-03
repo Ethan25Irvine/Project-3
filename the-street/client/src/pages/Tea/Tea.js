@@ -13,6 +13,9 @@ function Tea() {
 	const [ modifierArray, setModifierArray ] = useState([]);
 	const [ product ] = useState('Tea');
 	const [ size, setSize ] = useState({ modifierName: 'Small' });
+	const [newPrice, setNewPrice] = useState(3);
+	const [totalPrice, setTotalPrice] = useState(newPrice);
+	const [milkPrice, setMilkPrice] = useState(0);
 	const [ comment, setComment ] = useState('');
 	const [ flavors, setFlavors ] = useState(flavorList);
 	const [ toppings, setToppings ] = useState(Toppings);
@@ -25,12 +28,23 @@ function Tea() {
 	}
 
 	useEffect(() => {
+		setTotalPrice(newPrice);
+	}, [newPrice]);
+
+	useEffect(() => {
 		scrollup();
 		setUser(localStorage.getItem("userId"));
 		setUserName(localStorage.getItem("userName"));
 	}, []);
+
 	function sizeChange(event) {
 		const { value } = event.target;
+
+		if (value === "Large") {
+			setNewPrice(3.5 + totalPrice - 3);
+		} else {
+			setNewPrice(3 + totalPrice - 3.5);
+		}
 		setSize({ modifierName: value });
 	}
 
@@ -41,13 +55,30 @@ function Tea() {
 
 	function liquidOnCLick(event) {
 		const { value } = event.target;
+		if (value === "Milk") {
+			setMilkPrice(.5);
+		} else {
+			setMilkPrice(0);
+		}
 		setLiquid({ modifierName: value });
 	}
 
 	function flavorOnClick(event) {
 		const { name, checked } = event.target;
-		console.log(checked);
+		// console.log(checked);
 
+		setModifierArray(function(previousFlavors) {
+			return { ...previousFlavors, [name]: checked };
+		});
+	}
+	function toppingOnClick(event) {
+		const { name, checked } = event.target;
+		if (checked === true){
+			setTotalPrice(totalPrice + .5)
+		} else {
+			setTotalPrice(totalPrice - .5)
+		}
+		
 		setModifierArray(function(previousFlavors) {
 			return { ...previousFlavors, [name]: checked };
 		});
@@ -75,13 +106,7 @@ function Tea() {
 						return e
 					}),
 					notes: comment,
-					price: () => {
-						if (size.modifierName === "Small") {
-							return 4.75
-						} else {
-							return 5.25
-						}
-					}
+					price: totalPrice
 				}
 			]
 		}
@@ -93,13 +118,8 @@ function Tea() {
 						return e
 					}),
 					notes: comment,
-					price: () => {
-						if (size.modifierName === "Small") {
-							return 4.75
-						} else {
-							return 5.25
-						}
-					}
+					price: totalPrice
+					
 				}
 			]
 		}
@@ -115,7 +135,7 @@ function Tea() {
 				console.log("updated")
 			}
 		}).then(()=>{
-			history.push("/order");
+			history.push("/cart");
 		});
 
 	}
@@ -150,8 +170,8 @@ function Tea() {
 									<br />
 									<label for="exampleFormControlSelect1">Size</label>
 									<select class="form-control" id="exampleFormControlSelect1" onChange={sizeChange}>
-										<option id="3.00">Small ($3.00)</option>
-										<option id="3.50">Large ($3.50)</option>
+										<option id="3.00" value="Small">Small ($3.00)</option>
+										<option id="3.50" value="Large">Large ($3.50)</option>
 									</select>
 								</div>
 								<br />
@@ -179,11 +199,11 @@ function Tea() {
 								</div>
 								<br />
 								<br />
-								Toppings
+								Toppings (+ $0.50)
 								<div className="toppings">
 									{toppings.map((topping) => (
 										<div className="indivflavor">
-											<Flavor name={topping.name} onChange={flavorOnClick} />
+											<Flavor name={topping.name} onChange={toppingOnClick} />
 										</div>
 									))}
 								</div>
@@ -196,9 +216,11 @@ function Tea() {
 										id="comments"
 										aria-describedby="comments"
 										placeholder=""
+										onChange={commentChange}
 									/>
 								</div>
-								<button type="submit" class="btn btn-primary" onClick={handleFormSubmit}>
+								<h3>Total: ${totalPrice.toFixed(2)}</h3>
+								<button type="submit" class="btn btn-dark" onClick={handleFormSubmit}>
 									Add to Cart
 								</button>
 							</form>

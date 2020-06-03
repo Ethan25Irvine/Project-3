@@ -17,6 +17,8 @@ function Coffee() {
 	const [ product ] = useState('Coffee');
 	const [ size, setSize ] = useState({ modifierName: 'Small' });
 	const [ type, setType ] = useState({ modifierName: 'Hot Coffee' });
+	const [newPrice, setNewPrice] = useState(3.5);
+	const [totalPrice, setTotalPrice] = useState(newPrice);
 	const [ comment, setComment ] = useState('');
 	const [user, setUser] = useState();
 	const [username, setUserName] = useState();
@@ -24,6 +26,9 @@ function Coffee() {
 	function scrollup() {
 		window.scrollTo(0, 0);
 	}
+	useEffect(() => {
+		setTotalPrice(newPrice);
+	}, [newPrice]);
 
 	useEffect(() => {
 		scrollup();
@@ -33,6 +38,12 @@ function Coffee() {
 
 	function sizeChange(event) {
 		const { value } = event.target;
+
+		if (value === "Large") {
+			setNewPrice(5.25 + totalPrice - 4.75);
+		} else {
+			setNewPrice(4.75 + totalPrice - 5.25);
+		}
 		setSize({ modifierName: value });
 	}
 	function typeChange(event) {
@@ -45,10 +56,14 @@ function Coffee() {
 		setComment(value);
 	}
 
-	function flavorOnClick(event) {
+	function toppingOnClick(event) {
 		const { name, checked } = event.target;
-		console.log(checked);
-
+		if (checked === true){
+			setTotalPrice(totalPrice + .5)
+		} else {
+			setTotalPrice(totalPrice - .5)
+		}
+		
 		setModifierArray(function(previousFlavors) {
 			return { ...previousFlavors, [name]: checked };
 		});
@@ -76,13 +91,7 @@ function Coffee() {
 						return e
 					}),
 					notes: comment,
-					price: () => {
-						if (size.modifierName === "Small") {
-							return 4.75
-						} else {
-							return 5.25
-						}
-					}
+					price: totalPrice
 				}
 			]
 		}
@@ -94,13 +103,7 @@ function Coffee() {
 						return e
 					}),
 					notes: comment,
-					price: () => {
-						if (size.modifierName === "Small") {
-							return 4.75
-						} else {
-							return 5.25
-						}
-					}
+					price: totalPrice
 				}
 			]
 		}
@@ -164,9 +167,9 @@ function Coffee() {
 								<br />
 								<div className="form-group">
 									<br />
-									<label for="CoffeeChoice">Type</label>
+									<label for="CoffeeChoice">Type of Coffee</label>
 									<select className="form-control" id="CoffeeChoice" onChange={typeChange}>
-										<option>Hot Coffee</option>
+										<option>Hot Coffee (Decaf is Availble)</option>
 										<option>Iced Coffee</option>
 										<option>Lattes</option>
 										<option>Coffee Smoothie</option>
@@ -180,7 +183,7 @@ function Coffee() {
 								<div className="toppings">
 									{toppings.map((topping) => (
 										<div className="indivflavor">
-											<Flavor name={topping.name} onChange={flavorOnClick} />
+											<Flavor name={topping.name} onChange={toppingOnClick} />
 										</div>
 									))}
 								</div>
@@ -191,9 +194,11 @@ function Coffee() {
 										id="comments"
 										aria-describedby="comments"
 										placeholder="add cream, half & half, etc."
+										onChange={commentChange}
 									/>
 								</div>
-								<button type="submit" class="btn btn-primary" onClick={handleFormSubmit}>
+								<h3>Total: ${totalPrice.toFixed(2)}</h3>
+								<button type="submit" class="btn btn-dark" onClick={handleFormSubmit}>
 									Add to Cart
 								</button>
 							</form>

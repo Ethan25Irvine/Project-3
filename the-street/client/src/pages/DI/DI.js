@@ -11,7 +11,8 @@ import Toppings from '../../ditoppings.json';
 
 function DI() {
 	const [ modifierArray, setModifierArray ] = useState([]);
-	const [price, setPrice]= useState(4);
+	const [totalPrice, setTotalPrice]= useState(4);
+	const [milkPrice, setMilkPrice] = useState(0);
 	const [ toppings, setToppings ] = useState(Toppings);
 	const [ product ] = useState('Diamond Ice');
 	const [ size, setSize ] = useState({ modifierName: 'tiny' });
@@ -35,17 +36,17 @@ function DI() {
 		const { value } = event.target;
 		setSize({ modifierName: value });
 		if (value === "Tiny"){
-			setPrice(4);
+			setTotalPrice(4);
 		} else if (value === "Mini"){
-			setPrice(5);
+			setTotalPrice(5);
 		} else if (value === "Small"){
-			setPrice(6);
+			setTotalPrice(6);
 		} else if (value === "Medium"){
-			setPrice(10);
+			setTotalPrice(10);
 		} else if (value === "Large"){
-			setPrice(12);
+			setTotalPrice(12);
 		} else (
-			setPrice(16)
+			setTotalPrice(16)
 		)
 			
 		
@@ -57,13 +58,17 @@ function DI() {
 	}
 	function liquidOnCLick(event) {
 		const { value } = event.target;
+		if (value === "Milk"){
+			setMilkPrice(.5);
+		} else {
+			setMilkPrice(0);
+		}
 		setLiquid({ modifierName: value });
 		
 	}
 
 	function flavorOnClick(event) {
 		const { name, checked } = event.target;
-		
 
 		setModifierArray(function(previousFlavors) {
 			return { ...previousFlavors, [name]: checked };
@@ -94,7 +99,7 @@ function DI() {
 						return e
 					}),
 					notes: comment,
-					price: price
+					price: totalPrice + milkPrice
 				}
 			]
 		}
@@ -106,7 +111,7 @@ function DI() {
 						return e
 					}),
 					notes: comment,
-					price: price
+					price: totalPrice + milkPrice
 				}
 			]
 		}
@@ -122,7 +127,7 @@ function DI() {
 				// console.log("updated")
 			}
 		}).then(()=>{
-			history.push("/order");
+			history.push("/cart");
 		});
 
 	}
@@ -177,7 +182,7 @@ function DI() {
 								</div>
 								<br />
 								<br />
-								Toppings
+								Toppings (+ $0.50)
 								<div className="toppings">
 									{toppings.map((topping) => (
 										<div className="indivflavor">
@@ -192,10 +197,10 @@ function DI() {
 									<select class="form-control" id="milk" onChange={liquidOnCLick}>
 										<option>Condensed Milk (most common)</option>
 										<option>Whole Milk</option>
-										<option>Soy Milk</option>
-										<option>Almond Milk</option>
-										<option>Coconut Milk</option>
-										<option>Rice Milk</option>
+										<option value="Milk">Soy Milk ($0.50)</option>
+										<option value="Milk">Almond Milk ($0.50)</option>
+										<option value= "Milk">Coconut Milk ($0.50)</option>
+										<option value= "Milk">Rice Milk ($0.50)</option>
 									</select>
 								</div>
 								<div class="form-group">
@@ -208,6 +213,7 @@ function DI() {
 										placeholder=""
 									/>
 								</div>
+								<h3>Total: ${(totalPrice + milkPrice).toFixed(2)}</h3>
 								<button type="submit" class="btn btn-dark" onClick={handleFormSubmit}>
 									Add to Cart
 								</button>
