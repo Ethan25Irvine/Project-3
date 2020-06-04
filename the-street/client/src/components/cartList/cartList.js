@@ -99,7 +99,7 @@ function ListItems() {
                                     </button>
                                 </div>
                             </div>
-                            <h3 className="text-right">${(res.price).toFixed(2)}</h3>
+                            <h3 className="text-right">${res.price.toFixed(2)}</h3>
                         </li>
                     </div>
                 )) : (
