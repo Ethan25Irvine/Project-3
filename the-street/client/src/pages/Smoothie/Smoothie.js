@@ -16,7 +16,7 @@ function Smoothie() {
 	const [user, setUser] = useState();
 	const [username, setUserName] = useState();
 	const [size, setSize] = useState({ modifierName: "Small" });
-	const [newPrice, setNewPrice] = useState(3.5);
+	const [newPrice, setNewPrice] = useState(4.75);
 	const [totalPrice, setTotalPrice] = useState(newPrice);
 	const [milkPrice, setMilkPrice] = useState(0);
 	const [comment, setComment] = useState("");
@@ -44,9 +44,9 @@ function Smoothie() {
 		const { value } = event.target;
 
 		if (value === "Large") {
-			setNewPrice(4 + totalPrice - 3.5);
+			setNewPrice(5.25 + totalPrice - 4.75);
 		} else {
-			setNewPrice(3.5 + totalPrice - 4);
+			setNewPrice(4.75 + totalPrice - 5.25);
 		}
 		setSize({ modifierName: value });
 	}
@@ -119,7 +119,7 @@ function Smoothie() {
 						return e
 					}),
 					notes: comment,
-					price: () => totalPrice + milkPrice
+					price: totalPrice + milkPrice
 				}
 			]
 		}
@@ -135,7 +135,7 @@ function Smoothie() {
 					// console.log("updated")
 				}
 			}).then(() => {
-				history.push();
+				history.push("/cart");
 			});
 
 
